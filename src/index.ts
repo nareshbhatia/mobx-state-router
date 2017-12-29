@@ -8,4 +8,4 @@ export {
 
 export { ViewMap, RouterViewProps, RouterView } from './components/router-view';
 
-export { HistoryAdapter } from './adapters/history-adapter';
+export { HistoryAdapter, routerStateToUrl } from './adapters/history-adapter';
