@@ -18,6 +18,11 @@ Motivation: Decouple State and UI
 
 Features
 --------
+- Decoupled state from UI
+- Central route configuration in one file
+- Ability to fetch data before a component starts rendering
+- Ability to prevent going to the requested URL based on the application state. For example, redirect to the signin page if the user is not logged in. 
+- Support for 404 (Not Found)
 
 Usage
 -----
