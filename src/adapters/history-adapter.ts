@@ -1,6 +1,6 @@
 import { History, Location } from 'history';
 import { reaction } from 'mobx';
-import { RouterStore, Route } from '../router-store';
+import { RouterState, RouterStore, Route } from '../router-store';
 import { generateUrl } from './generate-url';
 import { matchUrl } from './match-url';
 
@@ -46,9 +46,7 @@ export class HistoryAdapter {
         reaction(
             () => this.routerStore.routerState,
             routerState => {
-                const { routeName, params } = routerState;
-                const route = this.routerStore.getRoute(routeName);
-                const url = generateUrl(route.pattern, params);
+                const url = routerStateToUrl(this.routerStore, routerState);
                 if (url !== this.history.location.pathname) {
                     this.history.push(url);
                 }
@@ -56,3 +54,12 @@ export class HistoryAdapter {
         );
     };
 }
+
+export const routerStateToUrl = (
+    routerStore: RouterStore,
+    routerState: RouterState
+): string => {
+    const { routeName, params } = routerState;
+    const route = routerStore.getRoute(routeName);
+    return generateUrl(route.pattern, params);
+};
