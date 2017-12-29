@@ -3,6 +3,7 @@ mobx-state-router
 
 [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 [![Travis](https://img.shields.io/travis/alexjoverm/typescript-library-starter.svg)](https://travis-ci.org/nareshbhatia/mobx-state-router)
+[![Coverage Status](https://coveralls.io/repos/github/nareshbhatia/mobx-state-router/badge.svg?branch=master)](https://coveralls.io/github/nareshbhatia/mobx-state-router?branch=master)
 
 MobX powered router for React apps.
 
