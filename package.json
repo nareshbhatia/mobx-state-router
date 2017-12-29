@@ -1,7 +1,7 @@
 {
   "name": "mobx-state-router",
   "description": "MobX powered router for React apps",
-  "version": "0.1.0",
+  "version": "0.0.0-development",
   "author": "Naresh Bhatia",
   "license": "MIT",
   "homepage": "https://github.com/nareshbhatia/mobx-state-router",
@@ -29,7 +29,7 @@
     "test:prod": "npm run lint && npm run test -- --coverage --no-cache",
     "report-coverage": "cat ./coverage/lcov.info | coveralls",
     "commit": "git-cz",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
+    "semantic-release": "semantic-release",
     "semantic-release-prepare": "ts-node tools/semantic-release-prepare",
     "format": "prettier --print-width 80 --tab-width 4 --single-quote --write '{src,test}/**/*.ts*'",
     "precommit": "lint-staged"
