@@ -9,7 +9,7 @@ const routes = [
     {
         name: 'work',
         pattern: '/work',
-        onBeforeExit: fromState => {
+        beforeExit: fromState => {
             return Promise.reject({
                 fromState: fromState,
                 toState: gym
@@ -19,7 +19,7 @@ const routes = [
     {
         name: 'mountains',
         pattern: '/mountains',
-        onBeforeEnter: fromState => {
+        beforeEnter: fromState => {
             return Promise.reject({
                 fromState: fromState,
                 toState: gasStation
@@ -109,7 +109,7 @@ describe('RouterStore', () => {
         expect(isStateEqual(routerStore.routerState, notFound)).toBeTruthy();
     });
 
-    test('rejects a transition as directed by onBeforeExit', () => {
+    test('rejects a transition as directed by beforeExit', () => {
         expect.assertions(1);
 
         const routerStore = new RouterStore({}, routes, notFound);
@@ -121,7 +121,7 @@ describe('RouterStore', () => {
             });
     });
 
-    test('rejects a transition as directed by onBeforeEnter', () => {
+    test('rejects a transition as directed by beforeEnter', () => {
         expect.assertions(1);
 
         const routerStore = new RouterStore({}, routes, notFound);

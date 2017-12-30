@@ -20,8 +20,8 @@ export interface TransitionFunction {
 export interface Route {
     name: string; // e.g. 'department'
     pattern: string; // e.g. '/departments/:id'
-    onBeforeExit?: TransitionFunction;
-    onBeforeEnter?: TransitionFunction;
+    beforeExit?: TransitionFunction;
+    beforeEnter?: TransitionFunction;
     onExit?: TransitionFunction;
     onEnter?: TransitionFunction;
 }
@@ -117,22 +117,18 @@ export class RouterStore {
         const fromRoute = this.getRoute(fromState.routeName);
         const toRoute = this.getRoute(toState.routeName);
 
-        // Call fromState.onBeforeExit()
-        const onBeforeExit = fromRoute.onBeforeExit
-            ? fromRoute.onBeforeExit
+        // Call fromState.beforeExit()
+        const beforeExit = fromRoute.beforeExit
+            ? fromRoute.beforeExit
             : happyTransition;
         return (
-            onBeforeExit(fromState, toState, this)
-                // Call toState.onBeforeEnter()
+            beforeExit(fromState, toState, this)
+                // Call toState.beforeEnter()
                 .then(result => {
-                    const onBeforeEnter = toRoute.onBeforeEnter
-                        ? toRoute.onBeforeEnter
+                    const beforeEnter = toRoute.beforeEnter
+                        ? toRoute.beforeEnter
                         : happyTransition;
-                    return onBeforeEnter(
-                        result.fromState,
-                        result.toState,
-                        this
-                    );
+                    return beforeEnter(result.fromState, result.toState, this);
                 })
 
                 // Call fromState.onExit()
