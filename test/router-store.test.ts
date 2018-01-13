@@ -59,6 +59,11 @@ const home = newState('home');
 const notFound = newState('notFound');
 const deptElectronics = newState('department', { id: 'electronics' });
 const deptMusic = newState('department', { id: 'music' });
+const deptElectronicsQuery = newState(
+    'department',
+    { id: 'electronics' },
+    { q: 'apple' }
+);
 const gym = newState('gym');
 const gasStation = newState('gasStation');
 const work = newState('work');
@@ -101,6 +106,17 @@ describe('RouterStore', () => {
             .then(result => {
                 expect(isStateEqual(result.toState, deptMusic)).toBeTruthy();
             });
+    });
+
+    test('transitions to the desired state with query parameters', () => {
+        expect.assertions(1);
+
+        const routerStore = new RouterStore({}, routes, notFound);
+        return routerStore.goTo(deptElectronicsQuery).then(result => {
+            expect(
+                isStateEqual(result.toState, deptElectronicsQuery)
+            ).toBeTruthy();
+        });
     });
 
     test('transitions to notFound state', () => {

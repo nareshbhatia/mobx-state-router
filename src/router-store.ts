@@ -4,6 +4,26 @@
 import * as _ from 'lodash';
 import { action, observable, toJS } from 'mobx';
 
+/**
+ * A map from string to string (key-value pairs). Based on:
+ * https://stackoverflow.com/questions/13631557/typescript-objects-as-dictionary-types-as-in-c-sharp
+ *
+ * Example:
+ * {
+ *     id: 'electronics',
+ *     category: 'computers'
+ * }
+ */
+export interface StringMap {
+    [param: string]: string;
+}
+
+export interface RouterState {
+    routeName: string; // e.g. 'department'
+    params: StringMap; // e.g. { id: 'electronics' }
+    queryParams: StringMap; // e.g. { q: 'apple' }
+}
+
 export interface TransitionResult {
     fromState: RouterState;
     toState: RouterState;
@@ -26,17 +46,12 @@ export interface Route {
     onEnter?: TransitionFunction;
 }
 
-export interface Params {
-    [param: string]: string;
-}
-
-export interface RouterState {
-    routeName: string; // e.g. 'department'
-    params: Params; // e.g. { id: 'electronics' }
-}
-
-export function newState(routeName: string, params: Params = {}): RouterState {
-    return { routeName, params };
+export function newState(
+    routeName: string,
+    params: StringMap = {},
+    queryParams: StringMap = {}
+): RouterState {
+    return { routeName, params, queryParams };
 }
 
 export function isStateEqual(
@@ -45,7 +60,8 @@ export function isStateEqual(
 ): boolean {
     return (
         state1.routeName === state2.routeName &&
-        _.isEqual(state1.params, state2.params)
+        _.isEqual(state1.params, state2.params) &&
+        _.isEqual(state1.queryParams, state2.queryParams)
     );
 }
 
@@ -76,7 +92,7 @@ export class RouterStore {
 
     /**
      * Requests a transition to a new state. Note that the actual transition
-     * may be different from the requested toState.
+     * may be different from the requested one based on enter and exit hooks.
      */
     goTo(toState: RouterState): Promise<TransitionResult> {
         const fromState = this.routerState;
@@ -97,7 +113,8 @@ export class RouterStore {
 
     /**
      * Requests a transition from fromState to toState. Note that the
-     * actual transition may be different from the requested toState.
+     * actual transition may be different from the requested one
+     * based on enter and exit hooks.
      */
     private transition(
         fromState: RouterState,

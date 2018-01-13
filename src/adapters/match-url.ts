@@ -1,5 +1,5 @@
 import * as pathToRegexp from 'path-to-regexp';
-import { Params } from '../router-store';
+import { StringMap } from '../router-store';
 
 interface PatternInfo {
     regExp: RegExp;
@@ -41,7 +41,7 @@ export const matchUrl = (url: string, pattern: string) => {
 
     const [matchedUrl, ...values] = match;
 
-    return keys.reduce((params: Params, key, index) => {
+    return keys.reduce((params: StringMap, key, index) => {
         params[key.name] = values[index];
         return params;
     }, {});

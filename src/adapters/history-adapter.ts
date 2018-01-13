@@ -1,6 +1,7 @@
 import { History, Location } from 'history';
 import { reaction } from 'mobx';
-import { RouterState, RouterStore, Route } from '../router-store';
+import { parse } from 'query-string';
+import { RouterState, RouterStore, Route, StringMap } from '../router-store';
 import { generateUrl } from './generate-url';
 import { matchUrl } from './match-url';
 
@@ -26,7 +27,8 @@ export class HistoryAdapter {
             if (params) {
                 this.routerStore.goTo({
                     routeName: route.name,
-                    params
+                    params,
+                    queryParams: parse(location.search) as StringMap
                 });
                 routeFound = true;
                 break;
@@ -59,7 +61,7 @@ export const routerStateToUrl = (
     routerStore: RouterStore,
     routerState: RouterState
 ): string => {
-    const { routeName, params } = routerState;
+    const { routeName, params, queryParams } = routerState;
     const route = routerStore.getRoute(routeName);
-    return generateUrl(route.pattern, params);
+    return generateUrl(route.pattern, params, queryParams);
 };
