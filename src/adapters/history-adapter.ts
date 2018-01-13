@@ -28,7 +28,7 @@ export class HistoryAdapter {
                 this.routerStore.goTo({
                     routeName: route.name,
                     params,
-                    queryParams: parse(location.search) as StringMap
+                    queryParams: parse(location.search)
                 });
                 routeFound = true;
                 break;

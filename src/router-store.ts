@@ -21,7 +21,7 @@ export interface StringMap {
 export interface RouterState {
     routeName: string; // e.g. 'department'
     params: StringMap; // e.g. { id: 'electronics' }
-    queryParams: StringMap; // e.g. { q: 'apple' }
+    queryParams: Object; // e.g. { q: 'apple' } or { items: ['E1', 'E2'] }
 }
 
 export interface TransitionResult {
