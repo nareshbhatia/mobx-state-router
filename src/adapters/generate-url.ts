@@ -1,4 +1,5 @@
 import { compile, PathFunction } from 'path-to-regexp';
+import { stringify } from 'query-string';
 
 interface GeneratorCache {
     [pattern: string]: PathFunction;
@@ -24,10 +25,15 @@ const getGenerator = (pattern: string): PathFunction => {
  *     generateUrl('/departments/:id', { id: 'electronics' })
  *     => '/departments/electronics'
  */
-export const generateUrl = (pattern = '/', params = {}) => {
-    if (pattern === '/') {
-        return pattern;
-    }
+export const generateUrl = (pattern = '/', params = {}, queryParams = {}) => {
+    // inject params
     const generator = getGenerator(pattern);
-    return generator(params);
+    let url = generator(params);
+
+    // inject queryParams (remember to insert the question mark)
+    if (Object.keys(queryParams).length > 0) {
+        url = `${url}?${stringify(queryParams)}`;
+    }
+
+    return url;
 };
