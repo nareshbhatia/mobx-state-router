@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
-// import { toJS } from 'mobx';
 import { observer } from 'mobx-react';
-import { newState, RouterStore } from '../src/router-store';
+import { RouterState, RouterStore } from '../src/router-store';
 
 const routes = [
     { name: 'home', pattern: '/' },
@@ -10,10 +9,10 @@ const routes = [
     { name: 'notFound', pattern: '/not-found' }
 ];
 
-const home = newState('home');
-const notFound = newState('notFound');
-const dept1 = newState('department', { id: 'dept1' });
-const dept2 = newState('department', { id: 'dept2' });
+const home = new RouterState('home');
+const notFound = new RouterState('notFound');
+const dept1 = new RouterState('department', { id: 'dept1' });
+const dept2 = new RouterState('department', { id: 'dept2' });
 
 const routerStore = new RouterStore({}, routes, notFound);
 
@@ -61,7 +60,7 @@ test('DepartmentsPage changes tabs when a tab button is clicked', () => {
         // jest.useFakeTimers();
         // setTimeout(() => {
         //     console.log(wrapper.debug());
-        //     console.log('routerState:', toJS(routerStore.routerState));
+        //     console.log('routerState:', routerStore.routerState);
         //     expect(wrapper.find('#tab').text()).toEqual('Dept 2 Content');
         // }, 10000);
         // jest.runAllTimers();

@@ -18,10 +18,26 @@ export interface StringMap {
     [param: string]: string;
 }
 
-export interface RouterState {
-    routeName: string; // e.g. 'department'
-    params: StringMap; // e.g. { id: 'electronics' }
-    queryParams: Object; // e.g. { q: 'apple' } or { items: ['E1', 'E2'] }
+export class RouterState {
+    /**
+     * Creates RouterState
+     * @param {string} routeName, e.g. 'department'
+     * @param {StringMap} params, e.g. { id: 'electronics' }
+     * @param {Object} queryParams, e.g. { q: 'apple' } or { items: ['E1', 'E2'] }
+     */
+    constructor(
+        readonly routeName: string,
+        readonly params: StringMap = {},
+        readonly queryParams: Object = {}
+    ) {}
+
+    isEqual(other: RouterState): boolean {
+        return (
+            this.routeName === other.routeName &&
+            _.isEqual(this.params, other.params) &&
+            _.isEqual(this.queryParams, other.queryParams)
+        );
+    }
 }
 
 export interface TransitionResult {
@@ -46,25 +62,6 @@ export interface Route {
     onEnter?: TransitionFunction;
 }
 
-export function newState(
-    routeName: string,
-    params: StringMap = {},
-    queryParams: StringMap = {}
-): RouterState {
-    return { routeName, params, queryParams };
-}
-
-export function isStateEqual(
-    state1: RouterState,
-    state2: RouterState
-): boolean {
-    return (
-        state1.routeName === state2.routeName &&
-        _.isEqual(state1.params, state2.params) &&
-        _.isEqual(state1.queryParams, state2.queryParams)
-    );
-}
-
 const INITIAL_ROUTE_NAME = '__initial__';
 
 const happyTransition = (fromState: RouterState, toState: RouterState) => {
@@ -78,7 +75,7 @@ export class RouterStore {
     rootStore: any;
     routes: Route[];
     notFoundState: RouterState;
-    @observable routerState: RouterState;
+    @observable.ref routerState: RouterState;
 
     constructor(rootStore: any, routes: Route[], notFoundState: RouterState) {
         this.rootStore = rootStore;
@@ -87,7 +84,7 @@ export class RouterStore {
 
         // Set initial state to an internal initial state
         this.routes.push({ name: INITIAL_ROUTE_NAME, pattern: '' });
-        this.routerState = newState(INITIAL_ROUTE_NAME);
+        this.routerState = new RouterState(INITIAL_ROUTE_NAME);
     }
 
     /**
@@ -124,15 +121,19 @@ export class RouterStore {
         // This is important to avoid infinite loops caused by RouterStore.goTo()
         // triggering a change in history, which in turn causes HistoryAdapter
         // to call RouterStore.goTo().
-        if (isStateEqual(toJS(fromState), toJS(toState))) {
+        if (fromState.isEqual(toState)) {
+            /* istanbul ignore if */
             if (process.env.NODE_ENV === 'development') {
+                const fromStateStr = JSON.stringify(fromState);
                 console.log(
-                    'RouterStore.transition() - states are equal, skipping'
+                    `RouterStore.transition(${fromStateStr}):`,
+                    'states are equal, skipping'
                 );
             }
             return Promise.resolve({ fromState: fromState, toState: toState });
         }
 
+        /* istanbul ignore if */
         if (process.env.NODE_ENV === 'development') {
             const fromStateStr = JSON.stringify(fromState);
             const toStateStr = JSON.stringify(toState);

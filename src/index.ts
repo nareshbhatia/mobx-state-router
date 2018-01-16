@@ -1,5 +1,4 @@
 export {
-    newState,
     Route,
     RouterState,
     TransitionResult,
