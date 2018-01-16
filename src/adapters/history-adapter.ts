@@ -31,11 +31,9 @@ export class HistoryAdapter {
             const route = routes[i];
             const params = matchUrl(location.pathname, route.pattern);
             if (params) {
-                this.routerStore.goTo({
-                    routeName: route.name,
-                    params,
-                    queryParams: parse(location.search)
-                });
+                this.routerStore.goTo(
+                    new RouterState(route.name, params, parse(location.search))
+                );
                 routeFound = true;
                 break;
             }
