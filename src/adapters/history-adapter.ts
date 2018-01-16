@@ -19,6 +19,12 @@ export class HistoryAdapter {
     }
 
     goToLocation = (location: Location) => {
+        if (process.env.NODE_ENV === 'development') {
+            console.log(
+                `HistoryAdapter.goToLocation(${JSON.stringify(location)})`
+            );
+        }
+
         const routes = this.routerStore.routes;
         let routeFound = false;
         for (let i = 0; i < routes.length; i++) {

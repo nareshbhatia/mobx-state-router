@@ -14,13 +14,12 @@ export interface RouterViewProps {
 @observer
 export class RouterView extends React.Component<RouterViewProps, {}> {
     render() {
-        const {
-            routerStore: { routerState: { routeName } },
-            viewMap
-        } = this.props;
-        // console.log(`RouterView rendering ${routeName}`);
+        const { routerStore: { routerState }, viewMap } = this.props;
+        if (process.env.NODE_ENV === 'development') {
+            console.log(`RouterView.render() - ${JSON.stringify(routerState)}`);
+        }
 
-        const view = viewMap[routeName];
+        const view = viewMap[routerState.routeName];
         return view ? view : null;
     }
 }

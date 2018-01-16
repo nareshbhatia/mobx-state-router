@@ -125,10 +125,21 @@ export class RouterStore {
         // triggering a change in history, which in turn causes HistoryAdapter
         // to call RouterStore.goTo().
         if (isStateEqual(toJS(fromState), toJS(toState))) {
+            if (process.env.NODE_ENV === 'development') {
+                console.log(
+                    'RouterStore.transition() - states are equal, skipping'
+                );
+            }
             return Promise.resolve({ fromState: fromState, toState: toState });
         }
 
-        // console.log(`RouterStore.transition(${fromState}, ${toState})`);
+        if (process.env.NODE_ENV === 'development') {
+            const fromStateStr = JSON.stringify(fromState);
+            const toStateStr = JSON.stringify(toState);
+            console.log(
+                `RouterStore.transition(${fromStateStr}, ${toStateStr})`
+            );
+        }
 
         // Get routes associated with the two states
         const fromRoute = this.getRoute(fromState.routeName);
