@@ -19,6 +19,7 @@ Motivation: Decouple State and UI
 Features
 --------
 - Decoupled state from UI
+- Router state consists of path parameters and query parameters
 - Central route configuration in one file
 - Ability to fetch data before a component starts rendering
 - Ability to prevent going to the requested URL based on the application state. For example, redirect to the signin page if the user is not logged in. 
