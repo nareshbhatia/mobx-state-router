@@ -5,6 +5,10 @@ import { RouterState, RouterStore, Route, StringMap } from '../router-store';
 import { generateUrl } from './generate-url';
 import { matchUrl } from './match-url';
 
+/**
+ * Responsible for keeping the browser address bar and the `RouterState`
+ * in sync. It also provides a `goBack()` method to go back in history.
+ */
 export class HistoryAdapter {
     routerStore: RouterStore;
     history: History;

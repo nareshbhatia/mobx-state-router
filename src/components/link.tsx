@@ -16,7 +16,8 @@ export interface LinkProps {
 }
 
 /**
- * Create an <a> element that links to a router state.
+ * Creates an <a> element that links to a router state. Redirects to the target
+ * state without reloading the entire app, thus avoiding potential flickers.
  */
 export class Link extends React.Component<LinkProps, {}> {
     render() {

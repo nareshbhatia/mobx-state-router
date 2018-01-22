@@ -11,6 +11,11 @@ export interface RouterViewProps {
     viewMap: ViewMap;
 }
 
+/**
+ * Watches the router state and instantiates the associated UI component.
+ * It expects two props: the `routerStore` and a `viewMap`. The `viewMap`
+ * is a simple mapping from `routeNames` to React components.
+ */
 @observer
 export class RouterView extends React.Component<RouterViewProps, {}> {
     render() {

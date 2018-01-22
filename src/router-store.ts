@@ -18,6 +18,11 @@ export interface StringMap {
     [param: string]: string;
 }
 
+/**
+ * Holds the state of the router. Always use the constructor to create
+ * an instance. Once an instance is created, don't mutate it - create a
+ * fresh instance instead.
+ */
 export class RouterState {
     /**
      * Creates RouterState
@@ -53,6 +58,11 @@ export interface TransitionFunction {
     ): Promise<TransitionResult>;
 }
 
+/**
+ * A `Route` consists of a name, a URL matching pattern and optional
+ * enter/exit hooks. The `RouterStore` is initialized with an array
+ * of routes which it uses to transition between states.
+ */
 export interface Route {
     name: string; // e.g. 'department'
     pattern: string; // e.g. '/departments/:id'
@@ -69,7 +79,8 @@ const happyTransition = (fromState: RouterState, toState: RouterState) => {
 };
 
 /**
- * Holds router state
+ * Holds the router state. It allows transitioning between states using
+ * the `goTo()` method.
  */
 export class RouterStore {
     rootStore: any;

@@ -395,7 +395,7 @@ API
 mobx-state-router is written in TypeScript, with rich type information embedded right inside the code. When in doubt, look at the exported interfaces and classes - they are fairly easy to understand. In this section we highlight the key interfaces and classes.
 
 ### RouterState
-`RouterState` consists of `routeName`, `params` and `queryParams`. Always use the constructor to create an instance of the `RouterState`.
+`RouterState` consists of `routeName`, `params` and `queryParams`. Always use the constructor to create an instance of the `RouterState`. Once an instance is created, don't mutate it - create a fresh instance instead.
 
 ```
 export class RouterState {
@@ -446,7 +446,7 @@ export class RouterStore {
 ```
 
 ### HistoryAdapter
-The `HistoryAdapter` is responsible for keeping the browser address bar and the `RouterState` in sync. It also provides a `goBack()` method to go back in browser history.
+The `HistoryAdapter` is responsible for keeping the browser address bar and the `RouterState` in sync. It also provides a `goBack()` method to go back in history.
 
 ```
 export class HistoryAdapter {
@@ -456,7 +456,7 @@ export class HistoryAdapter {
 ```
 
 ### RouterView
-The `RouterView` component watches the router state and instantiates the associated UI component. It expects two props: the `routerStore` and a `viewMap`. The `viewMap` is a simple mapping from routeNames to the associated React components.
+The `RouterView` component watches the router state and instantiates the associated UI component. It expects two props: the `routerStore` and a `viewMap`. The `viewMap` is a simple mapping from `routeNames` to React components.
 
 ```
 export interface ViewMap {
@@ -473,7 +473,7 @@ export class RouterView extends React.Component<RouterViewProps, {}> {...}
 ```
 
 ### Link
-The `Link` component renders an anchor tag that redirects to the target route without any flicker.
+The `Link` component Creates an <a> element that links to a router state. It redirects to the target state without reloading the entire app, thus avoiding potential flickers.
 
 ```
 export interface LinkProps {
