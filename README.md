@@ -5,7 +5,7 @@ mobx-state-router
 [![Travis](https://img.shields.io/travis/alexjoverm/typescript-library-starter.svg)](https://travis-ci.org/nareshbhatia/mobx-state-router)
 [![Coverage Status](https://coveralls.io/repos/github/nareshbhatia/mobx-state-router/badge.svg?branch=master)](https://coveralls.io/github/nareshbhatia/mobx-state-router?branch=master)
 
-MobX powered router for React apps.
+MobX-powered router for React apps.
 
 Demo
 ----
