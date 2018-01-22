@@ -105,7 +105,7 @@ The first step is to install the router and its peer dependencies. If you alread
     
 Now let's define our routes, the `RouterStore` will need them. By convention we define our routes in [src/shared/stores/routes.js](https://github.com/nareshbhatia/mobx-state-router-quick-start/blob/master/src/shared/stores/routes.js). We will keep our routes configuration very simple for right now. Let's define three routes: `home`, `department` and `notFound`:
 
-```
+```jsx
 // Routes are matched from top to bottom. Make sure they are sequenced
 // in the order of priority. It is generally best to sort them by pattern,
 // prioritizing specific patterns over generic patterns (patterns with
@@ -130,7 +130,7 @@ export const routes = [
 
 Now let's create the `RouterStore`. We will use the [best practices](https://mobx.js.org/best/store.html#combining-multiple-stores) described in the MobX documentation to create our stores. According to this document, an effective way to structure your stores is to create a `RootStore` that instantiates all stores, and shares references. So let's create this `RootStore` that will instantiate the `RouterStore`. By convention, we define the `RootStore` in [src/shared/stores/root.store.js](https://github.com/nareshbhatia/mobx-state-router-quick-start/blob/master/src/shared/stores/root.store.js). Add the following code to this file to instantiate the `RouterStore`. Note that the `RouterStore` expects the `RootStore`, the routes and the `notFound` state as the parameters of its constructor.
 
-```
+```jsx
 import { RouterState, RouterStore } from 'mobx-state-router';
 import { routes } from './routes';
 
@@ -143,7 +143,7 @@ export class RootStore {
 
 Now that the `RouterStore` is ready, let's focus on the `HistoryAdapter`, which is the key component to keep the browser address bar in sync with the `RouterState`. The `HistoryAdapter` depends on the [history](https://github.com/ReactTraining/history) library to manage the browser history. It needs a history object in the constructor - let's create it. By convention, we create the history object in [src/shared/utils/history.js](https://github.com/nareshbhatia/mobx-state-router-quick-start/blob/master/src/shared/utils/history.js). Add the following code to your `history.js` file:
 
-```
+```jsx
 import { createBrowserHistory } from 'history';
 
 export const history = createBrowserHistory();
@@ -151,7 +151,7 @@ export const history = createBrowserHistory();
 
 Now we are ready to connect all the pieces of the router architecture, namely the `RouterStore`, the `HistoryAdapter` and the `RouterView`. By convention, we do this in [src/App.js](https://github.com/nareshbhatia/mobx-state-router-quick-start/blob/master/src/App.js). If you are creating a new application, structure your `app.js` as follows, otherwise add the missing pieces to your existing `app.js`:
 
-```
+```jsx
 import React, { Component } from 'react';
 import { Provider } from 'mobx-react';
 import { HistoryAdapter } from 'mobx-state-router';
@@ -181,7 +181,7 @@ export default App;
 
 Here we create an instance of the `RootStore` and give it to the MobX `Provider`. The `Provider` makes the `RootStore` (and hence the `RouterStore`) available in any view. We also create the `HistoryAdapter` and ask it to observe route changes. The final piece is the `RouterView` which will be created in the `Shell`. By convention, we create the `Shell` in [src/shell.js](https://github.com/nareshbhatia/mobx-state-router-quick-start/blob/master/src/shell.js). Add the following code to this file:
 
-```
+```jsx
 import React from 'react';
 import { inject } from 'mobx-react';
 import { RouterView } from 'mobx-state-router';
@@ -216,7 +216,7 @@ The final pieces of the puzzle are the pages themselves. Here's the code for the
 
 [src/features/home/home-page](https://github.com/nareshbhatia/mobx-state-router-quick-start/blob/master/src/features/home/home-page.js)
 
-```
+```jsx
 import React from 'react';
 import { inject } from 'mobx-react';
 import { RouterState } from 'mobx-state-router';
@@ -252,7 +252,7 @@ The home page has a button that allows the user to navigate to the Electronics d
 
 [src/features/department/department-page](https://github.com/nareshbhatia/mobx-state-router-quick-start/blob/master/src/features/department/department-page.js)
 
-```
+```jsx
 import React from 'react';
 import { inject } from 'mobx-react';
 import { RouterState } from 'mobx-state-router';
@@ -291,7 +291,7 @@ The department page has a button that allows the user to navigate to home. Note 
 
 [src/features/not-found-page](https://github.com/nareshbhatia/mobx-state-router-quick-start/blob/master/src/features/not-found-page.js)
 
-```
+```jsx
 import React from 'react';
 
 const styles = {
@@ -318,7 +318,7 @@ Recipes
 ### Fetching Data
 As mentioned before, UI should not be responsible for fetching data. This means no data fetching in `componentWillMount()` or `componentDidMount()`. mobx-state-router facilitates data fetching during state transitions using the `onEnter` hook. This hook is called just before a new router state is entered and is the perfect place to kick off a data fetch. Here's [an example from MobX Shop](https://github.com/nareshbhatia/mobx-shop/blob/master/src/shared/stores/routes.js#L38-L47):
 
-```
+```jsx
 {
     name: 'department',
     pattern: '/departments/:id',
@@ -336,7 +336,7 @@ This code is part of route definitions. We define an `onEnter` hook that calls `
 ### Redirecting to the Sign In page
 If the user is not logged in, we can redirect them to a Sign In page. Not only that, we can redirect them back to the requested page on a successful sign in. For example, in MobX Shop, we allow the user to add items to the shopping cart without having them signed in. However they can't proceed to checkout unless they are signed in. This is achieved by using the `beforeEnter` hook in the route configuration. Here's [the code](https://github.com/nareshbhatia/mobx-shop/blob/master/src/shared/stores/routes.js#L33-L37) from MobX Shop:
 
-```
+```jsx
 {
     name: 'checkout',
     pattern: '/checkout',
@@ -346,7 +346,7 @@ If the user is not logged in, we can redirect them to a Sign In page. Not only t
 
 `checkForUserSignedIn()` is a shared function used by multiple routes. It is defined in the [routes.js](https://github.com/nareshbhatia/mobx-shop/blob/master/src/shared/stores/routes.js#L3-L14) file:
 
-```
+```jsx
 const checkForUserSignedIn = (fromState, toState, routerStore) => {
     const { rootStore: { authStore } } = routerStore;
     if (authStore.user) {
@@ -363,7 +363,7 @@ const checkForUserSignedIn = (fromState, toState, routerStore) => {
 
 This function allows the router to proceed if the user is already signed in. If not, the requested state is saved in the `authStore` and the app is redirected to the `signin` state. On a successful sign in, `authStore` redirects the app to the originally requested state. Here's [the code](https://github.com/nareshbhatia/mobx-shop/blob/master/src/shared/stores/auth.store.js#L18-L22) from MobX Shop:
 
-```
+```jsx
 @action
 setUser(user) {
     this.user = user;
@@ -374,7 +374,7 @@ setUser(user) {
 ### Creating Links
 You will notice that anchor tags used for linking to internal pages cause a flicker when clicked. That's because such links reload the entire app! We need to prevent the default handling of these links and let the router handle the redirect. This can be done using the `<Link>` component provided by the router. Here's an example of linking to the home page:
 
-```
+```jsx
 import { Link, RouterState } from 'mobx-state-router';
 
 function Footer({ routerStore }) {
@@ -397,7 +397,7 @@ mobx-state-router is written in TypeScript, with rich type information embedded 
 ### RouterState
 `RouterState` consists of `routeName`, `params` and `queryParams`. Always use the constructor to create an instance of the `RouterState`. Once an instance is created, don't mutate it - create a fresh instance instead.
 
-```
+```jsx
 export class RouterState {
     constructor(
         readonly routeName: string,
@@ -410,7 +410,7 @@ export class RouterState {
 ### Route
 A `Route` consists of a name, a URL matching pattern and optional enter/exit hooks. The `RouterStore` is initialized with an array of routes which it uses to transition between states.
 
-```
+```jsx
 export interface TransitionResult {
     fromState: RouterState;
     toState: RouterState;
@@ -437,7 +437,7 @@ export interface Route {
 ### RouterStore
 The `RouterStore` is the keeper of the `RouterState`. It allows transitioning between states using the `goTo()` method.
 
-```
+```jsx
 export class RouterStore {
     constructor(rootStore: any, routes: Route[], notFoundState: RouterState);
     goTo(toState: RouterState): Promise<TransitionResult>;
@@ -448,7 +448,7 @@ export class RouterStore {
 ### HistoryAdapter
 The `HistoryAdapter` is responsible for keeping the browser address bar and the `RouterState` in sync. It also provides a `goBack()` method to go back in history.
 
-```
+```jsx
 export class HistoryAdapter {
     constructor(routerStore: RouterStore, history: History);
     goBack();
@@ -458,7 +458,7 @@ export class HistoryAdapter {
 ### RouterView
 The `RouterView` component watches the router state and instantiates the associated UI component. It expects two props: the `routerStore` and a `viewMap`. The `viewMap` is a simple mapping from `routeNames` to React components.
 
-```
+```jsx
 export interface ViewMap {
     [routeName: string]: React.Component;
 }
@@ -475,7 +475,7 @@ export class RouterView extends React.Component<RouterViewProps, {}> {...}
 ### Link
 The `Link` component Creates an <a> element that links to a router state. It redirects to the target state without reloading the entire app, thus avoiding potential flickers.
 
-```
+```jsx
 export interface LinkProps {
     routerStore: RouterStore;
     toState: RouterState;
