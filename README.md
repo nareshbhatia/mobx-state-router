@@ -24,6 +24,7 @@ Table of Contents
   - [Fetching Data](#fetching-data)
   - [Redirecting to the Sign In page](#redirecting-to-the-sign-in-page)
   - [Creating Links](#creating-links)
+- [Troubleshooting](#troubleshooting)
 - [API](#api)
 - [Credits](#credits)
 
@@ -388,6 +389,11 @@ function Footer({ routerStore }) {
     );
 }
 ```
+
+
+Troubleshooting
+---------------
+To troubleshoot routing related issues, set the `NODE_ENV` environment variable to `development`. This will turn on the router logs and you will see exactly how the router's internal state is changing in the debugger console. Incidentally, if you are using create-react-app, `NODE_ENV` is automatically set to `development` during development.
 
 
 API
