@@ -56,9 +56,20 @@ export class HistoryAdapter {
         reaction(
             () => this.routerStore.routerState,
             routerState => {
-                const url = routerStateToUrl(this.routerStore, routerState);
-                if (url !== this.history.location.pathname) {
-                    this.history.push(url);
+                const location = this.history.location;
+                const currentUrl = `${location.pathname}${location.search}`;
+                const routerStateUrl = routerStateToUrl(
+                    this.routerStore,
+                    routerState
+                );
+                if (currentUrl !== routerStateUrl) {
+                    this.history.push(routerStateUrl);
+                    if (process.env.NODE_ENV === 'development') {
+                        console.log(
+                            `HistoryAdapter: history.push(${routerStateUrl}),`,
+                            `history.length=${this.history.length}`
+                        );
+                    }
                 }
             }
         );
