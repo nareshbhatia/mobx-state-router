@@ -317,7 +317,7 @@ Now that you have a taste of the basics, you can try out some advanced scenarios
 Recipes
 -------
 ### Fetching Data
-As mentioned before, UI should not be responsible for fetching data. This means no data fetching in `componentWillMount()` or `componentDidMount()`. mobx-state-router facilitates data fetching during state transitions using the `onEnter` hook. This hook is called just before a new router state is entered and is the perfect place to kick off a data fetch. Here's [an example from MobX Shop](https://github.com/nareshbhatia/mobx-shop/blob/master/src/shared/stores/routes.js#L38-L47):
+As mentioned before, UI should not be responsible for fetching data. This means no data fetching in `componentWillMount()` or `componentDidMount()`. mobx-state-router facilitates data fetching during state transitions using the `onEnter` hook. This hook is called just before a new router state is entered and is the perfect place to kick off a data fetch. Here's [an example from MobX Shop](https://github.com/nareshbhatia/mobx-shop/blob/master/src/shared/stores/routes.js#L38-L45):
 
 ```jsx
 {
@@ -325,17 +325,16 @@ As mentioned before, UI should not be responsible for fetching data. This means 
     pattern: '/departments/:id',
     onEnter: (fromState, toState, routerStore) => {
         const { rootStore: { itemStore } } = routerStore;
-        return itemStore
-            .loadDepartmentItems(toState.params.id)
-            .then(() => ({ fromState, toState }));
+        itemStore.loadDepartmentItems(toState.params.id);
+        return Promise.resolve({ fromState, toState });
     }
 },
 ```
 
-This code is part of route definitions. We define an `onEnter` hook that calls `itemStore.loadDepartmentItems()`. If the promise is successful, we let the router proceed to `toState`. Note that the `onEnter` hook simply needs to kick off the fetch, it does not have to wait for the fetch to complete. The `itemStore` can maintain an `isLoading` flag to indicate that it is still loading data.
+This code is part of route definitions. We define an `onEnter` hook that calls `itemStore.loadDepartmentItems()` to kick off the fetching process. It does not have to wait for the fetch to complete. The `itemStore` maintains an `isLoading` flag to indicate the status of the fetch. The last line in the `onEnter` hook resolves the promise to let the router proceed to `toState`. 
 
 ### Redirecting to the Sign In page
-If the user is not logged in, we can redirect them to a Sign In page. Not only that, we can redirect them back to the requested page on a successful sign in. For example, in MobX Shop, we allow the user to add items to the shopping cart without having them signed in. However they can't proceed to checkout unless they are signed in. This is achieved by using the `beforeEnter` hook in the route configuration. Here's [the code](https://github.com/nareshbhatia/mobx-shop/blob/master/src/shared/stores/routes.js#L33-L37) from MobX Shop:
+If the user is not logged in, we can redirect them to a Sign In page. Not only that, we can redirect them back to the requested page on a successful sign in. For example, in MobX Shop, we allow the user to add items to the shopping cart without having them signed in. However they can't proceed to checkout unless they are signed in. This is achieved by using the `beforeEnter` hook in the route configuration. Here's [the code](https://github.com/nareshbhatia/mobx-shop/blob/master/src/shared/stores/routes.js#L33-L36) from MobX Shop:
 
 ```jsx
 {
