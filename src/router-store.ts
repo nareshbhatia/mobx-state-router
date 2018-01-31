@@ -102,7 +102,21 @@ export class RouterStore {
      * Requests a transition to a new state. Note that the actual transition
      * may be different from the requested one based on enter and exit hooks.
      */
-    goTo(toState: RouterState): Promise<TransitionResult> {
+    goTo(toState: RouterState): Promise<TransitionResult>;
+    goTo(
+        routeName: string,
+        params?: StringMap,
+        queryParams?: Object
+    ): Promise<TransitionResult>;
+    goTo(
+        toStateOrRouteName: RouterState | string,
+        params: StringMap = {},
+        queryParams: Object = {}
+    ): Promise<TransitionResult> {
+        const toState =
+            toStateOrRouteName instanceof RouterState
+                ? toStateOrRouteName
+                : new RouterState(toStateOrRouteName, params, queryParams);
         const fromState = this.routerState;
         return this.transition(fromState, toState);
     }

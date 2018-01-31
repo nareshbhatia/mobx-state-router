@@ -446,6 +446,7 @@ The `RouterStore` is the keeper of the `RouterState`. It allows transitioning be
 export class RouterStore {
     constructor(rootStore: any, routes: Route[], notFoundState: RouterState);
     goTo(toState: RouterState): Promise<TransitionResult>;
+    goTo(routeName: string, params?: StringMap, queryParams?: Object): Promise<TransitionResult>;
     goToNotFound();
 }
 ```
