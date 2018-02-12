@@ -82,12 +82,23 @@ describe('RouterStore', () => {
         });
     });
 
-    test('transitions to the desired state using goto overload', () => {
+    test('transitions to the desired state using goto overload (variation 1)', () => {
         expect.assertions(1);
 
         const routerStore = new RouterStore({}, routes, notFound);
         return routerStore
             .goTo('department', { id: 'electronics' })
+            .then(result => {
+                expect(result.toState.isEqual(deptElectronics)).toBeTruthy();
+            });
+    });
+
+    test('transitions to the desired state using goto overload (variation 2)', () => {
+        expect.assertions(1);
+
+        const routerStore = new RouterStore({}, routes, notFound);
+        return routerStore
+            .goTo('department', { id: 'electronics' }, {})
             .then(result => {
                 expect(result.toState.isEqual(deptElectronics)).toBeTruthy();
             });
