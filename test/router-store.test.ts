@@ -10,40 +10,28 @@ const routes: Route[] = [
         name: 'work',
         pattern: '/work',
         beforeExit: fromState => {
-            return Promise.reject({
-                fromState: fromState,
-                toState: gym
-            });
+            return Promise.reject(gym);
         }
     },
     {
         name: 'mountains',
         pattern: '/mountains',
         beforeEnter: fromState => {
-            return Promise.reject({
-                fromState: fromState,
-                toState: gasStation
-            });
+            return Promise.reject(gasStation);
         }
     },
     {
         name: 'sea',
         pattern: '/sea',
         onExit: fromState => {
-            return Promise.reject({
-                fromState: fromState,
-                toState: gasStation
-            });
+            return Promise.reject(gasStation);
         }
     },
     {
         name: 'dessert',
         pattern: '/dessert',
         onEnter: fromState => {
-            return Promise.reject({
-                fromState: fromState,
-                toState: gasStation
-            });
+            return Promise.reject(gasStation);
         }
     },
     {
@@ -77,8 +65,8 @@ describe('RouterStore', () => {
         expect.assertions(1);
 
         const routerStore = new RouterStore({}, routes, notFound);
-        return routerStore.goTo(home).then(result => {
-            expect(result.toState.isEqual(home)).toBeTruthy();
+        return routerStore.goTo(home).then(toState => {
+            expect(toState.isEqual(home)).toBeTruthy();
         });
     });
 
@@ -88,8 +76,8 @@ describe('RouterStore', () => {
         const routerStore = new RouterStore({}, routes, notFound);
         return routerStore
             .goTo('department', { id: 'electronics' })
-            .then(result => {
-                expect(result.toState.isEqual(deptElectronics)).toBeTruthy();
+            .then(toState => {
+                expect(toState.isEqual(deptElectronics)).toBeTruthy();
             });
     });
 
@@ -99,8 +87,8 @@ describe('RouterStore', () => {
         const routerStore = new RouterStore({}, routes, notFound);
         return routerStore
             .goTo('department', { id: 'electronics' }, {})
-            .then(result => {
-                expect(result.toState.isEqual(deptElectronics)).toBeTruthy();
+            .then(toState => {
+                expect(toState.isEqual(deptElectronics)).toBeTruthy();
             });
     });
 
@@ -111,8 +99,8 @@ describe('RouterStore', () => {
         return routerStore
             .goTo(deptElectronics)
             .then(() => routerStore.goTo(deptElectronics))
-            .then(result => {
-                expect(result.toState.isEqual(deptElectronics)).toBeTruthy();
+            .then(toState => {
+                expect(toState.isEqual(deptElectronics)).toBeTruthy();
             });
     });
 
@@ -123,8 +111,8 @@ describe('RouterStore', () => {
         return routerStore
             .goTo(deptElectronics)
             .then(() => routerStore.goTo(deptMusic))
-            .then(result => {
-                expect(result.toState.isEqual(deptMusic)).toBeTruthy();
+            .then(toState => {
+                expect(toState.isEqual(deptMusic)).toBeTruthy();
             });
     });
 
@@ -132,8 +120,8 @@ describe('RouterStore', () => {
         expect.assertions(1);
 
         const routerStore = new RouterStore({}, routes, notFound);
-        return routerStore.goTo(deptElectronicsQuery).then(result => {
-            expect(result.toState.isEqual(deptElectronicsQuery)).toBeTruthy();
+        return routerStore.goTo(deptElectronicsQuery).then(toState => {
+            expect(toState.isEqual(deptElectronicsQuery)).toBeTruthy();
         });
     });
 
@@ -150,8 +138,8 @@ describe('RouterStore', () => {
         return routerStore
             .goTo(work)
             .then(() => routerStore.goTo(home))
-            .then(result => {
-                expect(result.toState.isEqual(gym)).toBeTruthy();
+            .then(toState => {
+                expect(toState.isEqual(gym)).toBeTruthy();
             });
     });
 
@@ -162,8 +150,8 @@ describe('RouterStore', () => {
         return routerStore
             .goTo(home)
             .then(() => routerStore.goTo(mountains))
-            .then(result => {
-                expect(result.toState.isEqual(gasStation)).toBeTruthy();
+            .then(toState => {
+                expect(toState.isEqual(gasStation)).toBeTruthy();
             });
     });
 
@@ -174,8 +162,8 @@ describe('RouterStore', () => {
         return routerStore
             .goTo(sea)
             .then(() => routerStore.goTo(home))
-            .then(result => {
-                expect(result.toState.isEqual(gasStation)).toBeTruthy();
+            .then(toState => {
+                expect(toState.isEqual(gasStation)).toBeTruthy();
             });
     });
 
@@ -186,8 +174,8 @@ describe('RouterStore', () => {
         return routerStore
             .goTo(home)
             .then(() => routerStore.goTo(dessert))
-            .then(result => {
-                expect(result.toState.isEqual(gasStation)).toBeTruthy();
+            .then(toState => {
+                expect(toState.isEqual(gasStation)).toBeTruthy();
             });
     });
 

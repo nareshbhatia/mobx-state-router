@@ -45,17 +45,12 @@ export class RouterState {
     }
 }
 
-export interface TransitionResult {
-    fromState: RouterState;
-    toState: RouterState;
-}
-
-export interface TransitionFunction {
+export interface TransitionHook {
     (
         fromState: RouterState,
         toState: RouterState,
         routerStore: RouterStore
-    ): Promise<TransitionResult>;
+    ): Promise<void>;
 }
 
 /**
@@ -66,17 +61,13 @@ export interface TransitionFunction {
 export interface Route {
     name: string; // e.g. 'department'
     pattern: string; // e.g. '/departments/:id'
-    beforeExit?: TransitionFunction;
-    beforeEnter?: TransitionFunction;
-    onExit?: TransitionFunction;
-    onEnter?: TransitionFunction;
+    beforeExit?: TransitionHook;
+    beforeEnter?: TransitionHook;
+    onExit?: TransitionHook;
+    onEnter?: TransitionHook;
 }
 
 const INITIAL_ROUTE_NAME = '__initial__';
-
-const happyTransition = (fromState: RouterState, toState: RouterState) => {
-    return Promise.resolve({ fromState: fromState, toState: toState });
-};
 
 /**
  * Holds the router state. It allows transitioning between states using
@@ -102,17 +93,17 @@ export class RouterStore {
      * Requests a transition to a new state. Note that the actual transition
      * may be different from the requested one based on enter and exit hooks.
      */
-    goTo(toState: RouterState): Promise<TransitionResult>;
+    goTo(toState: RouterState): Promise<RouterState>;
     goTo(
         routeName: string,
         params?: StringMap,
         queryParams?: Object
-    ): Promise<TransitionResult>;
+    ): Promise<RouterState>;
     goTo(
         toStateOrRouteName: RouterState | string,
         params: StringMap = {},
         queryParams: Object = {}
-    ): Promise<TransitionResult> {
+    ): Promise<RouterState> {
         const toState =
             toStateOrRouteName instanceof RouterState
                 ? toStateOrRouteName
@@ -141,7 +132,7 @@ export class RouterStore {
     private transition(
         fromState: RouterState,
         toState: RouterState
-    ): Promise<TransitionResult> {
+    ): Promise<RouterState> {
         // If fromState = toState, do nothing
         // This is important to avoid infinite loops caused by RouterStore.goTo()
         // triggering a change in history, which in turn causes HistoryAdapter
@@ -155,7 +146,7 @@ export class RouterStore {
                     'states are equal, skipping'
                 );
             }
-            return Promise.resolve({ fromState: fromState, toState: toState });
+            return Promise.resolve(toState);
         }
 
         /* istanbul ignore if */
@@ -167,53 +158,34 @@ export class RouterStore {
             );
         }
 
-        // Get routes associated with the two states
-        const fromRoute = this.getRoute(fromState.routeName);
-        const toRoute = this.getRoute(toState.routeName);
+        // Get transition hooks from the two states
+        const { beforeExit, onExit } = this.getRoute(fromState.routeName);
+        const { beforeEnter, onEnter } = this.getRoute(toState.routeName);
 
-        // Call fromState.beforeExit()
-        const beforeExit = fromRoute.beforeExit
-            ? fromRoute.beforeExit
-            : happyTransition;
+        // Call the transition hook chain
         return (
-            beforeExit(fromState, toState, this)
-                // Call toState.beforeEnter()
-                .then(result => {
-                    const beforeEnter = toRoute.beforeEnter
-                        ? toRoute.beforeEnter
-                        : happyTransition;
-                    return beforeEnter(result.fromState, result.toState, this);
+            [beforeExit, beforeEnter, onExit, onEnter]
+                .reduce(
+                    (promise: Promise<void>, hook) =>
+                        hook
+                            ? promise.then(() => hook(fromState, toState, this))
+                            : promise,
+                    Promise.resolve()
+                )
+
+                // Handle successful resolution from the promise chain
+                .then(() => {
+                    this.setRouterState(toState);
+                    return toState;
                 })
 
-                // Call fromState.onExit()
-                .then(result => {
-                    const onExit = fromRoute.onExit
-                        ? fromRoute.onExit
-                        : happyTransition;
-                    return onExit(result.fromState, result.toState, this);
-                })
-
-                // Call toState.onEnter()
-                .then(result => {
-                    const onEnter = toRoute.onEnter
-                        ? toRoute.onEnter
-                        : happyTransition;
-                    return onEnter(result.fromState, result.toState, this);
-                })
-
-                // Update routerState
-                .then(result => {
-                    this.setRouterState(result.toState);
-                    return result;
-                })
-
-                // Handle break from the promise chain
-                .catch(result => {
-                    if (!result.toState) {
+                // Handle rejection from the promise chain
+                .catch(redirectState => {
+                    if (redirectState instanceof RouterState === false) {
                         throw new Error('toState is undefined');
                     }
-                    this.setRouterState(result.toState);
-                    return result;
+                    this.setRouterState(redirectState);
+                    return redirectState;
                 })
         );
     }
