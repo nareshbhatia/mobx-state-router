@@ -220,7 +220,6 @@ The final pieces of the puzzle are the pages themselves. Here's the code for the
 ```jsx
 import React from 'react';
 import { inject } from 'mobx-react';
-import { RouterState } from 'mobx-state-router';
 
 const styles = {
     root: {
@@ -242,7 +241,7 @@ class HomePageBase extends React.Component {
 
     handleClick = () => {
         const { rootStore: { routerStore } } = this.props;
-        routerStore.goTo(new RouterState('department', {id: 'electronics'}));
+        routerStore.goTo('department', {id: 'electronics'});
     }
 }
 
@@ -256,7 +255,6 @@ The home page has a button that allows the user to navigate to the Electronics d
 ```jsx
 import React from 'react';
 import { inject } from 'mobx-react';
-import { RouterState } from 'mobx-state-router';
 
 const styles = {
     root: {
@@ -281,7 +279,7 @@ class DepartmentPageBase extends React.Component {
 
     handleClick = () => {
         const { rootStore: { routerStore } } = this.props;
-        routerStore.goTo(new RouterState('home'));
+        routerStore.goTo('home');
     }
 }
 
@@ -317,7 +315,7 @@ Now that you have a taste of the basics, you can try out some advanced scenarios
 Recipes
 -------
 ### Fetching Data
-As mentioned before, UI should not be responsible for fetching data. This means no data fetching in `componentWillMount()` or `componentDidMount()`. mobx-state-router facilitates data fetching during state transitions using the `onEnter` hook. This hook is called just before a new router state is entered and is the perfect place to kick off a data fetch. Here's [an example from MobX Shop](https://github.com/nareshbhatia/mobx-shop/blob/master/src/shared/stores/routes.js#L38-L45):
+As mentioned before, UI should not be responsible for fetching data. This means no data fetching in `componentWillMount()` or `componentDidMount()`. mobx-state-router facilitates data fetching during state transitions using the `onEnter` hook. This hook is called just before a new router state is entered and is the perfect place to kick off a data fetch. Here's [an example from MobX Shop](https://github.com/nareshbhatia/mobx-shop/blob/master/src/shared/stores/routes.js):
 
 ```jsx
 {
@@ -326,7 +324,7 @@ As mentioned before, UI should not be responsible for fetching data. This means 
     onEnter: (fromState, toState, routerStore) => {
         const { rootStore: { itemStore } } = routerStore;
         itemStore.loadDepartmentItems(toState.params.id);
-        return Promise.resolve({ fromState, toState });
+        return Promise.resolve();
     }
 },
 ```
@@ -334,7 +332,7 @@ As mentioned before, UI should not be responsible for fetching data. This means 
 This code is part of route definitions. We define an `onEnter` hook that calls `itemStore.loadDepartmentItems()` to kick off the fetching process. It does not have to wait for the fetch to complete. The `itemStore` maintains an `isLoading` flag to indicate the status of the fetch. The last line in the `onEnter` hook resolves the promise to let the router proceed to `toState`. 
 
 ### Redirecting to the Sign In page
-If the user is not logged in, we can redirect them to a Sign In page. Not only that, we can redirect them back to the requested page on a successful sign in. For example, in MobX Shop, we allow the user to add items to the shopping cart without having them signed in. However they can't proceed to checkout unless they are signed in. This is achieved by using the `beforeEnter` hook in the route configuration. Here's [the code](https://github.com/nareshbhatia/mobx-shop/blob/master/src/shared/stores/routes.js#L33-L36) from MobX Shop:
+If the user is not logged in, we can redirect them to a Sign In page. Not only that, we can redirect them back to the requested page on a successful sign in. For example, in MobX Shop, we allow the user to add items to the shopping cart without having them signed in. However they can't proceed to checkout unless they are signed in. This is achieved by using the `beforeEnter` hook in the route configuration. Here's [the code](https://github.com/nareshbhatia/mobx-shop/blob/master/src/shared/stores/routes.js) from MobX Shop:
 
 ```jsx
 {
@@ -344,24 +342,21 @@ If the user is not logged in, we can redirect them to a Sign In page. Not only t
 }
 ```
 
-`checkForUserSignedIn()` is a shared function used by multiple routes. It is defined in the [routes.js](https://github.com/nareshbhatia/mobx-shop/blob/master/src/shared/stores/routes.js#L3-L14) file:
+`checkForUserSignedIn()` is a shared function used by multiple routes. It is defined in the [routes.js](https://github.com/nareshbhatia/mobx-shop/blob/master/src/shared/stores/routes.js) file:
 
 ```jsx
 const checkForUserSignedIn = (fromState, toState, routerStore) => {
     const { rootStore: { authStore } } = routerStore;
     if (authStore.user) {
-        return Promise.resolve({ fromState, toState });
+        return Promise.resolve();
     } else {
         authStore.setSignInRedirect(toState);
-        return Promise.reject({
-            fromState: fromState,
-            toState: new RouterState('signin')
-        });
+        return Promise.reject(new RouterState('signin'));
     }
 };
 ```
 
-This function allows the router to proceed if the user is already signed in. If not, the requested state is saved in the `authStore` and the app is redirected to the `signin` state. On a successful sign in, `authStore` redirects the app to the originally requested state. Here's [the code](https://github.com/nareshbhatia/mobx-shop/blob/master/src/shared/stores/auth.store.js#L18-L22) from MobX Shop:
+This function allows the router to proceed if the user is already signed in. If not, the requested state is saved in the `authStore` and the app is redirected to the `signin` state. On a successful sign in, `authStore` redirects the app to the originally requested state. Here's [the code](https://github.com/nareshbhatia/mobx-shop/blob/master/src/shared/stores/auth.store.js) from MobX Shop:
 
 ```jsx
 @action
@@ -416,26 +411,21 @@ export class RouterState {
 A `Route` consists of a name, a URL matching pattern and optional enter/exit hooks. The `RouterStore` is initialized with an array of routes which it uses to transition between states.
 
 ```jsx
-export interface TransitionResult {
-    fromState: RouterState;
-    toState: RouterState;
-}
-
-export interface TransitionFunction {
+export interface TransitionHook {
     (
         fromState: RouterState,
         toState: RouterState,
         routerStore: RouterStore
-    ): Promise<TransitionResult>;
+    ): Promise<void>;
 }
 
 export interface Route {
     name: string; // e.g. 'department'
     pattern: string; // e.g. '/departments/:id'
-    beforeExit?: TransitionFunction;
-    beforeEnter?: TransitionFunction;
-    onExit?: TransitionFunction;
-    onEnter?: TransitionFunction;
+    beforeExit?: TransitionHook;
+    beforeEnter?: TransitionHook;
+    onExit?: TransitionHook;
+    onEnter?: TransitionHook;
 }
 ```
 
@@ -445,8 +435,8 @@ The `RouterStore` is the keeper of the `RouterState`. It allows transitioning be
 ```jsx
 export class RouterStore {
     constructor(rootStore: any, routes: Route[], notFoundState: RouterState);
-    goTo(toState: RouterState): Promise<TransitionResult>;
-    goTo(routeName: string, params?: StringMap, queryParams?: Object): Promise<TransitionResult>;
+    goTo(toState: RouterState): Promise<RouterState>;
+    goTo(routeName: string, params?: StringMap, queryParams?: Object): Promise<RouterState>;
     goToNotFound();
 }
 ```
