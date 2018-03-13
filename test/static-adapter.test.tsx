@@ -17,25 +17,50 @@ const dept2 = new RouterState('department', { id: 'dept2' });
 
 const routerStore = new RouterStore({}, routes, notFound);
 const location = '/departments/dept1';
-const staticAdapter = new StaticAdapter(routerStore, location);
+const locationNotFound = '/departmenasdts/dept1';
+const locationWithoutParams = '/';
 
 @observer
 class DepartmentsPage extends React.Component {
     render() {
-        const { routerState: { params } } = routerStore;
+        const { routerState: { params, routeName } } = routerStore;
 
         return (
             <div>
                 {params.id === 'dept1' && <div id="tab">Dept 1 Content</div>}
                 {params.id === 'dept2' && <div id="tab">Dept 2 Content</div>}
+                {routeName === 'notFound' && <div id="tab">Not Found</div>}
+                {routeName === 'without params' && (
+                    <div id="tab">Without params</div>
+                )}
             </div>
         );
     }
 }
 
-test('StaticAdapter', () => {
-    return staticAdapter.preload().then(() => {
-        const wrapper = shallow(<DepartmentsPage />);
-        expect(wrapper.find('#tab').text()).toEqual('Dept 1 Content');
+describe('RouterStore', () => {
+    test('With match url', () => {
+        const staticAdapter = new StaticAdapter(routerStore, location);
+        return staticAdapter.preload().then(() => {
+            const wrapper = shallow(<DepartmentsPage />);
+            expect(wrapper.find('#tab').text()).toEqual('Dept 1 Content');
+        });
+    });
+
+    test('Without match url', () => {
+        const staticAdapter = new StaticAdapter(routerStore, locationNotFound);
+        return staticAdapter.preload().then(() => {
+            const wrapper = shallow(<DepartmentsPage />);
+            expect(wrapper.find('#tab').text()).toEqual('Not Found');
+        });
+    });
+
+    test('Test ENV', () => {
+        process.env.NODE_ENV = 'development';
+        const staticAdapter = new StaticAdapter(routerStore, location);
+        return staticAdapter.preload().then(() => {
+            const wrapper = shallow(<DepartmentsPage />);
+            expect(wrapper.find('#tab').text()).toEqual('Dept 1 Content');
+        });
     });
 });

@@ -1,5 +1,5 @@
 import { parse, parseUrl, extract } from 'query-string';
-import { RouterState, RouterStore } from '../router-store';
+import { RouterState, RouterStore, StringMap } from '../router-store';
 import { matchUrl } from './match-url';
 
 /**
@@ -8,6 +8,7 @@ import { matchUrl } from './match-url';
  */
 export class StaticAdapter {
     routerStore: RouterStore;
+    fullLocation: string;
     location: string;
     search: string;
 
@@ -15,6 +16,7 @@ export class StaticAdapter {
         const parsedUrl = parseUrl(location);
 
         this.routerStore = routerStore;
+        this.fullLocation = location;
         this.location = parsedUrl.url;
         this.search = extract(location);
         this.search = '';
@@ -24,7 +26,7 @@ export class StaticAdapter {
         if (process.env.NODE_ENV === 'development') {
             console.log(
                 `StaticAdapter.preload(${JSON.stringify(
-                    `${this.location}?${this.search}`
+                    `${this.fullLocation}`
                 )})`
             );
         }
@@ -36,30 +38,30 @@ export class StaticAdapter {
         if (process.env.NODE_ENV === 'development') {
             console.log(
                 `StaticAdapter.goToLocation(${JSON.stringify(
-                    `${location}?${search}`
+                    `${this.fullLocation}`
                 )})`
             );
         }
 
         const routes = this.routerStore.routes;
-        let routeFound = false;
+        let route;
+        let params: any | StringMap = {};
         for (let i = 0; i < routes.length; i++) {
-            const route = routes[i];
-            const params = matchUrl(location, route.pattern);
+            route = routes[i];
+            params = matchUrl(location, route.pattern);
             if (params) {
-                routeFound = true;
-                return Promise.resolve(
-                    this.routerStore.goTo(
-                        new RouterState(route.name, params, parse(search))
-                    )
-                );
+                break;
             }
         }
 
-        if (!routeFound) {
+        if (!params || !route) {
             return Promise.resolve(this.routerStore.goToNotFound());
+        } else {
+            return Promise.resolve(
+                this.routerStore.goTo(
+                    new RouterState(route.name, params, parse(search))
+                )
+            );
         }
-
-        return Promise.resolve();
     }
 }
