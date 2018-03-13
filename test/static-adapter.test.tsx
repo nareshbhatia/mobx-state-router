@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { observer } from 'mobx-react';
-import { StaticAdapter } from '../src';
+import { StaticAdapter } from '../src/adapters/static-adapter';
 import { Route, RouterState, RouterStore } from '../src/router-store';
 
 const routes = [
@@ -18,7 +18,6 @@ const dept2 = new RouterState('department', { id: 'dept2' });
 const routerStore = new RouterStore({}, routes, notFound);
 const location = '/departments/dept1';
 const locationNotFound = '/departmenasdts/dept1';
-const locationWithoutParams = '/';
 
 @observer
 class DepartmentsPage extends React.Component {
