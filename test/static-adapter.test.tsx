@@ -37,6 +37,5 @@ test('StaticAdapter', () => {
     return staticAdapter.preload().then(() => {
         const wrapper = shallow(<DepartmentsPage />);
         expect(wrapper.find('#tab').text()).toEqual('Dept 1 Content');
-        // expect(111).toEqual(111);
     });
 });
