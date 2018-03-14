@@ -19,7 +19,6 @@ export class StaticAdapter {
         this.fullLocation = location;
         this.location = parsedUrl.url;
         this.search = extract(location);
-        this.search = '';
     }
 
     preload(): Promise<any> {
