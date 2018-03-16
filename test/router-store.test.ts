@@ -217,4 +217,13 @@ describe('RouterStore', () => {
         const routerStore = new RouterStore({}, routes, notFound);
         expect(routerStore.routerState).toMatchObject(equalRouterState);
     });
+
+    test('Extract rout state after insert initial state', () => {
+        const initialState = {
+            name: 'home',
+            pattern: '/'
+        };
+        const routerStore = new RouterStore({}, routes, notFound, initialState);
+        expect(routerStore.extractState()).toMatchObject(initialState);
+    });
 });

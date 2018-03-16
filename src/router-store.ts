@@ -143,6 +143,14 @@ export class RouterStore {
         return route;
     }
 
+    extractState(): InitialState {
+        const route = this.getRoute(this.routerState.routeName);
+        return {
+            name: route.name,
+            pattern: route.pattern
+        };
+    }
+
     /**
      * Requests a transition from fromState to toState. Note that the
      * actual transition may be different from the requested one
