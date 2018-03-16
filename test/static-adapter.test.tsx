@@ -32,7 +32,7 @@ const routes: Route[] = [
         name: 'beforeEnter',
         pattern: '/before-enter',
         beforeEnter: (fromState, toState, routerStore) => {
-            const rootStore = routerStore.rootStore as RootStore;
+            const rootStore = routerStore.rootStore;
             return rootStore.loadItem();
         }
     },
@@ -70,7 +70,7 @@ class DepartmentsPage extends React.Component {
     }
 }
 
-describe('RouterStore', () => {
+describe('StaticAdapter', () => {
     test('With match url', () => {
         const staticAdapter = new StaticAdapter(routerStore, location);
         return staticAdapter.preload().then(() => {
