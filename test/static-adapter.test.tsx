@@ -73,7 +73,7 @@ class DepartmentsPage extends React.Component {
 describe('StaticAdapter', () => {
     test('With match url', () => {
         const staticAdapter = new StaticAdapter(routerStore, location);
-        return staticAdapter.preload().then(() => {
+        return staticAdapter.preloadReady().then(() => {
             const wrapper = shallow(<DepartmentsPage />);
             expect(wrapper.find('#tab').text()).toEqual('Dept 1 Content');
         });
@@ -81,7 +81,7 @@ describe('StaticAdapter', () => {
 
     test('Without match url', () => {
         const staticAdapter = new StaticAdapter(routerStore, locationNotFound);
-        return staticAdapter.preload().then(() => {
+        return staticAdapter.preloadReady().then(() => {
             const wrapper = shallow(<DepartmentsPage />);
             expect(wrapper.find('#tab').text()).toEqual('Not Found');
         });
@@ -92,7 +92,7 @@ describe('StaticAdapter', () => {
             routerStore,
             locationBeforeEnter
         );
-        return staticAdapter.preload().then(() => {
+        return staticAdapter.preloadReady().then(() => {
             const wrapper = shallow(<DepartmentsPage />);
             expect(wrapper.find('#tab').text()).toEqual(itemValue);
         });
@@ -101,7 +101,7 @@ describe('StaticAdapter', () => {
     test('Test ENV', () => {
         process.env.NODE_ENV = 'development';
         const staticAdapter = new StaticAdapter(routerStore, location);
-        return staticAdapter.preload().then(() => {
+        return staticAdapter.preloadReady().then(() => {
             const wrapper = shallow(<DepartmentsPage />);
             expect(wrapper.find('#tab').text()).toEqual('Dept 1 Content');
         });

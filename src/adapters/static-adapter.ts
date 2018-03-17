@@ -3,14 +3,15 @@ import { RouterState, RouterStore, StringMap } from '../router-store';
 import { matchUrl } from './match-url';
 
 /**
- * Adapter for static routes
- *
+ * Responsible for keeping the `RouterState` without sync with the Browser bar.
+ * It also provides a `preloadReady()` method await loading current route.
  */
 export class StaticAdapter {
     routerStore: RouterStore;
     fullLocation: string;
     location: string;
     search: string;
+    readyLoad: Promise<any>;
 
     constructor(routerStore: RouterStore, location: string) {
         const parsedUrl = parseUrl(location);
@@ -19,18 +20,16 @@ export class StaticAdapter {
         this.fullLocation = location;
         this.location = parsedUrl.url;
         this.search = extract(location);
+
+        this.readyLoad = this.goToLocation(this.location, this.search);
     }
 
-    preload(): Promise<any> {
+    preloadReady(): Promise<any> {
         if (process.env.NODE_ENV === 'development') {
-            console.log(
-                `StaticAdapter.preload(${JSON.stringify(
-                    `${this.fullLocation}`
-                )})`
-            );
+            console.log(`StaticAdapter.preloadReady()`);
         }
 
-        return Promise.resolve(this.goToLocation(this.location, this.search));
+        return Promise.resolve(this.readyLoad);
     }
 
     goToLocation(location: string, search: string): Promise<any> {
