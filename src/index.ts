@@ -4,3 +4,4 @@ export { ViewMap, RouterViewProps, RouterView } from './components/router-view';
 export { Link } from './components/link';
 
 export { HistoryAdapter, routerStateToUrl } from './adapters/history-adapter';
+export { StaticAdapter } from './adapters/static-adapter';

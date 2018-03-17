@@ -34,6 +34,7 @@
     "precommit": "lint-staged"
   },
   "dependencies": {
+    "@types/enzyme": "^3.1.9",
     "lodash.find": "^4.3.0",
     "lodash.isequal": "^4.3.0",
     "path-to-regexp": "^2.1.0",
@@ -50,6 +51,7 @@
     "@types/jest": "^22.1.2",
     "@types/lodash": "^4.14.102",
     "@types/node": "^9.4.5",
+    "@types/query-string": "^5.1.0",
     "@types/react": "^16.0.37",
     "@types/react-dom": "^16.0.4",
     "colors": "^1.1.2",
