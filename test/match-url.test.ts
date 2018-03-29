@@ -14,6 +14,6 @@ describe('matchUrl', () => {
             '/departments/electronics',
             '/departments/:id/:category'
         );
-        expect(params).toBeNull();
+        expect(params).toBeUndefined();
     });
 });

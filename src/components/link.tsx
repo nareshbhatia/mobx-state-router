@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { RouterState, RouterStore } from '../router-store';
-import { routerStateToUrl } from '../adapters/history-adapter';
+import { routerStateToUrl } from '../adapters/generate-url';
 
 function isLeftClickEvent(event: React.MouseEvent<HTMLElement>) {
     return event.button === 0;
@@ -34,13 +34,15 @@ export class Link extends React.Component<LinkProps, {}> {
 
     handleClick = (event: React.MouseEvent<HTMLElement>) => {
         // Ignore if link is clicked using a modifier key or not left-clicked
-        if (isModifiedEvent(event) || !isLeftClickEvent(event)) return;
+        if (isModifiedEvent(event) || !isLeftClickEvent(event)) {
+            return undefined;
+        }
 
         // Prevent default action which reloads the app
         event.preventDefault();
 
         // Change the router state to trigger a refresh
         const { routerStore, toState } = this.props;
-        routerStore.goTo(toState);
+        return routerStore.goTo(toState);
     };
 }
