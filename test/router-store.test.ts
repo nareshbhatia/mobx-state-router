@@ -218,12 +218,12 @@ describe('RouterStore', () => {
         expect(routerStore.routerState).toMatchObject(equalRouterState);
     });
 
-    test('Extract rout state after insert initial state', () => {
-        const initialState = {
+    test('Get current route after insert initial state', () => {
+        const initialRoute = {
             name: 'home',
             pattern: '/'
         };
-        const routerStore = new RouterStore({}, routes, notFound, initialState);
-        expect(routerStore.extractState()).toMatchObject(initialState);
+        const routerStore = new RouterStore({}, routes, notFound, initialRoute);
+        expect(routerStore.getCurrentRoute()).toMatchObject(initialRoute);
     });
 });

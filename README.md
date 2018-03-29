@@ -432,7 +432,7 @@ export interface Route {
 ```
 
 ### RouterStore
-The `RouterStore` is the keeper of the `RouterState`. It allows transitioning between states using the `goTo()` method.  It also provides a `extractState()` dump actual state.
+The `RouterStore` is the keeper of the `RouterState`. It allows transitioning between states using the `goTo()` method.  It also provides a `getCurrentRoute()` return current route.
 
 ```jsx
 export class RouterStore {
@@ -440,7 +440,7 @@ export class RouterStore {
     goTo(toState: RouterState): Promise<RouterState>;
     goTo(routeName: string, params?: StringMap, queryParams?: Object): Promise<RouterState>;
     goToNotFound();
-    extractState();
+    getCurrentRoute();
 }
 ```
 
@@ -455,12 +455,12 @@ export class HistoryAdapter {
 ```
 
 ### StaticAdapter
-The `StaticAdapter` Responsible for keeping the `RouterState` without sync with the Browser bar.It also provides a `preloadReady()` method await loading current route.
+The `StaticAdapter` Responsible for keeping the `RouterState` without sync with the Browser bar.It also provides a `goToLocation()` method await loading current location.
 
 ```jsx
 export class StaticAdapter {
-    constructor(routerStore: RouterStore, location: string);
-    preloadReady();
+    constructor(routerStore: RouterStore);
+    goToLocation(location: Location)
 }
 ```
 

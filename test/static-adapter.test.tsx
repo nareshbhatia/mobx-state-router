@@ -4,6 +4,7 @@ import { observer } from 'mobx-react';
 import { observable, action, runInAction } from 'mobx';
 import { StaticAdapter } from '../src/adapters/static-adapter';
 import { Route, RouterState, RouterStore } from '../src/router-store';
+import { createLocation } from 'history';
 
 const itemValue = `Hellow World`;
 class RootStore {
@@ -47,9 +48,10 @@ const dept1 = new RouterState('department', { id: 'dept1' });
 const dept2 = new RouterState('department', { id: 'dept2' });
 
 const routerStore = new RouterStore(rootStore, routes, notFound);
-const location = '/departments/dept1';
-const locationBeforeEnter = '/before-enter';
-const locationNotFound = '/departmenasdts/dept1';
+
+const location = createLocation('/departments/dept1');
+const locationBeforeEnter = createLocation('/before-enter');
+const locationNotFound = createLocation('/departmenasdts/dept1');
 
 @observer
 class DepartmentsPage extends React.Component {
@@ -72,27 +74,24 @@ class DepartmentsPage extends React.Component {
 
 describe('StaticAdapter', () => {
     test('With match url', () => {
-        const staticAdapter = new StaticAdapter(routerStore, location);
-        return staticAdapter.preloadReady().then(() => {
+        const staticAdapter = new StaticAdapter(routerStore);
+        return staticAdapter.goToLocation(location).then(() => {
             const wrapper = shallow(<DepartmentsPage />);
             expect(wrapper.find('#tab').text()).toEqual('Dept 1 Content');
         });
     });
 
     test('Without match url', () => {
-        const staticAdapter = new StaticAdapter(routerStore, locationNotFound);
-        return staticAdapter.preloadReady().then(() => {
+        const staticAdapter = new StaticAdapter(routerStore);
+        return staticAdapter.goToLocation(locationNotFound).then(() => {
             const wrapper = shallow(<DepartmentsPage />);
             expect(wrapper.find('#tab').text()).toEqual('Not Found');
         });
     });
 
     test('Test BeforeEnter Async Load', () => {
-        const staticAdapter = new StaticAdapter(
-            routerStore,
-            locationBeforeEnter
-        );
-        return staticAdapter.preloadReady().then(() => {
+        const staticAdapter = new StaticAdapter(routerStore);
+        return staticAdapter.goToLocation(locationBeforeEnter).then(() => {
             const wrapper = shallow(<DepartmentsPage />);
             expect(wrapper.find('#tab').text()).toEqual(itemValue);
         });
@@ -100,8 +99,8 @@ describe('StaticAdapter', () => {
 
     test('Test ENV', () => {
         process.env.NODE_ENV = 'development';
-        const staticAdapter = new StaticAdapter(routerStore, location);
-        return staticAdapter.preloadReady().then(() => {
+        const staticAdapter = new StaticAdapter(routerStore);
+        return staticAdapter.goToLocation(location).then(() => {
             const wrapper = shallow(<DepartmentsPage />);
             expect(wrapper.find('#tab').text()).toEqual('Dept 1 Content');
         });

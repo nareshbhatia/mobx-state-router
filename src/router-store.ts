@@ -67,11 +67,6 @@ export interface Route {
     onEnter?: TransitionHook;
 }
 
-export interface InitialState {
-    name: string;
-    pattern: string;
-}
-
 const INITIAL_ROUTE_NAME = '__initial__';
 const INITIAL_ROUTE_PATTERN = '';
 
@@ -89,23 +84,23 @@ export class RouterStore {
         rootStore: any,
         routes: Route[],
         notFoundState: RouterState,
-        initialState?: InitialState
+        initialRoute?: Route
     ) {
         this.rootStore = rootStore;
         this.routes = routes;
         this.notFoundState = notFoundState;
 
         // if not initial state, set default
-        if (!initialState) {
-            initialState = {
+        if (!initialRoute) {
+            initialRoute = {
                 name: INITIAL_ROUTE_NAME,
                 pattern: INITIAL_ROUTE_PATTERN
             };
         }
 
         // Set initial state to an internal initial state
-        this.routes.push(initialState);
-        this.routerState = new RouterState(initialState.name);
+        this.routes.push(initialRoute);
+        this.routerState = new RouterState(initialRoute.name);
     }
 
     /**
@@ -144,12 +139,8 @@ export class RouterStore {
         return route;
     }
 
-    extractState(): InitialState {
-        const route = this.getRoute(this.routerState.routeName);
-        return {
-            name: route.name,
-            pattern: route.pattern
-        };
+    getCurrentRoute(): Route {
+        return this.getRoute(this.routerState.routeName);
     }
 
     /**
