@@ -15,7 +15,7 @@ export class StaticAdapter {
     goToLocation = (location: Location): Promise<RouterState> => {
         if (process.env.NODE_ENV === 'development') {
             console.log(
-                `HistoryAdapter.goToLocation(${JSON.stringify(location)})`
+                `StaticAdapter.goToLocation(${JSON.stringify(location)})`
             );
         }
 
