@@ -2,7 +2,7 @@
 // import find from 'lodash/find';
 // import isEqual from 'lodash/isEqual';
 import * as _ from 'lodash';
-import { action, observable, toJS } from 'mobx';
+import { action, observable } from 'mobx';
 
 /**
  * A map from string to string (key-value pairs). Based on:
@@ -112,8 +112,9 @@ export class RouterStore {
         return this.transition(fromState, toState);
     }
 
-    goToNotFound() {
+    goToNotFound(): Promise<RouterState> {
         this.setRouterState(this.notFoundState);
+        return Promise.resolve(this.notFoundState);
     }
 
     getRoute(routeName: string): Route {

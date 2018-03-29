@@ -1,4 +1,10 @@
-import { generateUrl } from '../src/adapters/generate-url';
+import { generateUrl, routerStateToUrl } from '../src/adapters/generate-url';
+import { RouterState, RouterStore } from '../src/router-store';
+
+const routes = [{ name: 'department', pattern: '/departments/:id' }];
+const notFound = new RouterState('notFound');
+const deptElectronics = new RouterState('department', { id: 'electronics' });
+const routerStore = new RouterStore({}, routes, notFound);
 
 describe('generateUrl', () => {
     test('generates the url "/" when pattern and params are defaulted', () => {
@@ -28,5 +34,12 @@ describe('generateUrl', () => {
             { q: 'apple' }
         );
         expect(url).toEqual('/departments/electronics?q=apple');
+    });
+});
+
+describe('routerStateToUrl', () => {
+    test('converts a state with with specified params to a url', () => {
+        const url = routerStateToUrl(routerStore, deptElectronics);
+        expect(url).toEqual('/departments/electronics');
     });
 });

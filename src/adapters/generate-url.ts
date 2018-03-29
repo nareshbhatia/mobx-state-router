@@ -1,5 +1,6 @@
 import { compile, PathFunction } from 'path-to-regexp';
 import { stringify } from 'query-string';
+import { RouterState, RouterStore } from '../router-store';
 
 interface GeneratorCache {
     [pattern: string]: PathFunction;
@@ -36,4 +37,19 @@ export const generateUrl = (pattern = '/', params = {}, queryParams = {}) => {
     }
 
     return url;
+};
+
+/**
+ * Converts the supplied routerState to a URL
+ * @param {RouterStore} routerStore
+ * @param {RouterState} routerState
+ * @returns {string}
+ */
+export const routerStateToUrl = (
+    routerStore: RouterStore,
+    routerState: RouterState
+): string => {
+    const { routeName, params, queryParams } = routerState;
+    const route = routerStore.getRoute(routeName);
+    return generateUrl(route.pattern, params, queryParams);
 };

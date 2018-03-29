@@ -36,9 +36,10 @@ export const matchUrl = (url: string, pattern: string) => {
     const { regExp, keys } = getPatternInfo(pattern);
     const match = regExp.exec(url);
     if (!match) {
-        return null;
+        return undefined;
     }
 
+    // tslint:disable-next-line:no-unused-variable
     const [matchedUrl, ...values] = match;
 
     return keys.reduce((params: StringMap, key, index) => {
