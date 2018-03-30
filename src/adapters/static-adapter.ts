@@ -1,3 +1,4 @@
+import { Location } from 'history';
 import { parse } from 'query-string';
 import { RouterState, RouterStore } from '../router-store';
 import { matchUrl } from './match-url';

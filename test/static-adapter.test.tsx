@@ -49,9 +49,9 @@ const dept2 = new RouterState('department', { id: 'dept2' });
 
 const routerStore = new RouterStore(rootStore, routes, notFound);
 
-const location = createLocation('/departments/dept1');
-const locationBeforeEnter = createLocation('/before-enter');
-const locationNotFound = createLocation('/departmenasdts/dept1');
+const dept1Location = createLocation('/departments/dept1');
+const beforeEnterLocation = createLocation('/before-enter');
+const unknownLocation = createLocation('/departmentions/dept1');
 
 @observer
 class DepartmentsPage extends React.Component {
@@ -73,34 +73,34 @@ class DepartmentsPage extends React.Component {
 }
 
 describe('StaticAdapter', () => {
-    test('With match url', () => {
+    test('goes correctly to a known location', () => {
         const staticAdapter = new StaticAdapter(routerStore);
-        return staticAdapter.goToLocation(location).then(() => {
+        return staticAdapter.goToLocation(dept1Location).then(() => {
             const wrapper = shallow(<DepartmentsPage />);
             expect(wrapper.find('#tab').text()).toEqual('Dept 1 Content');
         });
     });
 
-    test('Without match url', () => {
+    test('goes to Not Found if asked to go to an unknown location', () => {
         const staticAdapter = new StaticAdapter(routerStore);
-        return staticAdapter.goToLocation(locationNotFound).then(() => {
+        return staticAdapter.goToLocation(unknownLocation).then(() => {
             const wrapper = shallow(<DepartmentsPage />);
             expect(wrapper.find('#tab').text()).toEqual('Not Found');
         });
     });
 
-    test('Test BeforeEnter Async Load', () => {
+    test('runs beforeEnter hook before going to target location', () => {
         const staticAdapter = new StaticAdapter(routerStore);
-        return staticAdapter.goToLocation(locationBeforeEnter).then(() => {
+        return staticAdapter.goToLocation(beforeEnterLocation).then(() => {
             const wrapper = shallow(<DepartmentsPage />);
             expect(wrapper.find('#tab').text()).toEqual(itemValue);
         });
     });
 
-    test('Test ENV', () => {
+    test('honors process.env.NODE_ENV', () => {
         process.env.NODE_ENV = 'development';
         const staticAdapter = new StaticAdapter(routerStore);
-        return staticAdapter.goToLocation(location).then(() => {
+        return staticAdapter.goToLocation(dept1Location).then(() => {
             const wrapper = shallow(<DepartmentsPage />);
             expect(wrapper.find('#tab').text()).toEqual('Dept 1 Content');
         });
