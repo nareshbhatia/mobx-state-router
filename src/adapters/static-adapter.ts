@@ -3,7 +3,10 @@ import { RouterState, RouterStore } from '../router-store';
 import { matchUrl } from './match-url';
 
 /**
- * Responsible for keeping the `RouterState` without sync with the Browser bar.
+ * Responsible for driving `RouterState` programmatically instead of the
+ * Browser bar. This is useful in server-side rendering scenarios where
+ * the user isn’t actually clicking around, so the location never actually
+ * changes. Hence, the name `static`.
  */
 export class StaticAdapter {
     routerStore: RouterStore;

@@ -7,14 +7,13 @@ mobx-state-router
 
 MobX-powered router for React apps.
 
-Demo
-----
-MobX Shop -
+Examples
+--------
+- MobX Shop:
 [Live Demo](https://mobx-shop.firebaseapp.com),
 [Source](https://github.com/nareshbhatia/mobx-shop.git)
-
-ssr - 
-[boilerplate](https://github.com/xFloooo/mobx-state-router-ssr-boilerplate)
+- Server-Side Rendering: 
+[SSR Boilerplate](https://github.com/xFloooo/mobx-state-router-ssr-boilerplate)
 
 Table of Contents
 -----------------
@@ -36,7 +35,9 @@ Features
 - State is decoupled from the UI. UI is simply a function of the state.
 - UI is no longer responsible for fetching data. Data is now fetched during state transitions using router hooks.
 - The router can override routing requests based on the application state. For example, it can redirect to the Sign In page if the user is not logged in.
-- The router provides built-in support for 404 (Not Found) errors.
+- Supports
+    - 404 (Not Found) errors
+    - Server-Side Rendering
 
 
 Motivation: Decouple State and UI
@@ -432,15 +433,16 @@ export interface Route {
 ```
 
 ### RouterStore
-The `RouterStore` is the keeper of the `RouterState`. It allows transitioning between states using the `goTo()` method.  It also provides a `getCurrentRoute()` return current route.
+The `RouterStore` is the keeper of the `RouterState`. It allows transitioning between states using the `goTo()` method.
 
 ```jsx
 export class RouterStore {
-    constructor(rootStore: any, routes: Route[], notFoundState: RouterState);
+    constructor(rootStore: any, routes: Route[], notFoundState: RouterState, initialRoute: Route = INITIAL_ROUTE);
     goTo(toState: RouterState): Promise<RouterState>;
     goTo(routeName: string, params?: StringMap, queryParams?: Object): Promise<RouterState>;
-    goToNotFound();
-    getCurrentRoute();
+    goToNotFound(): Promise<RouterState>;
+    getRoute(routeName: string): Route;
+    getCurrentRoute(): Route;
 }
 ```
 
@@ -450,17 +452,18 @@ The `HistoryAdapter` is responsible for keeping the browser address bar and the 
 ```jsx
 export class HistoryAdapter {
     constructor(routerStore: RouterStore, history: History);
+    goToLocation = (location: Location): Promise<RouterState>;
     goBack();
 }
 ```
 
 ### StaticAdapter
-The `StaticAdapter` Responsible for keeping the `RouterState` without sync with the Browser bar.It also provides a `goToLocation()` method await loading current location.
+The `StaticAdapter` is responsible for driving `RouterState` programmatically instead of the Browser bar. This is useful in server-side rendering scenarios where the user isn’t actually clicking around, so the location never actually changes. Hence, the name `static`.
 
 ```jsx
 export class StaticAdapter {
     constructor(routerStore: RouterStore);
-    goToLocation(location: Location)
+    goToLocation = (location: Location): Promise<RouterState>;
 }
 ```
 

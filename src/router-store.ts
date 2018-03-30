@@ -67,8 +67,10 @@ export interface Route {
     onEnter?: TransitionHook;
 }
 
-const INITIAL_ROUTE_NAME = '__initial__';
-const INITIAL_ROUTE_PATTERN = '';
+const INITIAL_ROUTE = {
+    name: '__initial__',
+    pattern: ''
+};
 
 /**
  * Holds the router state. It allows transitioning between states using
@@ -84,21 +86,13 @@ export class RouterStore {
         rootStore: any,
         routes: Route[],
         notFoundState: RouterState,
-        initialRoute?: Route
+        initialRoute: Route = INITIAL_ROUTE
     ) {
         this.rootStore = rootStore;
         this.routes = routes;
         this.notFoundState = notFoundState;
 
-        // if not initial state, set default
-        if (!initialRoute) {
-            initialRoute = {
-                name: INITIAL_ROUTE_NAME,
-                pattern: INITIAL_ROUTE_PATTERN
-            };
-        }
-
-        // Set initial state to an internal initial state
+        // Set RouterState to initialRoute
         this.routes.push(initialRoute);
         this.routerState = new RouterState(initialRoute.name);
     }

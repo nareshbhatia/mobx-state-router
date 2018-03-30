@@ -193,32 +193,32 @@ describe('RouterStore', () => {
         );
     });
 
-    test('set initial state', () => {
-        const initialState = {
-            name: 'home',
-            pattern: '/'
-        };
-
-        const equalRouterState = {
-            routeName: 'home',
-            params: {},
-            queryParams: {}
-        };
-        const routerStore = new RouterStore({}, routes, notFound, initialState);
-        expect(routerStore.routerState).toMatchObject(equalRouterState);
-    });
-
-    test('check default initial state', () => {
-        const equalRouterState = {
+    test('sets a default initial route', () => {
+        const expectedRouterState = {
             routeName: '__initial__',
             params: {},
             queryParams: {}
         };
         const routerStore = new RouterStore({}, routes, notFound);
-        expect(routerStore.routerState).toMatchObject(equalRouterState);
+        expect(routerStore.routerState).toMatchObject(expectedRouterState);
     });
 
-    test('Get current route after insert initial state', () => {
+    test('allows to set a specific initial route', () => {
+        const initialRoute = {
+            name: 'home',
+            pattern: '/'
+        };
+
+        const expectedRouterState = {
+            routeName: 'home',
+            params: {},
+            queryParams: {}
+        };
+        const routerStore = new RouterStore({}, routes, notFound, initialRoute);
+        expect(routerStore.routerState).toMatchObject(expectedRouterState);
+    });
+
+    test('allows to query the current route', () => {
         const initialRoute = {
             name: 'home',
             pattern: '/'
