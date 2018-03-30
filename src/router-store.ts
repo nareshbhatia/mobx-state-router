@@ -67,7 +67,10 @@ export interface Route {
     onEnter?: TransitionHook;
 }
 
-const INITIAL_ROUTE_NAME = '__initial__';
+const INITIAL_ROUTE = {
+    name: '__initial__',
+    pattern: ''
+};
 
 /**
  * Holds the router state. It allows transitioning between states using
@@ -79,14 +82,19 @@ export class RouterStore {
     notFoundState: RouterState;
     @observable.ref routerState: RouterState;
 
-    constructor(rootStore: any, routes: Route[], notFoundState: RouterState) {
+    constructor(
+        rootStore: any,
+        routes: Route[],
+        notFoundState: RouterState,
+        initialRoute: Route = INITIAL_ROUTE
+    ) {
         this.rootStore = rootStore;
         this.routes = routes;
         this.notFoundState = notFoundState;
 
-        // Set initial state to an internal initial state
-        this.routes.push({ name: INITIAL_ROUTE_NAME, pattern: '' });
-        this.routerState = new RouterState(INITIAL_ROUTE_NAME);
+        // Set RouterState to initialRoute
+        this.routes.push(initialRoute);
+        this.routerState = new RouterState(initialRoute.name);
     }
 
     /**
@@ -123,6 +131,10 @@ export class RouterStore {
             throw new Error(`Route ${routeName} does not exist`);
         }
         return route;
+    }
+
+    getCurrentRoute(): Route {
+        return this.getRoute(this.routerState.routeName);
     }
 
     /**

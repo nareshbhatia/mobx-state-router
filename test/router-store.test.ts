@@ -192,4 +192,38 @@ describe('RouterStore', () => {
             'toState is undefined'
         );
     });
+
+    test('sets a default initial route', () => {
+        const expectedRouterState = {
+            routeName: '__initial__',
+            params: {},
+            queryParams: {}
+        };
+        const routerStore = new RouterStore({}, routes, notFound);
+        expect(routerStore.routerState).toMatchObject(expectedRouterState);
+    });
+
+    test('allows to set a specific initial route', () => {
+        const initialRoute = {
+            name: 'home',
+            pattern: '/'
+        };
+
+        const expectedRouterState = {
+            routeName: 'home',
+            params: {},
+            queryParams: {}
+        };
+        const routerStore = new RouterStore({}, routes, notFound, initialRoute);
+        expect(routerStore.routerState).toMatchObject(expectedRouterState);
+    });
+
+    test('allows to query the current route', () => {
+        const initialRoute = {
+            name: 'home',
+            pattern: '/'
+        };
+        const routerStore = new RouterStore({}, routes, notFound, initialRoute);
+        expect(routerStore.getCurrentRoute()).toMatchObject(initialRoute);
+    });
 });
