@@ -1,8 +1,8 @@
 import { History, Location } from 'history';
 import { reaction } from 'mobx';
 import { parse } from 'query-string';
-import { RouterState, RouterStore, Route, StringMap } from '../router-store';
-import { generateUrl } from './generate-url';
+import { RouterState, RouterStore } from '../router-store';
+import { routerStateToUrl } from './generate-url';
 import { matchUrl } from './match-url';
 
 /**
@@ -16,35 +16,45 @@ export class HistoryAdapter {
     constructor(routerStore: RouterStore, history: History) {
         this.routerStore = routerStore;
         this.history = history;
+
+        // Go to current history location
+        // tslint:disable-next-line:no-floating-promises
         this.goToLocation(this.history.location);
 
         // Listen for history changes
         this.history.listen(location => this.goToLocation(location));
     }
 
-    goToLocation = (location: Location) => {
+    goToLocation = (location: Location): Promise<RouterState> => {
         if (process.env.NODE_ENV === 'development') {
             console.log(
                 `HistoryAdapter.goToLocation(${JSON.stringify(location)})`
             );
         }
 
+        // Find the matching route
         const routes = this.routerStore.routes;
-        let routeFound = false;
+        let matchingRoute = null;
+        let params = undefined;
         for (let i = 0; i < routes.length; i++) {
             const route = routes[i];
-            const params = matchUrl(location.pathname, route.pattern);
+            params = matchUrl(location.pathname, route.pattern);
             if (params) {
-                this.routerStore.goTo(
-                    new RouterState(route.name, params, parse(location.search))
-                );
-                routeFound = true;
+                matchingRoute = route;
                 break;
             }
         }
 
-        if (!routeFound) {
-            this.routerStore.goToNotFound();
+        if (matchingRoute) {
+            return this.routerStore.goTo(
+                new RouterState(
+                    matchingRoute.name,
+                    params,
+                    parse(location.search)
+                )
+            );
+        } else {
+            return this.routerStore.goToNotFound();
         }
     };
 
@@ -75,12 +85,3 @@ export class HistoryAdapter {
         );
     };
 }
-
-export const routerStateToUrl = (
-    routerStore: RouterStore,
-    routerState: RouterState
-): string => {
-    const { routeName, params, queryParams } = routerState;
-    const route = routerStore.getRoute(routeName);
-    return generateUrl(route.pattern, params, queryParams);
-};
