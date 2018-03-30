@@ -1,147 +1,149 @@
 {
-  "name": "mobx-state-router",
-  "description": "MobX powered router for React apps",
-  "version": "0.0.0-development",
-  "author": "Naresh Bhatia",
-  "license": "MIT",
-  "homepage": "https://github.com/nareshbhatia/mobx-state-router",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/nareshbhatia/mobx-state-router.git"
-  },
-  "keywords": [
-    "mobx",
-    "react",
-    "router"
-  ],
-  "main": "dist/index.js",
-  "types": "dist/types/index.d.ts",
-  "files": [
-    "dist/"
-  ],
-  "scripts": {
-    "lint": "tslint --project tsconfig.json -t codeFrame 'src/**/*.ts*' 'test/**/*.ts*'",
-    "prebuild": "rimraf dist",
-    "build": "tsc",
-    "start": "tsc -w",
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:prod": "npm run lint && npm run test -- --coverage --no-cache",
-    "report-coverage": "cat ./coverage/lcov.info | coveralls",
-    "commit": "git-cz",
-    "semantic-release": "semantic-release",
-    "format": "prettier --print-width 80 --tab-width 4 --single-quote --write '{src,test}/**/*.ts*'",
-    "precommit": "lint-staged"
-  },
-  "dependencies": {
-    "lodash.find": "^4.3.0",
-    "lodash.isequal": "^4.3.0",
-    "path-to-regexp": "^2.2.0",
-    "query-string": "^6.0.0"
-  },
-  "peerDependencies": {
-    "history": "^4.x",
-    "react": "16.x",
-    "mobx": "^3.x",
-    "mobx-react": "^4.x"
-  },
-  "devDependencies": {
-    "@types/history": "^4.6.2",
-    "@types/jest": "^22.2.2",
-    "@types/lodash": "^4.14.106",
-    "@types/node": "^9.6.1",
-    "@types/react": "^16.1.0",
-    "@types/react-dom": "^16.0.4",
-    "colors": "^1.2.1",
-    "commitizen": "^2.9.6",
-    "coveralls": "^3.0.0",
-    "cross-env": "^5.1.4",
-    "cz-conventional-changelog": "^2.1.0",
-    "enzyme": "^3.2.0",
-    "enzyme-adapter-react-16": "^1.1.1",
-    "history": "^4.7.2",
-    "husky": "^0.14.0",
-    "jest": "^22.4.3",
-    "lint-staged": "^7.0.0",
-    "lodash.camelcase": "^4.3.0",
-    "mobx": "3.5.1",
-    "mobx-react": "4.4.1",
-    "prettier": "^1.11.1",
-    "prompt": "^1.0.0",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
-    "replace-in-file": "^3.4.0",
-    "rimraf": "^2.6.1",
-    "semantic-release": "^15.1.4",
-    "ts-jest": "^22.4.2",
-    "ts-node": "^5.0.1",
-    "tslint": "^5.9.1",
-    "tslint-config-prettier": "^1.10.0",
-    "tslint-config-standard": "^7.0.0",
-    "typescript": "^2.8.1",
-    "validate-commit-msg": "^2.12.2"
-  },
-  "lint-staged": {
-    "{src,test}/**/*.ts*": [
-      "prettier --print-width 80 --tab-width 4 --single-quote --write",
-      "git add"
-    ]
-  },
-  "config": {
-    "commitizen": {
-      "path": "node_modules/cz-conventional-changelog"
+    "name": "mobx-state-router",
+    "description": "MobX powered router for React apps",
+    "version": "0.0.0-development",
+    "author": "Naresh Bhatia",
+    "license": "MIT",
+    "homepage": "https://github.com/nareshbhatia/mobx-state-router",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/nareshbhatia/mobx-state-router.git"
     },
-    "validate-commit-msg": {
-      "types": "conventional-commit-types",
-      "helpMessage": "Use \"npm run commit\" instead, we use conventional-changelog format :) (https://github.com/commitizen/cz-cli)"
-    }
-  },
-  "release": {
-    "analyzeCommits": {
-      "preset": "angular",
-      "releaseRules": [
-        {
-          "type": "docs",
-          "scope": "README",
-          "release": "patch"
+    "keywords": [
+        "mobx",
+        "react",
+        "router"
+    ],
+    "main": "dist/index.js",
+    "types": "dist/types/index.d.ts",
+    "files": [
+        "dist/"
+    ],
+    "scripts": {
+        "lint": "tslint --project tsconfig.json -t codeFrame 'src/**/*.ts*' 'test/**/*.ts*'",
+        "prebuild": "rimraf dist",
+        "build": "tsc",
+        "start": "tsc -w",
+        "test": "jest",
+        "test:watch": "jest --watch",
+        "test:prod": "npm run lint && npm run test -- --coverage --no-cache",
+        "report-coverage": "cat ./coverage/lcov.info | coveralls",
+        "commit": "git-cz",
+        "semantic-release": "semantic-release",
+        "format": "prettier --print-width 80 --tab-width 4 --single-quote --write '{src,test}/**/*.ts*'",
+        "precommit": "lint-staged"
+    },
+    "dependencies": {
+        "lodash.find": "^4.3.0",
+        "lodash.isequal": "^4.3.0",
+        "path-to-regexp": "^2.2.0",
+        "query-string": "^6.0.0"
+    },
+    "peerDependencies": {
+        "history": "^4.x",
+        "react": "16.x",
+        "mobx": "^3.x",
+        "mobx-react": "^4.x"
+    },
+    "devDependencies": {
+        "@types/enzyme": "^3.1.9",
+        "@types/history": "^4.6.2",
+        "@types/jest": "^22.2.2",
+        "@types/lodash": "^4.14.106",
+        "@types/node": "^9.6.1",
+        "@types/query-string": "^5.1.0",
+        "@types/react": "^16.1.0",
+        "@types/react-dom": "^16.0.4",
+        "colors": "^1.2.1",
+        "commitizen": "^2.9.6",
+        "coveralls": "^3.0.0",
+        "cross-env": "^5.1.4",
+        "cz-conventional-changelog": "^2.1.0",
+        "enzyme": "^3.2.0",
+        "enzyme-adapter-react-16": "^1.1.1",
+        "history": "^4.7.2",
+        "husky": "^0.14.0",
+        "jest": "^22.4.3",
+        "lint-staged": "^7.0.0",
+        "lodash.camelcase": "^4.3.0",
+        "mobx": "3.5.1",
+        "mobx-react": "4.4.1",
+        "prettier": "^1.11.1",
+        "prompt": "^1.0.0",
+        "react": "^16.2.0",
+        "react-dom": "^16.2.0",
+        "replace-in-file": "^3.4.0",
+        "rimraf": "^2.6.1",
+        "semantic-release": "^15.1.4",
+        "ts-jest": "^22.4.2",
+        "ts-node": "^5.0.1",
+        "tslint": "^5.9.1",
+        "tslint-config-prettier": "^1.10.0",
+        "tslint-config-standard": "^7.0.0",
+        "typescript": "^2.8.1",
+        "validate-commit-msg": "^2.12.2"
+    },
+    "lint-staged": {
+        "{src,test}/**/*.ts*": [
+            "prettier --print-width 80 --tab-width 4 --single-quote --write",
+            "git add"
+        ]
+    },
+    "config": {
+        "commitizen": {
+            "path": "node_modules/cz-conventional-changelog"
         },
-        {
-          "type": "refactor",
-          "release": "patch"
-        },
-        {
-          "type": "style",
-          "release": "patch"
+        "validate-commit-msg": {
+            "types": "conventional-commit-types",
+            "helpMessage": "Use \"npm run commit\" instead, we use conventional-changelog format :) (https://github.com/commitizen/cz-cli)"
         }
-      ]
+    },
+    "release": {
+        "analyzeCommits": {
+            "preset": "angular",
+            "releaseRules": [
+                {
+                    "type": "docs",
+                    "scope": "README",
+                    "release": "patch"
+                },
+                {
+                    "type": "refactor",
+                    "release": "patch"
+                },
+                {
+                    "type": "style",
+                    "release": "patch"
+                }
+            ]
+        }
+    },
+    "jest": {
+        "transform": {
+            ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+        },
+        "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
+        "moduleFileExtensions": [
+            "ts",
+            "tsx",
+            "js"
+        ],
+        "setupFiles": [
+            "./test/test-shim.ts",
+            "./test/test-setup.ts"
+        ],
+        "coveragePathIgnorePatterns": [
+            "/node_modules/",
+            "/test/"
+        ],
+        "coverageThreshold": {
+            "global": {
+                "branches": 90,
+                "functions": 95,
+                "lines": 95,
+                "statements": 95
+            }
+        },
+        "collectCoverage": true
     }
-  },
-  "jest": {
-    "transform": {
-      ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
-    },
-    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js"
-    ],
-    "setupFiles": [
-      "./test/test-shim.ts",
-      "./test/test-setup.ts"
-    ],
-    "coveragePathIgnorePatterns": [
-      "/node_modules/",
-      "/test/"
-    ],
-    "coverageThreshold": {
-      "global": {
-        "branches": 90,
-        "functions": 95,
-        "lines": 95,
-        "statements": 95
-      }
-    },
-    "collectCoverage": true
-  }
 }

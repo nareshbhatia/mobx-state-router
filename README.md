@@ -13,6 +13,8 @@ MobX Shop -
 [Live Demo](https://mobx-shop.firebaseapp.com),
 [Source](https://github.com/nareshbhatia/mobx-shop.git)
 
+ssr - 
+[boilerplate](https://github.com/xFloooo/mobx-state-router-ssr-boilerplate)
 
 Table of Contents
 -----------------
@@ -430,7 +432,7 @@ export interface Route {
 ```
 
 ### RouterStore
-The `RouterStore` is the keeper of the `RouterState`. It allows transitioning between states using the `goTo()` method.
+The `RouterStore` is the keeper of the `RouterState`. It allows transitioning between states using the `goTo()` method.  It also provides a `getCurrentRoute()` return current route.
 
 ```jsx
 export class RouterStore {
@@ -438,6 +440,7 @@ export class RouterStore {
     goTo(toState: RouterState): Promise<RouterState>;
     goTo(routeName: string, params?: StringMap, queryParams?: Object): Promise<RouterState>;
     goToNotFound();
+    getCurrentRoute();
 }
 ```
 
@@ -448,6 +451,16 @@ The `HistoryAdapter` is responsible for keeping the browser address bar and the 
 export class HistoryAdapter {
     constructor(routerStore: RouterStore, history: History);
     goBack();
+}
+```
+
+### StaticAdapter
+The `StaticAdapter` Responsible for keeping the `RouterState` without sync with the Browser bar.It also provides a `goToLocation()` method await loading current location.
+
+```jsx
+export class StaticAdapter {
+    constructor(routerStore: RouterStore);
+    goToLocation(location: Location)
 }
 ```
 
