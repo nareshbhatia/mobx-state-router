@@ -387,6 +387,23 @@ function Footer({ routerStore }) {
 }
 ```
 
+`<RouterLink>` is a simpler variation of `<Link>` that does not require the `routerStore` parameter. Also the `toState` can be specified using simpler properties: `routeName`, `params` and `queryParams`. For example, the link shown above can be specified using `RouterLink` as follows:
+
+```jsx
+import { RouterLink } from 'mobx-state-router';
+
+function Footer() {
+    return (
+        <div>
+            <RouterLink routeName="home">
+                Home
+            </RouterLink>
+        </div>
+    );
+}
+```
+
+Both `Link` & `RouterLink` accept `className` and `activeClassName` as optional properties. `className` is always applied to the generated anchor tag. `activeClassName` is applied in addition if the current `routerState` matches the state specified by the `RouterLink`. This feature is useful for highlighting the active link in a navbar.
 
 Troubleshooting
 ---------------

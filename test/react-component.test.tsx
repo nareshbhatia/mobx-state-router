@@ -19,7 +19,9 @@ const routerStore = new RouterStore({}, routes, notFound);
 @observer
 class DepartmentsPage extends React.Component {
     render() {
-        const { routerState: { params } } = routerStore;
+        const {
+            routerState: { params }
+        } = routerStore;
 
         return (
             <div>
@@ -55,14 +57,15 @@ test('DepartmentsPage changes tabs when a tab button is clicked', () => {
         expect(wrapper.find('#tab').text()).toEqual('Dept 1 Content');
 
         // Click on the dept2 button and make sure the page switches to department 2
-        // TODO: Can't get this part of the test to pass - tab stays at Dept 1
-        // wrapper.find('[name="dept2-button"]').simulate('click');
+        wrapper.find('[name="dept2-button"]').simulate('click');
+
+        // TODO: Not working - tab stays at Dept 1
         // jest.useFakeTimers();
         // setTimeout(() => {
+        //     console.log('-----> routerState:', routerStore.routerState);
         //     console.log(wrapper.debug());
-        //     console.log('routerState:', routerStore.routerState);
         //     expect(wrapper.find('#tab').text()).toEqual('Dept 2 Content');
-        // }, 10000);
+        // }, 1000);
         // jest.runAllTimers();
     });
 });
