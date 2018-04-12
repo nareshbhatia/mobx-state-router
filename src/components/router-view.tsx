@@ -19,7 +19,10 @@ export interface RouterViewProps {
 @observer
 export class RouterView extends React.Component<RouterViewProps, {}> {
     render() {
-        const { routerStore: { routerState }, viewMap } = this.props;
+        const {
+            routerStore: { routerState },
+            viewMap
+        } = this.props;
         if (process.env.NODE_ENV === 'development') {
             console.log(`RouterView.render() - ${JSON.stringify(routerState)}`);
         }

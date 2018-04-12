@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { RouterState, RouterStore } from '../router-store';
+import { inject } from 'mobx-react';
+import { RouterState, StringMap } from '../router-store';
 import { routerStateToUrl } from '../adapters/generate-url';
 
 function isLeftClickEvent(event: React.MouseEvent<HTMLElement>) {
@@ -10,9 +11,11 @@ function isModifiedEvent(event: React.MouseEvent<HTMLElement>) {
     return event.metaKey || event.altKey || event.ctrlKey || event.shiftKey;
 }
 
-export interface LinkProps {
-    routerStore: RouterStore;
-    toState: RouterState;
+export interface RouterLinkProps {
+    rootStore: any;
+    routeName: string;
+    params?: StringMap;
+    queryParams?: Object;
     className?: string;
     activeClassName?: string;
 }
@@ -22,29 +25,36 @@ export interface LinkProps {
  * state without reloading the entire app, thus avoiding potential flickers.
  *
  * Example:
- *     const home = new RouterState('home');
- *     ...
- *     <Link routerStore={routerStore} toState={home}>
+ *     <RouterLink routeName="home">
  *         Home
- *     </Link>
+ *     </RouterLink>
  *
- * Link accepts `className` and `activeClassName` as optional
+ * Note that `rootStore` is injected directly into the RouterLink, there
+ * is no need to pass it as prop.
+ *
+ * The target state is specified by the `routeName`, `params` and `queryParams`
+ * properties.
+ *
+ * RouterLink accepts `className` and `activeClassName` as optional
  * properties. `className` is always applied to the anchor tag.
  * `activeClassName` is applied in addition if the current `routerState`
- * matches the state specified by the `Link`. This feature is
+ * matches the state specified by the `RouterLink`. This feature is
  * useful for highlighting the active link in a navbar.
- *
- * @see RouterLink for simpler way to create anchor tags.
  */
-export class Link extends React.Component<LinkProps, {}> {
+@inject('rootStore')
+export class RouterLink extends React.Component<RouterLinkProps, {}> {
     render() {
         const {
-            routerStore,
-            toState,
+            rootStore: { routerStore },
+            routeName,
+            params,
+            queryParams,
             className,
             activeClassName,
             children
         } = this.props;
+
+        const toState = new RouterState(routeName, params, queryParams);
 
         const isActive = routerStore.routerState.isEqual(toState);
         const joinedClassName =
@@ -72,7 +82,8 @@ export class Link extends React.Component<LinkProps, {}> {
         event.preventDefault();
 
         // Change the router state to trigger a refresh
-        const { routerStore, toState } = this.props;
-        return routerStore.goTo(toState);
+        const { rootStore, routeName, params, queryParams } = this.props;
+        const { routerStore } = rootStore;
+        return routerStore.goTo(routeName, params, queryParams);
     };
 }

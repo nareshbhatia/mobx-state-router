@@ -56,7 +56,10 @@ const unknownLocation = createLocation('/departmentions/dept1');
 @observer
 class DepartmentsPage extends React.Component {
     render() {
-        const { rootStore, routerState: { params, routeName } } = routerStore;
+        const {
+            rootStore,
+            routerState: { params, routeName }
+        } = routerStore;
         const item = rootStore.item;
         return (
             <div>
