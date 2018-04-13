@@ -387,7 +387,7 @@ function Footer({ routerStore }) {
 }
 ```
 
-`<RouterLink>` is a simpler variation of `<Link>` that does not require the `routerStore` parameter. Also the `toState` can be specified using simpler properties: `routeName`, `params` and `queryParams`. For example, the link shown above can be specified using `RouterLink` as follows:
+`<RouterLink>` is a simpler variation of `<Link>` that does not require the `routerStore` parameter. Also `toState` can be specified using simpler properties: `routeName`, `params` and `queryParams`. For example, the link shown above can be specified using `RouterLink` as follows:
 
 ```jsx
 import { RouterLink } from 'mobx-state-router';
@@ -502,15 +502,39 @@ export class RouterView extends React.Component<RouterViewProps, {}> {...}
 ```
 
 ### Link
-The `Link` component Creates an <a> element that links to a router state. It redirects to the target state without reloading the entire app, thus avoiding potential flickers.
+The `Link` component creates an anchor tag that links to a router state. Redirects to the target state without reloading the entire app, thus avoiding potential flickers.
+
+`Link` accepts `className` and `activeClassName` as optional properties to control the look of the link in normal and active states.
 
 ```jsx
 export interface LinkProps {
     routerStore: RouterStore;
     toState: RouterState;
+    className?: string;
+    activeClassName?: string;
 }
 
 export class Link extends React.Component<LinkProps, {}> {...}
+```
+
+### RouterLink
+The `RouterLink` component is a simpler variation of `<Link>` that does not require the `routerStore` parameter. Also `toState` can be specified using simpler properties: `routeName`, `params` and `queryParams`.
+
+`RouterLink` accepts `className` and `activeClassName` as optional properties to control the look of the link in normal and active states.
+
+Note that the `rootStore` property is injected into the `RouterLink`. There is no need to supply it in your tags.
+
+```jsx
+export interface LinkProps {
+    rootStore: any;
+    routeName: string;
+    params?: StringMap;
+    queryParams?: Object;
+    className?: string;
+    activeClassName?: string;
+}
+
+export class RouterLink extends React.Component<RouterLinkProps, {}> {...}
 ```
 
 
