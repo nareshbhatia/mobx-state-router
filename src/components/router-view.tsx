@@ -3,7 +3,7 @@ import { observer } from 'mobx-react';
 import { RouterStore } from '../router-store';
 
 export interface ViewMap {
-    [routeName: string]: React.Component;
+    [routeName: string]: React.ReactNode;
 }
 
 export interface RouterViewProps {
