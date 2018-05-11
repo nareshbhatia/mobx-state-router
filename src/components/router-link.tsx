@@ -12,7 +12,7 @@ function isModifiedEvent(event: React.MouseEvent<HTMLElement>) {
 }
 
 export interface RouterLinkProps {
-    rootStore: any;
+    rootStore?: any;
     routeName: string;
     params?: StringMap;
     queryParams?: Object;
