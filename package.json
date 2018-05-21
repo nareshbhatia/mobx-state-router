@@ -34,8 +34,6 @@
     "precommit": "lint-staged"
   },
   "dependencies": {
-    "lodash.find": "^4.3.0",
-    "lodash.isequal": "^4.3.0",
     "path-to-regexp": "^2.2.0",
     "query-string": "^5.1.1"
   },
