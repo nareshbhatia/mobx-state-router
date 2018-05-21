@@ -20,6 +20,7 @@
     "dist/"
   ],
   "scripts": {
+    "activate-commit-hook": "validate-commit-msg",
     "lint": "tslint --project tsconfig.json -t codeFrame 'src/**/*.ts*' 'test/**/*.ts*'",
     "prebuild": "rimraf dist",
     "build": "tsc",
