@@ -1,7 +1,5 @@
-// TODO: How to get the following imports working without allowSyntheticDefaultImports
-// import find from 'lodash/find';
-// import isEqual from 'lodash/isEqual';
-import * as _ from 'lodash';
+/// <reference path="value-equal.d.ts" />
+import valueEqual from 'value-equal';
 import { action, observable } from 'mobx';
 
 /**
@@ -37,11 +35,7 @@ export class RouterState {
     ) {}
 
     isEqual(other: RouterState): boolean {
-        return (
-            this.routeName === other.routeName &&
-            _.isEqual(this.params, other.params) &&
-            _.isEqual(this.queryParams, other.queryParams)
-        );
+        return valueEqual(this, other);
     }
 }
 
@@ -126,11 +120,14 @@ export class RouterStore {
     }
 
     getRoute(routeName: string): Route {
-        const route = _.find(this.routes, { name: routeName });
-        if (!route) {
-            throw new Error(`Route ${routeName} does not exist`);
+        for (let i = 0; i < this.routes.length; i++) {
+            const route = this.routes[i];
+            if (route.name === routeName) {
+                return route;
+            }
         }
-        return route;
+
+        throw new Error(`Route ${routeName} does not exist`);
     }
 
     getCurrentRoute(): Route {
