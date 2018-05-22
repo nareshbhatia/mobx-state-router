@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { inject } from 'mobx-react';
+import { inject, observer } from 'mobx-react';
 import { RouterState, StringMap } from '../router-store';
 import { routerStateToUrl } from '../adapters/generate-url';
 
@@ -42,6 +42,7 @@ export interface RouterLinkProps {
  * useful for highlighting the active link in a navbar.
  */
 @inject('rootStore')
+@observer
 export class RouterLink extends React.Component<RouterLinkProps, {}> {
     render() {
         const {
