@@ -1,4 +1,3 @@
-/// <reference path="value-equal.d.ts" />
 import valueEqual from 'value-equal';
 import { action, observable } from 'mobx';
 
