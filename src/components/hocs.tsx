@@ -42,7 +42,7 @@ export const withRouter = <P extends LinkProps>(
         handleClick = (event: React.MouseEvent<HTMLElement>) => {
             // Ignore if link is clicked using a modifier key or not left-clicked
             if (isModifiedEvent(event) || !isLeftClickEvent(event)) {
-                return;
+                return undefined;
             }
 
             // Prevent default action which reloads the app

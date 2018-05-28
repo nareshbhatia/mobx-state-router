@@ -57,3 +57,4 @@ const BaseLink = (props: BaseLinkProps) => {
 
 // FIXME: Need documentation
 export const Link = withRouter(BaseLink, 'active');
+export { WithRouterProps } from './hocs';
