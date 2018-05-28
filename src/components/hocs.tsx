@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { observer, inject } from 'mobx-react';
+import { observer } from 'mobx-react';
 import { RouterState, RouterStore, StringMap } from '../router-store';
 import { routerStateToUrl } from '../adapters/generate-url';
 
@@ -49,14 +49,15 @@ export const withRouter = <P extends LinkProps>(
             event.preventDefault();
 
             // Change the router state to trigger a refresh
-            const { routerStore, toState, params, queryParams } = this.props;
+            const { routerStore, toState, params, queryParams } = this
+                .props as WithRouterProps;
 
             const to =
                 typeof toState === 'string'
                     ? new RouterState(toState, params, queryParams)
-                    : (toState as RouterState);
+                    : toState;
 
-            routerStore.goTo(to);
+            return routerStore.goTo(to);
         };
 
         render() {
@@ -72,7 +73,7 @@ export const withRouter = <P extends LinkProps>(
             const to =
                 typeof toState === 'string'
                     ? new RouterState(toState, params, queryParams)
-                    : (toState as RouterState);
+                    : toState;
 
             const href = routerStateToUrl(routerStore, to);
             const active = activePropName
