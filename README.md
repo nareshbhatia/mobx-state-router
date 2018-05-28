@@ -537,6 +537,42 @@ export interface LinkProps {
 export class RouterLink extends React.Component<RouterLinkProps, {}> {...}
 ```
 
+### withRouter & withStore example
+
+```jsx
+import React from 'react';
+import { NavLink as ReactstrapNavLink } from 'reactstrap'; // Extern component
+import {
+    withRouter,
+    withStore,
+    RouterStore,
+    RouterState
+} from 'mobx-state-router';
+
+const routes = [
+    { name: 'home', pattern: '/home' },
+    { name: 'profile', pattern: '/profile' },
+    { name: 'notFound', pattern: '/not-found' }
+];
+const routerStore = new RouterStore(this, routes, new RouterState('notFound'));
+
+// add routerStore, toState, params, queryParams, and 'active' prop to wrapped component
+const NavLink = withRouter(ReactstrapNavLink, 'active');
+// set routerStore to router store
+const NavLinkWithStore = withStore(NavLink, routerStore);
+
+const SideBar = () => (
+    <div>
+        <NavLink routerStore={routerStore} toState={'home'}>
+            Home
+        </NavLink>
+        <NavLinkWithStore toState={new RouterState('profile')}>
+            Profile
+        </NavLinkWithStore>
+    </div>
+);
+```
+
 Contributors
 ------------
 When making a pull request, make sure that your commit messages conform to the [Angular Commit Message Conventions](https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#-git-commit-guidelines). Doing so allows us to automate the whole package release workflow using [semantic-release](https://github.com/semantic-release/semantic-release).

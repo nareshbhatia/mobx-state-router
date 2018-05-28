@@ -1,15 +1,7 @@
 import * as React from 'react';
-import { inject, observer } from 'mobx-react';
-import { RouterState, StringMap } from '../router-store';
-import { routerStateToUrl } from '../adapters/generate-url';
-
-function isLeftClickEvent(event: React.MouseEvent<HTMLElement>) {
-    return event.button === 0;
-}
-
-function isModifiedEvent(event: React.MouseEvent<HTMLElement>) {
-    return event.metaKey || event.altKey || event.ctrlKey || event.shiftKey;
-}
+import { inject } from 'mobx-react';
+import { StringMap } from '../router-store';
+import { Link } from './link';
 
 export interface RouterLinkProps {
     rootStore?: any;
@@ -41,50 +33,15 @@ export interface RouterLinkProps {
  * matches the state specified by the `RouterLink`. This feature is
  * useful for highlighting the active link in a navbar.
  */
-@inject('rootStore')
-@observer
-export class RouterLink extends React.Component<RouterLinkProps, {}> {
-    render() {
-        const {
-            rootStore: { routerStore },
-            routeName,
-            params,
-            queryParams,
-            className,
-            activeClassName,
-            children
-        } = this.props;
 
-        const toState = new RouterState(routeName, params, queryParams);
+export const RouterLink = inject('rootStore')((props: RouterLinkProps) => {
+    const {
+        rootStore: { routerStore },
+        routeName,
+        ...restProps
+    } = props;
 
-        const isActive = routerStore.routerState.isEqual(toState);
-        const joinedClassName =
-            (className ? className : '') +
-            (isActive && activeClassName ? ' ' + activeClassName : '');
-
-        return (
-            <a
-                className={joinedClassName}
-                href={routerStateToUrl(routerStore, toState)}
-                onClick={this.handleClick}
-            >
-                {children}
-            </a>
-        );
-    }
-
-    handleClick = (event: React.MouseEvent<HTMLElement>) => {
-        // Ignore if link is clicked using a modifier key or not left-clicked
-        if (isModifiedEvent(event) || !isLeftClickEvent(event)) {
-            return undefined;
-        }
-
-        // Prevent default action which reloads the app
-        event.preventDefault();
-
-        // Change the router state to trigger a refresh
-        const { rootStore, routeName, params, queryParams } = this.props;
-        const { routerStore } = rootStore;
-        return routerStore.goTo(routeName, params, queryParams);
-    };
-}
+    return (
+        <Link routerStore={routerStore} toState={routeName} {...restProps} />
+    );
+});

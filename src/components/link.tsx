@@ -1,31 +1,49 @@
 import * as React from 'react';
-import { RouterState, RouterStore } from '../router-store';
-import { routerStateToUrl } from '../adapters/generate-url';
+import { withRouter, WithRouterProps } from './hocs';
 
-function isLeftClickEvent(event: React.MouseEvent<HTMLElement>) {
-    return event.button === 0;
-}
-
-function isModifiedEvent(event: React.MouseEvent<HTMLElement>) {
-    return event.metaKey || event.altKey || event.ctrlKey || event.shiftKey;
-}
-
-export interface LinkProps {
-    routerStore: RouterStore;
-    toState: RouterState;
+export interface BaseLinkProps {
+    href?: string;
+    onClick?: (event: React.MouseEvent<HTMLElement>) => void;
+    active?: boolean;
     className?: string;
     activeClassName?: string;
 }
+
+const BaseLink = (props: BaseLinkProps) => {
+    const { active, className, activeClassName, ...restProps } = props;
+
+    const classname =
+        (className || '') +
+        (active && activeClassName ? ' ' + activeClassName : '');
+
+    return <a {...restProps} className={classname} />;
+};
 
 /**
  * Creates an anchor tag that links to a router state. Redirects to the target
  * state without reloading the entire app, thus avoiding potential flickers.
  *
  * Example:
- *     const home = new RouterState('home');
+ *
+ *     const state = new RouterState(
+ *         'department',
+ *         { id: 'electronics' },
+ *         { q: 'apple' }
+ *     );
+ *
  *     ...
- *     <Link routerStore={routerStore} toState={home}>
- *         Home
+ *
+ *     <Link routerStore={routerStore} toState={state}>
+ *         Apple
+ *     </Link>
+ *
+ *     <Link
+ *         routerStore={routerStore}
+ *         toState='department'
+ *         params={{ id: 'electronics' }}
+ *         queryParams={{ q: 'samsung' }}
+ *     />
+ *         Samsung
  *     </Link>
  *
  * Link accepts `className` and `activeClassName` as optional
@@ -36,43 +54,6 @@ export interface LinkProps {
  *
  * @see RouterLink for simpler way to create anchor tags.
  */
-export class Link extends React.Component<LinkProps, {}> {
-    render() {
-        const {
-            routerStore,
-            toState,
-            className,
-            activeClassName,
-            children
-        } = this.props;
 
-        const isActive = routerStore.routerState.isEqual(toState);
-        const joinedClassName =
-            (className ? className : '') +
-            (isActive && activeClassName ? ' ' + activeClassName : '');
-
-        return (
-            <a
-                className={joinedClassName}
-                href={routerStateToUrl(routerStore, toState)}
-                onClick={this.handleClick}
-            >
-                {children}
-            </a>
-        );
-    }
-
-    handleClick = (event: React.MouseEvent<HTMLElement>) => {
-        // Ignore if link is clicked using a modifier key or not left-clicked
-        if (isModifiedEvent(event) || !isLeftClickEvent(event)) {
-            return undefined;
-        }
-
-        // Prevent default action which reloads the app
-        event.preventDefault();
-
-        // Change the router state to trigger a refresh
-        const { routerStore, toState } = this.props;
-        return routerStore.goTo(toState);
-    };
-}
+// FIXME: Need documentation
+export const Link = withRouter(BaseLink, 'active');
