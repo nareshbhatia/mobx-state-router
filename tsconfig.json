@@ -1,18 +1,15 @@
 {
     "compilerOptions": {
-        "allowSyntheticDefaultImports": true,
         "declaration": true,
         "declarationDir": "dist/types",
         "experimentalDecorators": true,
         "jsx": "react",
         "lib": ["es2015", "es2016", "es2017", "dom"],
-        "module":"commonjs",
+        "module": "commonjs",
         "outDir": "./dist",
         "sourceMap": true,
         "strict": true,
         "target": "es5"
     },
-    "include": [
-        "src"
-    ]
+    "include": ["src"]
 }

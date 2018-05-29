@@ -3,7 +3,7 @@ import { observer } from 'mobx-react';
 import { RouterState, RouterStore, StringMap } from '../router-store';
 import { routerStateToUrl } from '../adapters/generate-url';
 
-export interface RequaredLinkProps {
+export interface AnchorProps {
     href?: string;
     onClick?: (event: React.MouseEvent<HTMLElement>) => any;
 }
@@ -28,13 +28,13 @@ const isModifiedEvent = (event: React.MouseEvent<HTMLElement>) =>
     !!(event.metaKey || event.altKey || event.ctrlKey || event.shiftKey);
 
 // FIXME: Need documentation
-export const withRouter = <P extends RequaredLinkProps, K extends keyof P>(
+export const withRouter = <P extends AnchorProps, K extends keyof P>(
     Component: React.ComponentType<P>,
     activePropName?: K
-): React.ComponentType<Subtract<P, RequaredLinkProps> & WithRouterProps> => {
+): React.ComponentType<Subtract<P, AnchorProps> & WithRouterProps> => {
     @observer
     class WithRouterLink extends React.Component<
-        Subtract<P, RequaredLinkProps> & WithRouterProps
+        Subtract<P, AnchorProps> & WithRouterProps
     > {
         static displayName = `WithRouter(${Component.displayName ||
             Component.name})`;

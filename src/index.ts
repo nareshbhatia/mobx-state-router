@@ -9,7 +9,7 @@ export { StaticAdapter } from './adapters/static-adapter';
 export { generateUrl, routerStateToUrl } from './adapters/generate-url';
 
 export {
-    RequaredLinkProps,
+    AnchorProps,
     WithStoreProps,
     WithRouterProps,
     withRouter,
