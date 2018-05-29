@@ -9,8 +9,8 @@ export { StaticAdapter } from './adapters/static-adapter';
 export { generateUrl, routerStateToUrl } from './adapters/generate-url';
 
 export {
-    LinkProps,
-    RouterStoreProps,
+    RequaredLinkProps,
+    WithStoreProps,
     WithRouterProps,
     withRouter,
     withStore

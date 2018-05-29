@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { withRouter, WithRouterProps } from './hocs';
 
-export interface BaseLinkProps {
+interface BaseLinkProps {
     href?: string;
     onClick?: (event: React.MouseEvent<HTMLElement>) => void;
     active?: boolean;
@@ -9,7 +9,7 @@ export interface BaseLinkProps {
     activeClassName?: string;
 }
 
-const BaseLink = (props: BaseLinkProps) => {
+const BaseLink: React.SFC<BaseLinkProps> = props => {
     const { active, className, activeClassName, ...restProps } = props;
 
     const classname =
@@ -18,6 +18,11 @@ const BaseLink = (props: BaseLinkProps) => {
 
     return <a {...restProps} className={classname} />;
 };
+
+export interface LinkProps extends WithRouterProps {
+    className?: string;
+    activeClassName?: string;
+}
 
 /**
  * Creates an anchor tag that links to a router state. Redirects to the target
@@ -56,7 +61,7 @@ const BaseLink = (props: BaseLinkProps) => {
  */
 
 // FIXME: Need documentation
-export const Link: React.ComponentType<WithRouterProps> = withRouter(
+export const Link: React.ComponentType<LinkProps> = withRouter(
     BaseLink,
     'active'
 );

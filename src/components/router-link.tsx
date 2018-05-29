@@ -34,14 +34,20 @@ export interface RouterLinkProps {
  * useful for highlighting the active link in a navbar.
  */
 
-export const RouterLink = inject('rootStore')((props: RouterLinkProps) => {
-    const {
-        rootStore: { routerStore },
-        routeName,
-        ...restProps
-    } = props;
+export const RouterLink: React.SFC<RouterLinkProps> = inject('rootStore')(
+    (props: RouterLinkProps) => {
+        const {
+            rootStore: { routerStore },
+            routeName,
+            ...restProps
+        } = props;
 
-    return (
-        <Link routerStore={routerStore} toState={routeName} {...restProps} />
-    );
-});
+        return (
+            <Link
+                routerStore={routerStore}
+                toState={routeName}
+                {...restProps}
+            />
+        );
+    }
+);

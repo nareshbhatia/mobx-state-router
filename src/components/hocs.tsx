@@ -3,22 +3,16 @@ import { observer } from 'mobx-react';
 import { RouterState, RouterStore, StringMap } from '../router-store';
 import { routerStateToUrl } from '../adapters/generate-url';
 
-const isLeftClickEvent = (event: React.MouseEvent<HTMLElement>) =>
-    event.button === 0;
-
-const isModifiedEvent = (event: React.MouseEvent<HTMLElement>) =>
-    !!(event.metaKey || event.altKey || event.ctrlKey || event.shiftKey);
-
-export interface LinkProps {
+export interface RequaredLinkProps {
     href?: string;
     onClick?: (event: React.MouseEvent<HTMLElement>) => any;
 }
 
-export interface RouterStoreProps {
+export interface WithStoreProps {
     routerStore: RouterStore;
 }
 
-export interface WithRouterProps extends RouterStoreProps {
+export interface WithRouterProps extends WithStoreProps {
     toState: RouterState | string;
     params?: StringMap;
     queryParams?: Object;
@@ -27,14 +21,20 @@ export interface WithRouterProps extends RouterStoreProps {
 type Omit<T, K> = Pick<T, Exclude<keyof T, K>>;
 type Subtract<T, K> = Omit<T, keyof K>;
 
+const isLeftClickEvent = (event: React.MouseEvent<HTMLElement>) =>
+    event.button === 0;
+
+const isModifiedEvent = (event: React.MouseEvent<HTMLElement>) =>
+    !!(event.metaKey || event.altKey || event.ctrlKey || event.shiftKey);
+
 // FIXME: Need documentation
-export const withRouter = <P extends LinkProps>(
+export const withRouter = <P extends RequaredLinkProps, K extends keyof P>(
     Component: React.ComponentType<P>,
-    activePropName?: string
-): React.ComponentType<Subtract<P, LinkProps> & WithRouterProps> => {
+    activePropName?: K
+): React.ComponentType<Subtract<P, RequaredLinkProps> & WithRouterProps> => {
     @observer
     class WithRouterLink extends React.Component<
-        Subtract<P, LinkProps> & WithRouterProps
+        Subtract<P, RequaredLinkProps> & WithRouterProps
     > {
         static displayName = `WithRouter(${Component.displayName ||
             Component.name})`;
@@ -96,9 +96,9 @@ export const withRouter = <P extends LinkProps>(
 };
 
 // FIXME: Need documentation
-export const withStore = <P extends RouterStoreProps>(
+export const withStore = <P extends WithStoreProps>(
     Component: React.ComponentType<P>,
     routerStore: RouterStore
-) => (props: Subtract<P, RouterStoreProps>) => (
+): React.SFC<Subtract<P, WithStoreProps>> => props => (
     <Component {...props} routerStore={routerStore} />
 );

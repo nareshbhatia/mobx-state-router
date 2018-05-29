@@ -17,6 +17,14 @@ class RootStore {
     routerStore = new RouterStore(this, routes, notFound);
 }
 
+const SimpleLink = (props: any) => {
+    const { active, ...restProps } = props;
+    let activeProp = 'undefined';
+    if (active === true) activeProp = 'true';
+    if (active === false) activeProp = 'false';
+    return <a {...restProps} active={activeProp} />;
+};
+
 describe('Link', () => {
     test('renders simple routes, e.g. /home (toState: string)', () => {
         const wrapper = mount(
@@ -36,7 +44,6 @@ describe('Link', () => {
     });
 
     test('renders component with active prop', () => {
-        const SimpleLink = (props: any) => <a {...props} />;
         const LinkWithRouter = withRouter(SimpleLink, 'active');
 
         const wrapper = mount(
@@ -45,11 +52,10 @@ describe('Link', () => {
                 toState={new RouterState('home')}
             />
         );
-        expect(wrapper.find('a').prop('active')).toEqual(false);
+        expect(wrapper.find('a').prop('active')).toEqual('false');
     });
 
     test('renders component without active prop', () => {
-        const SimpleLink = (props: any) => <a {...props} />;
         const LinkWithRouter = withRouter(SimpleLink);
 
         const wrapper = mount(
@@ -58,7 +64,7 @@ describe('Link', () => {
                 toState={new RouterState('home')}
             />
         );
-        expect(wrapper.find('a').prop('active')).toEqual(undefined);
+        expect(wrapper.find('a').prop('active')).toEqual('undefined');
     });
 
     test('renders simple routes with store, e.g. /home', () => {

@@ -1,4 +1,4 @@
-mobx-state-router
+﻿mobx-state-router
 =================
 
 [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
@@ -541,7 +541,7 @@ export class RouterLink extends React.Component<RouterLinkProps, {}> {...}
 
 ```jsx
 import React from 'react';
-import { NavLink as ReactstrapNavLink } from 'reactstrap'; // Extern component
+import { NavLink as ReactstrapNavLink } from 'reactstrap'; // External component
 import {
     withRouter,
     withStore,
@@ -556,9 +556,12 @@ const routes = [
 ];
 const routerStore = new RouterStore(this, routes, new RouterState('notFound'));
 
-// add routerStore, toState, params, queryParams, and 'active' prop to wrapped component
+// add routerStore, toState, params, queryParams properties
+// remove href and onClick properties
+// and use active property as active router state indicator
 const NavLink = withRouter(ReactstrapNavLink, 'active');
-// set routerStore to router store
+
+// set routerStore property to router store
 const NavLinkWithStore = withStore(NavLink, routerStore);
 
 const SideBar = () => (
@@ -566,7 +569,7 @@ const SideBar = () => (
         <NavLink routerStore={routerStore} toState={'home'}>
             Home
         </NavLink>
-        <NavLinkWithStore toState={new RouterState('profile')}>
+        <NavLinkWithStore toState={'profile'}>
             Profile
         </NavLinkWithStore>
     </div>
