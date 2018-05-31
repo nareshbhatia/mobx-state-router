@@ -1,3 +1,3 @@
 declare module 'value-equal' {
-    export default function valueEqual(a: any, b: any): boolean;
+    export default function(a: any, b: any): boolean;
 }
