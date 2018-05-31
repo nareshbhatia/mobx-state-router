@@ -50,7 +50,8 @@ export class HistoryAdapter {
                 new RouterState(
                     matchingRoute.name,
                     params,
-                    parse(location.search)
+                    // for fix https://github.com/mjackson/value-equal/issues/10
+                    Object.assign({}, parse(location.search))
                 )
             );
         } else {
@@ -65,7 +66,7 @@ export class HistoryAdapter {
     observeRouterStateChanges = () => {
         reaction(
             () => this.routerStore.routerState,
-            routerState => {
+            (routerState: RouterState) => {
                 const location = this.history.location;
                 const currentUrl = `${location.pathname}${location.search}`;
                 const routerStateUrl = routerStateToUrl(

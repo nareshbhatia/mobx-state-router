@@ -1,4 +1,4 @@
-import * as valueEqual from 'value-equal';
+import valueEqual from 'value-equal';
 import { action, observable } from 'mobx';
 
 /**

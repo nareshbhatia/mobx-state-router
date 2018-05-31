@@ -5,7 +5,7 @@ import { routerStateToUrl } from '../adapters/generate-url';
 
 export interface AnchorProps {
     href?: string;
-    onClick?: (event: React.MouseEvent<HTMLElement>) => any;
+    onClick?: (event: React.MouseEvent<HTMLElement>) => void;
 }
 
 export interface WithStoreProps {
