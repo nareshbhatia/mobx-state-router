@@ -1,4 +1,4 @@
-mobx-state-router
+﻿mobx-state-router
 =================
 
 [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
@@ -535,6 +535,45 @@ export interface LinkProps {
 }
 
 export class RouterLink extends React.Component<RouterLinkProps, {}> {...}
+```
+
+### withRouter & withStore example
+
+```jsx
+import React from 'react';
+import { NavLink as ReactstrapNavLink } from 'reactstrap'; // External component
+import {
+    withRouter,
+    withStore,
+    RouterStore,
+    RouterState
+} from 'mobx-state-router';
+
+const routes = [
+    { name: 'home', pattern: '/home' },
+    { name: 'profile', pattern: '/profile' },
+    { name: 'notFound', pattern: '/not-found' }
+];
+const routerStore = new RouterStore(this, routes, new RouterState('notFound'));
+
+// add routerStore, toState, params, queryParams properties
+// remove href and onClick properties
+// and use active property as active router state indicator
+const NavLink = withRouter(ReactstrapNavLink, 'active');
+
+// set routerStore property to router store
+const NavLinkWithStore = withStore(NavLink, routerStore);
+
+const SideBar = () => (
+    <div>
+        <NavLink routerStore={routerStore} toState={'home'}>
+            Home
+        </NavLink>
+        <NavLinkWithStore toState={'profile'}>
+            Profile
+        </NavLinkWithStore>
+    </div>
+);
 ```
 
 Contributors
