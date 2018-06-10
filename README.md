@@ -492,11 +492,11 @@ export class StaticAdapter {
 ```
 
 ### RouterView
-The `RouterView` component watches the router state and instantiates the associated UI component. It expects two props: the `routerStore` and a `viewMap`. The `viewMap` is a simple mapping from `routeNames` to React components.
+The `RouterView` component watches the router state and instantiates the associated UI component. It expects two props: the `routerStore` and a `viewMap`. The `viewMap` is a simple mapping from `routeNames` to React components (or more generally `ReactNodes`).
 
 ```jsx
 export interface ViewMap {
-    [routeName: string]: React.Component;
+    [routeName: string]: React.ReactNode;
 }
 
 export interface RouterViewProps {
