@@ -74,6 +74,7 @@ export class RouterStore {
     routes: Route[];
     notFoundState: RouterState;
     @observable.ref routerState: RouterState;
+    @observable isTransitioning: boolean = false;
 
     constructor(
         rootStore: any,
@@ -172,6 +173,7 @@ export class RouterStore {
         const { beforeEnter, onEnter } = this.getRoute(toState.routeName);
 
         // Call the transition hook chain
+        this.isTransitioning = true;
         return (
             [beforeExit, beforeEnter, onExit, onEnter]
                 .reduce(
@@ -202,5 +204,6 @@ export class RouterStore {
     @action
     private setRouterState(routerState: RouterState) {
         this.routerState = routerState;
+        this.isTransitioning = false;
     }
 }

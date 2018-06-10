@@ -454,6 +454,9 @@ The `RouterStore` is the keeper of the `RouterState`. It allows transitioning be
 
 ```jsx
 export class RouterStore {
+    @observable.ref routerState: RouterState;
+    @observable isTransitioning: boolean = false;
+
     constructor(rootStore: any, routes: Route[], notFoundState: RouterState, initialRoute: Route = INITIAL_ROUTE);
     goTo(toState: RouterState): Promise<RouterState>;
     goTo(routeName: string, params?: StringMap, queryParams?: Object): Promise<RouterState>;
@@ -462,6 +465,10 @@ export class RouterStore {
     getCurrentRoute(): Route;
 }
 ```
+
+The `RouterStore` exposes two observable properties:
+- routerState: the state of the router
+- isTransitioning: set to true when the router is in the process of transitioning from one state to another. This property can be used, for example, to display a progress indicator during transitions.
 
 ### HistoryAdapter
 The `HistoryAdapter` is responsible for keeping the browser address bar and the `RouterState` in sync. It also provides a `goBack()` method to go back in history.

@@ -62,11 +62,12 @@ const errorState = new RouterState('errorRoute');
 
 describe('RouterStore', () => {
     test('transitions to the desired state', () => {
-        expect.assertions(1);
+        expect.assertions(2);
 
         const routerStore = new RouterStore({}, routes, notFound);
         return routerStore.goTo(home).then(toState => {
             expect(toState.isEqual(home)).toBeTruthy();
+            expect(routerStore.isTransitioning).toBeFalsy();
         });
     });
 
