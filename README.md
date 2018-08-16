@@ -548,7 +548,7 @@ Contributors
 ------------
 When making a pull request, make sure that your commit messages conform to the [Angular Commit Message Conventions](https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#-git-commit-guidelines). Doing so allows us to automate the whole package release workflow using [semantic-release](https://github.com/semantic-release/semantic-release).
 
-To simplify this process, we have included [validate-commit-message](https://github.com/Frikki/validate-commit-message) and [Commitizen](https://github.com/commitizen/cz-cli) as dependencies of this project. To activate `validate-commit-message`, simply run the following command once in your local repo: `npm run activate-commit-hook`. From now on, you'll need to use `npm run commit` to commit to your repo. This will prompted you to fill out any required commit fields interactively.
+To simplify this process, we have included [validate-commit-message](https://github.com/Frikki/validate-commit-message) and [Commitizen](https://github.com/commitizen/cz-cli) as dependencies of this project. To activate `validate-commit-message`, simply run the following command once in your local repo: `npm run activate-commit-hook`. From now on, you'll need to use `npm run commit` to commit to your repo. This will prompt you to fill out any required commit fields interactively.
 
 Credits
 -------
