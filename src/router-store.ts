@@ -107,9 +107,9 @@ export class RouterStore {
         queryParams: Object = {}
     ): Promise<RouterState> {
         const toState =
-            toStateOrRouteName instanceof RouterState
-                ? toStateOrRouteName
-                : new RouterState(toStateOrRouteName, params, queryParams);
+            typeof toStateOrRouteName === 'string'
+                ? new RouterState(toStateOrRouteName, params, queryParams)
+                : toStateOrRouteName;
         const fromState = this.routerState;
         return this.transition(fromState, toState);
     }
