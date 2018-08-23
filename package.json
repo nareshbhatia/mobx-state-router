@@ -35,7 +35,7 @@
     "precommit": "lint-staged"
   },
   "dependencies": {
-    "path-to-regexp": "^2.2.1",
+    "path-to-regexp": "^2.3.0",
     "query-string": "^5.1.1"
   },
   "peerDependencies": {
@@ -45,39 +45,39 @@
     "react": "^16.x"
   },
   "devDependencies": {
-    "@types/enzyme": "^3.1.10",
-    "@types/history": "^4.6.2",
-    "@types/jest": "^23.0.0",
-    "@types/node": "^10.3.2",
+    "@types/enzyme": "^3.1.13",
+    "@types/history": "^4.7.0",
+    "@types/jest": "^23.3.1",
+    "@types/node": "^10.7.1",
     "@types/query-string": "^5.1.0",
-    "@types/react": "^16.3.17",
-    "@types/react-dom": "^16.0.6",
-    "colors": "^1.3.0",
+    "@types/react": "^16.4.11",
+    "@types/react-dom": "^16.0.7",
+    "colors": "^1.3.2",
     "commitizen": "^2.10.1",
-    "coveralls": "^3.0.1",
-    "cross-env": "^5.1.6",
+    "coveralls": "^3.0.2",
+    "cross-env": "^5.2.0",
     "cz-conventional-changelog": "^2.1.0",
-    "enzyme": "^3.2.0",
-    "enzyme-adapter-react-16": "^1.1.1",
+    "enzyme": "^3.4.4",
+    "enzyme-adapter-react-16": "^1.2.0",
     "history": "^4.7.2",
     "husky": "^0.14.0",
-    "jest": "^23.1.0",
-    "lint-staged": "^7.1.3",
-    "mobx": "^4.3.1",
-    "mobx-react": "^5.2.2",
-    "prettier": "^1.13.5",
+    "jest": "^23.5.0",
+    "lint-staged": "^7.2.2",
+    "mobx": "^4.3.2",
+    "mobx-react": "^5.2.5",
+    "prettier": "^1.14.2",
     "prompt": "^1.0.0",
-    "react": "^16.4.0",
-    "react-dom": "^16.4.0",
-    "replace-in-file": "^3.4.0",
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2",
+    "replace-in-file": "^3.4.2",
     "rimraf": "^2.6.1",
-    "semantic-release": "^15.5.1",
-    "ts-jest": "^22.4.6",
-    "ts-node": "^6.1.0",
-    "tslint": "^5.10.0",
-    "tslint-config-prettier": "^1.13.0",
-    "tslint-config-standard": "^7.0.0",
-    "typescript": "^2.9.1",
+    "semantic-release": "^15.9.9",
+    "ts-jest": "^23.1.4",
+    "ts-node": "^7.0.1",
+    "tslint": "^5.11.0",
+    "tslint-config-prettier": "^1.15.0",
+    "tslint-config-standard": "^7.1.0",
+    "typescript": "^2.9.2",
     "validate-commit-msg": "^2.12.2"
   },
   "lint-staged": {
@@ -117,7 +117,7 @@
   },
   "jest": {
     "transform": {
-      ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+      ".(ts|tsx)": "ts-jest"
     },
     "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
     "moduleFileExtensions": [

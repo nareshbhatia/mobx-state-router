@@ -73,8 +73,10 @@ export class RouterStore {
     rootStore: any;
     routes: Route[];
     notFoundState: RouterState;
-    @observable.ref routerState: RouterState;
-    @observable isTransitioning: boolean = false;
+    @observable.ref
+    routerState: RouterState;
+    @observable
+    isTransitioning: boolean = false;
 
     constructor(
         rootStore: any,

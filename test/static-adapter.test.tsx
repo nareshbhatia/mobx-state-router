@@ -8,7 +8,8 @@ import { createLocation } from 'history';
 
 const itemValue = `Hellow World`;
 class RootStore {
-    @observable item: string = '';
+    @observable
+    item: string = '';
     @action
     loadItem() {
         return new Promise(resolve => {
