@@ -141,7 +141,7 @@ export class RouterStore {
      * actual transition may be different from the requested one
      * based on enter and exit hooks.
      */
-    private transition(
+    private async transition(
         fromState: RouterState,
         toState: RouterState
     ): Promise<RouterState> {
@@ -158,7 +158,7 @@ export class RouterStore {
                     'states are equal, skipping'
                 );
             }
-            return Promise.resolve(toState);
+            return toState;
         }
 
         /* istanbul ignore if */
@@ -176,31 +176,30 @@ export class RouterStore {
 
         // Call the transition hook chain
         this.isTransitioning = true;
-        return (
-            [beforeExit, beforeEnter, onExit, onEnter]
-                .reduce(
-                    (promise: Promise<void>, hook) =>
-                        hook
-                            ? promise.then(() => hook(fromState, toState, this))
-                            : promise,
-                    Promise.resolve()
-                )
 
-                // Handle successful resolution from the promise chain
-                .then(() => {
-                    this.setRouterState(toState);
-                    return toState;
-                })
+        try {
+            if (beforeExit) await beforeExit(fromState, toState, this);
+            if (beforeEnter) await beforeEnter(fromState, toState, this);
+            if (onExit) await onExit(fromState, toState, this);
+            if (onEnter) await onEnter(fromState, toState, this);
 
-                // Handle rejection from the promise chain
-                .catch(redirectState => {
-                    if (redirectState instanceof RouterState === false) {
-                        throw new Error('toState is undefined');
-                    }
-                    this.setRouterState(redirectState);
-                    return redirectState;
-                })
-        );
+            this.setRouterState(toState);
+            return toState;
+        } catch (err) {
+            if (err instanceof RouterState === false) {
+                throw new Error('toState is undefined');
+            }
+            const redirectState: RouterState = err;
+
+            if (redirectState.isEqual(toState)) {
+                this.setRouterState(redirectState);
+                return redirectState;
+            } else {
+                return this.goTo(redirectState);
+            }
+        } finally {
+            this.isTransitioning = false;
+        }
     }
 
     @action
