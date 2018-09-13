@@ -35,6 +35,11 @@ export interface LinkProps
  * matches the state specified by the `Link`. This feature is
  * useful for highlighting the active link in a navbar.
  *
+ * Note that you can pass other anchor tag attributes (such as onClick
+ * and onBlur) to this component. They will be passed through to the
+ * child anchor tag except for `href`, which is fully computed by this
+ * component.
+ *
  * @see RouterLink for simpler way to create anchor tags.
  */
 export class Link extends React.Component<LinkProps, {}> {
@@ -45,8 +50,8 @@ export class Link extends React.Component<LinkProps, {}> {
             className,
             activeClassName,
             children,
-            onClick, // for remove `onClick` out of `...others`
-            href, // for remove `href` out of `...others`
+            href, // remove from `...others`
+            onClick, // remove from `...others`
             ...others
         } = this.props;
 
@@ -57,10 +62,10 @@ export class Link extends React.Component<LinkProps, {}> {
 
         return (
             <a
-                {...others}
                 className={joinedClassName}
                 href={routerStateToUrl(routerStore, toState)}
                 onClick={this.handleClick}
+                {...others}
             >
                 {children}
             </a>
@@ -76,9 +81,12 @@ export class Link extends React.Component<LinkProps, {}> {
         // Prevent default action which reloads the app
         event.preventDefault();
 
-        // Change the router state to trigger a refresh
         const { routerStore, toState, onClick } = this.props;
+
+        // Call onClick hook if present
         if (onClick != null) onClick(event);
+
+        // Change the router state to trigger a refresh
         return routerStore.goTo(toState);
     };
 }

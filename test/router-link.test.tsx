@@ -136,4 +136,21 @@ describe('RouterLink', () => {
         // }, 1000);
         // jest.runAllTimers();
     });
+
+    test('calls onClick prop when passed in', () => {
+        const mockCallBack = jest.fn();
+        const rootStore = new RootStore();
+        const wrapper = mount(
+            <RouterLink
+                rootStore={rootStore}
+                routeName="home"
+                onClick={mockCallBack}
+            />
+        );
+        expect(wrapper.find('a').prop('href')).toEqual('/home');
+
+        // Left-click the link
+        wrapper.find('a').simulate('click', { button: 0 });
+        expect(mockCallBack.mock.calls.length).toEqual(1);
+    });
 });

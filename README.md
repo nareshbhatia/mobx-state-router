@@ -514,7 +514,8 @@ The `Link` component creates an anchor tag that links to a router state. Redirec
 `Link` accepts `className` and `activeClassName` as optional properties to control the look of the link in normal and active states.
 
 ```jsx
-export interface LinkProps {
+export interface LinkProps
+    extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
     routerStore: RouterStore;
     toState: RouterState;
     className?: string;
@@ -524,6 +525,10 @@ export interface LinkProps {
 export class Link extends React.Component<LinkProps, {}> {...}
 ```
 
+You can pass other anchor tag attributes (such as onClick and onBlur) to this component. They will be passed through to the child anchor tag except for `href`, which is fully computed by this component.
+
+See RouterLink for simpler way to create anchor tags.
+
 ### RouterLink
 The `RouterLink` component is a simpler variation of `<Link>` that does not require the `routerStore` parameter. Also `toState` can be specified using simpler properties: `routeName`, `params` and `queryParams`.
 
@@ -532,8 +537,9 @@ The `RouterLink` component is a simpler variation of `<Link>` that does not requ
 Note that the `rootStore` property is injected into the `RouterLink`. There is no need to supply it in your tags.
 
 ```jsx
-export interface LinkProps {
-    rootStore: any;
+export interface RouterLinkProps
+    extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+    rootStore?: any;
     routeName: string;
     params?: StringMap;
     queryParams?: Object;
@@ -543,6 +549,8 @@ export interface LinkProps {
 
 export class RouterLink extends React.Component<RouterLinkProps, {}> {...}
 ```
+
+You can pass other anchor tag attributes (such as onClick and onBlur) to this component. They will be passed through to the child anchor tag except for `href`, which is fully computed by this component.
 
 Contributors
 ------------
