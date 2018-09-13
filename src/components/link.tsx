@@ -10,7 +10,8 @@ function isModifiedEvent(event: React.MouseEvent<HTMLElement>) {
     return event.metaKey || event.altKey || event.ctrlKey || event.shiftKey;
 }
 
-export interface LinkProps {
+export interface LinkProps
+    extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
     routerStore: RouterStore;
     toState: RouterState;
     className?: string;
@@ -43,7 +44,10 @@ export class Link extends React.Component<LinkProps, {}> {
             toState,
             className,
             activeClassName,
-            children
+            children,
+            onClick, // for remove `onClick` out of `...others`
+            href, // for remove `href` out of `...others`
+            ...others
         } = this.props;
 
         const isActive = routerStore.routerState.isEqual(toState);
@@ -53,6 +57,7 @@ export class Link extends React.Component<LinkProps, {}> {
 
         return (
             <a
+                {...others}
                 className={joinedClassName}
                 href={routerStateToUrl(routerStore, toState)}
                 onClick={this.handleClick}
@@ -62,7 +67,7 @@ export class Link extends React.Component<LinkProps, {}> {
         );
     }
 
-    handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    handleClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
         // Ignore if link is clicked using a modifier key or not left-clicked
         if (isModifiedEvent(event) || !isLeftClickEvent(event)) {
             return undefined;
@@ -72,7 +77,8 @@ export class Link extends React.Component<LinkProps, {}> {
         event.preventDefault();
 
         // Change the router state to trigger a refresh
-        const { routerStore, toState } = this.props;
+        const { routerStore, toState, onClick } = this.props;
+        if (onClick != null) onClick(event);
         return routerStore.goTo(toState);
     };
 }

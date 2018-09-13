@@ -139,7 +139,6 @@ describe('RouterLink', () => {
         // jest.runAllTimers();
     });
 
-    /*
     // Uncomment this test to see the issue with PR-41
     test('calls onClick prop when passed in', () => {
         const mockCallBack = jest.fn();
@@ -157,5 +156,4 @@ describe('RouterLink', () => {
         wrapper.find('a').simulate('click', { button: 0 });
         expect(mockCallBack.mock.calls.length).toEqual(1);
     });
-    */
 });
