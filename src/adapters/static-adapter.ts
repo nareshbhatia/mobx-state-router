@@ -17,6 +17,7 @@ export class StaticAdapter {
     }
 
     goToLocation = (location: Location): Promise<RouterState> => {
+        /* istanbul ignore if */
         if (process.env.NODE_ENV === 'development') {
             console.log(
                 `StaticAdapter.goToLocation(${JSON.stringify(location)})`

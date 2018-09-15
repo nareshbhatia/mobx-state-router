@@ -6,7 +6,7 @@ import { StaticAdapter } from '../src/adapters/static-adapter';
 import { Route, RouterState, RouterStore } from '../src/router-store';
 import { createLocation } from 'history';
 
-const itemValue = `Hellow World`;
+const itemValue = `Hello World`;
 class RootStore {
     @observable
     item: string = '';
@@ -98,15 +98,6 @@ describe('StaticAdapter', () => {
         return staticAdapter.goToLocation(beforeEnterLocation).then(() => {
             const wrapper = shallow(<DepartmentsPage />);
             expect(wrapper.find('#tab').text()).toEqual(itemValue);
-        });
-    });
-
-    test('honors process.env.NODE_ENV', () => {
-        process.env.NODE_ENV = 'development';
-        const staticAdapter = new StaticAdapter(routerStore);
-        return staticAdapter.goToLocation(dept1Location).then(() => {
-            const wrapper = shallow(<DepartmentsPage />);
-            expect(wrapper.find('#tab').text()).toEqual('Dept 1 Content');
         });
     });
 });
