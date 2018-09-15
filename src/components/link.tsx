@@ -84,7 +84,7 @@ export class Link extends React.Component<LinkProps, {}> {
         const { routerStore, toState, onClick } = this.props;
 
         // Call onClick hook if present
-        if (onClick != null) onClick(event);
+        if (onClick) onClick(event);
 
         // Change the router state to trigger a refresh
         return routerStore.goTo(toState);

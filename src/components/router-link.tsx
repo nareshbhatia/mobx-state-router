@@ -102,7 +102,7 @@ export class RouterLink extends React.Component<RouterLinkProps, {}> {
         const { routerStore } = rootStore;
 
         // Call onClick hook if present
-        if (onClick != null) onClick(event);
+        if (onClick) onClick(event);
 
         // Change the router state to trigger a refresh
         return routerStore.goTo(routeName, params, queryParams);
