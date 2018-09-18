@@ -46,6 +46,10 @@ export interface TransitionHook {
     ): Promise<void>;
 }
 
+export interface ErrorHook {
+    (err: Error): any;
+}
+
 /**
  * A `Route` consists of a name, a URL matching pattern and optional
  * enter/exit hooks. The `RouterStore` is initialized with an array
@@ -73,6 +77,7 @@ export class RouterStore {
     rootStore: any;
     routes: Route[];
     notFoundState: RouterState;
+    onError?: ErrorHook;
     @observable.ref
     routerState: RouterState;
     @observable
@@ -91,6 +96,10 @@ export class RouterStore {
         // Set RouterState to initialRoute
         this.routes.push(initialRoute);
         this.routerState = new RouterState(initialRoute.name);
+    }
+
+    setErrorHook(onError: ErrorHook) {
+        this.onError = onError;
     }
 
     /**
@@ -186,17 +195,25 @@ export class RouterStore {
             this.setRouterState(toState);
             return toState;
         } catch (err) {
-            if (err instanceof RouterState === false) {
-                throw new Error('toState is undefined');
-            }
-            const redirectState: RouterState = err;
+            // If error is an instance of RouterState then go to that state
+            if (err instanceof RouterState) {
+                const redirectState: RouterState = err;
 
-            if (redirectState.isEqual(toState)) {
-                this.setRouterState(redirectState);
-                return redirectState;
-            } else {
-                return this.goTo(redirectState);
+                if (redirectState.isEqual(toState)) {
+                    this.setRouterState(redirectState);
+                    return redirectState;
+                } else {
+                    return this.goTo(redirectState);
+                }
             }
+
+            // Else if error hook is specified, call it
+            if (this.onError) {
+                return this.onError(err);
+            }
+
+            // Else handle the error internally
+            throw new Error('toState is undefined');
         } finally {
             this.isTransitioning = false;
         }

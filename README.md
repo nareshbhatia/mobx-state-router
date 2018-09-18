@@ -453,11 +453,16 @@ export interface Route {
 The `RouterStore` is the keeper of the `RouterState`. It allows transitioning between states using the `goTo()` method.
 
 ```jsx
+export interface ErrorHook {
+    (err: Error): any;
+}
+
 export class RouterStore {
     @observable.ref routerState: RouterState;
     @observable isTransitioning: boolean = false;
 
     constructor(rootStore: any, routes: Route[], notFoundState: RouterState, initialRoute: Route = INITIAL_ROUTE);
+    setErrorHook(onError: ErrorHook);
     goTo(toState: RouterState): Promise<RouterState>;
     goTo(routeName: string, params?: StringMap, queryParams?: Object): Promise<RouterState>;
     goToNotFound(): Promise<RouterState>;
@@ -466,9 +471,13 @@ export class RouterStore {
 }
 ```
 
+The `goTo()` method calls the optional `TransitionHook`s (see above) before transitioning to the final state. Any of the hooks can prevent the transition to the final state by returning a `Promise.reject(someOtherState)`. In this case the router will immediately transition to `someOtherState` without calling the remaining hooks.
+
 The `RouterStore` exposes two observable properties:
 - routerState: the state of the router
 - isTransitioning: set to true when the router is in the process of transitioning from one state to another. This property can be used, for example, to display a progress indicator during transitions.
+
+The `RouterStore` allows you to set a custom error hook using the `setErrorHook()` method. This hook is called if any unexpected error occurs when transitioning states. You can set this hook, for example, to transition to an error page.
 
 ### HistoryAdapter
 The `HistoryAdapter` is responsible for keeping the browser address bar and the `RouterState` in sync. It also provides a `goBack()` method to go back in history.

@@ -194,6 +194,17 @@ describe('RouterStore', () => {
         );
     });
 
+    test('calls error hook if a transition function throws an error', () => {
+        expect.assertions(1);
+
+        const onError = jest.fn();
+        const routerStore = new RouterStore({}, routes, notFound);
+        routerStore.setErrorHook(onError);
+        return routerStore.goTo(errorState).then(() => {
+            expect(onError.mock.calls.length).toEqual(1);
+        });
+    });
+
     test('sets a default initial route', () => {
         const expectedRouterState = {
             routeName: '__initial__',
