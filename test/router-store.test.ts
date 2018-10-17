@@ -216,9 +216,8 @@ describe('RouterStore', () => {
     });
 
     test('allows to set a specific initial route', () => {
-        const initialRoute = {
-            name: 'home',
-            pattern: '/'
+        const initialState = {
+            routeName: 'home'
         };
 
         const expectedRouterState = {
@@ -226,16 +225,51 @@ describe('RouterStore', () => {
             params: {},
             queryParams: {}
         };
-        const routerStore = new RouterStore({}, routes, notFound, initialRoute);
+        const routerStore = new RouterStore({}, routes, notFound, initialState);
         expect(routerStore.routerState).toMatchObject(expectedRouterState);
     });
 
     test('allows to query the current route', () => {
-        const initialRoute = {
+        const initialState = {
+            routeName: 'home'
+        };
+
+        const expectedRoute = {
             name: 'home',
             pattern: '/'
         };
-        const routerStore = new RouterStore({}, routes, notFound, initialRoute);
-        expect(routerStore.getCurrentRoute()).toMatchObject(initialRoute);
+        const routerStore = new RouterStore({}, routes, notFound, initialState);
+        expect(routerStore.getCurrentRoute()).toMatchObject(expectedRoute);
+    });
+
+    test('allows to hydrate from a serialized state', () => {
+        const serverState = {
+            routeName: 'home'
+        };
+
+        const expectedRouterState = {
+            routeName: 'home',
+            params: {},
+            queryParams: {}
+        };
+        const routerStore = new RouterStore({}, routes, notFound);
+        routerStore.hydrate(serverState);
+        expect(routerStore.routerState).toMatchObject(expectedRouterState);
+    });
+
+    test('allows to serialize current state', () => {
+        const expectedSerializedState = {
+            routeName: 'department',
+            params: { id: 'electronics' },
+            queryParams: {}
+        };
+
+        const routerStore = new RouterStore(
+            {},
+            routes,
+            notFound,
+            deptElectronics
+        );
+        expect(routerStore.serialize()).toMatchObject(expectedSerializedState);
     });
 });
