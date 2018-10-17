@@ -16,6 +16,15 @@ export interface StringMap {
 }
 
 /**
+ * Holds a serialized version of the router state.
+ */
+export interface JsRouterState {
+    routeName: string;
+    params?: StringMap;
+    queryParams?: Object;
+}
+
+/**
  * Holds the state of the router. Always use the constructor to create
  * an instance. Once an instance is created, don't mutate it - create a
  * fresh instance instead.
@@ -32,6 +41,11 @@ export class RouterState {
         readonly params: StringMap = {},
         readonly queryParams: Object = {}
     ) {}
+
+    static create(jsRouterState: JsRouterState): RouterState {
+        const { routeName, params, queryParams } = jsRouterState;
+        return new RouterState(routeName, params, queryParams);
+    }
 
     isEqual(other: RouterState): boolean {
         return valueEqual(this, other);
@@ -87,15 +101,31 @@ export class RouterStore {
         rootStore: any,
         routes: Route[],
         notFoundState: RouterState,
-        initialRoute: Route = INITIAL_ROUTE
+        initialState?: JsRouterState
     ) {
         this.rootStore = rootStore;
         this.routes = routes;
         this.notFoundState = notFoundState;
 
-        // Set RouterState to initialRoute
-        this.routes.push(initialRoute);
-        this.routerState = new RouterState(initialRoute.name);
+        // Set the initial state
+        if (initialState) {
+            this.routerState = RouterState.create(initialState);
+        } else {
+            // Create an artificial route and set initial state to it
+            this.routes.push(INITIAL_ROUTE);
+            this.routerState = new RouterState(INITIAL_ROUTE.name);
+        }
+    }
+
+    @action
+    hydrate(state: JsRouterState) {
+        this.routerState = RouterState.create(state);
+    }
+
+    serialize(): JsRouterState {
+        return {
+            ...this.routerState
+        };
     }
 
     setErrorHook(onError: ErrorHook) {
