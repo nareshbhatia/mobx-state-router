@@ -23,9 +23,9 @@ export class RouterView extends React.Component<RouterViewProps, {}> {
             routerStore: { routerState },
             viewMap
         } = this.props;
-        if (process.env.NODE_ENV === 'development') {
-            console.log(`RouterView.render() - ${JSON.stringify(routerState)}`);
-        }
+        // if (process.env.NODE_ENV === 'development') {
+        //     console.log(`RouterView.render() - ${JSON.stringify(routerState)}`);
+        // }
 
         const view = viewMap[routerState.routeName];
         return view ? view : null;

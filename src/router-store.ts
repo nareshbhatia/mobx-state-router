@@ -192,22 +192,22 @@ export class RouterStore {
             /* istanbul ignore if */
             if (process.env.NODE_ENV === 'development') {
                 const fromStateStr = JSON.stringify(fromState);
-                console.log(
-                    `RouterStore.transition(${fromStateStr}):`,
-                    'states are equal, skipping'
-                );
+                // console.log(
+                //     `RouterStore.transition(${fromStateStr}):`,
+                //     'states are equal, skipping'
+                // );
             }
             return toState;
         }
 
-        /* istanbul ignore if */
-        if (process.env.NODE_ENV === 'development') {
-            const fromStateStr = JSON.stringify(fromState);
-            const toStateStr = JSON.stringify(toState);
-            console.log(
-                `RouterStore.transition(${fromStateStr}, ${toStateStr})`
-            );
-        }
+        // /* istanbul ignore if */
+        // if (process.env.NODE_ENV === 'development') {
+        //     const fromStateStr = JSON.stringify(fromState);
+        //     const toStateStr = JSON.stringify(toState);
+        //     console.log(
+        //         `RouterStore.transition(${fromStateStr}, ${toStateStr})`
+        //     );
+        // }
 
         // Get transition hooks from the two states
         const { beforeExit, onExit } = this.getRoute(fromState.routeName);

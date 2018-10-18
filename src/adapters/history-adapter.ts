@@ -26,11 +26,11 @@ export class HistoryAdapter {
     }
 
     goToLocation = (location: Location): Promise<RouterState> => {
-        if (process.env.NODE_ENV === 'development') {
-            console.log(
-                `HistoryAdapter.goToLocation(${JSON.stringify(location)})`
-            );
-        }
+        // if (process.env.NODE_ENV === 'development') {
+        //     console.log(
+        //         `HistoryAdapter.goToLocation(${JSON.stringify(location)})`
+        //     );
+        // }
 
         // Find the matching route
         const routes = this.routerStore.routes;
@@ -74,12 +74,12 @@ export class HistoryAdapter {
                 );
                 if (currentUrl !== routerStateUrl) {
                     this.history.push(routerStateUrl);
-                    if (process.env.NODE_ENV === 'development') {
-                        console.log(
-                            `HistoryAdapter: history.push(${routerStateUrl}),`,
-                            `history.length=${this.history.length}`
-                        );
-                    }
+                    // if (process.env.NODE_ENV === 'development') {
+                    //     console.log(
+                    //         `HistoryAdapter: history.push(${routerStateUrl}),`,
+                    //         `history.length=${this.history.length}`
+                    //     );
+                    // }
                 }
             }
         );

@@ -17,12 +17,12 @@ export class StaticAdapter {
     }
 
     goToLocation = (location: Location): Promise<RouterState> => {
-        /* istanbul ignore if */
-        if (process.env.NODE_ENV === 'development') {
-            console.log(
-                `StaticAdapter.goToLocation(${JSON.stringify(location)})`
-            );
-        }
+        // /* istanbul ignore if */
+        // if (process.env.NODE_ENV === 'development') {
+        //     console.log(
+        //         `StaticAdapter.goToLocation(${JSON.stringify(location)})`
+        //     );
+        // }
 
         // Find the matching route
         const routes = this.routerStore.routes;
