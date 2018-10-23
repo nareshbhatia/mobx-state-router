@@ -1,5 +1,9 @@
 import { valueEqual } from './utils/value-equal';
-import { action, observable } from 'mobx';
+import { action, computed, observable } from 'mobx';
+
+export interface ViewMap {
+    [routeName: string]: React.ReactNode;
+}
 
 /**
  * A map from string to string (key-value pairs). Based on:
@@ -72,15 +76,17 @@ export interface ErrorHook {
 export interface Route {
     name: string; // e.g. 'department'
     pattern: string; // e.g. '/departments/:id'
+    component: React.ReactNode;
     beforeExit?: TransitionHook;
     beforeEnter?: TransitionHook;
     onExit?: TransitionHook;
     onEnter?: TransitionHook;
 }
 
-const INITIAL_ROUTE = {
+const INITIAL_ROUTE: Route = {
     name: '__initial__',
-    pattern: ''
+    pattern: '',
+    component: ''
 };
 
 /**
@@ -96,6 +102,7 @@ export class RouterStore {
     routerState: RouterState;
     @observable
     isTransitioning: boolean = false;
+    private viewMap: ViewMap = {};
 
     constructor(
         rootStore: any,
@@ -115,6 +122,17 @@ export class RouterStore {
             this.routes.push(INITIAL_ROUTE);
             this.routerState = new RouterState(INITIAL_ROUTE.name);
         }
+
+        // Create internal viewMap between route name and component to render for faster lookup
+        this.routes.forEach(
+            route => (this.viewMap[route.name] = route.component)
+        );
+    }
+
+    @computed
+    get activeView(): React.ReactNode | null {
+        const component = this.viewMap[this.routerState.routeName];
+        return component ? (component as React.ReactNode) : null;
     }
 
     @action

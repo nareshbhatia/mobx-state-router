@@ -1,20 +1,7 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { observer } from 'mobx-react';
-import { RouterState, RouterStore } from '../src/router-store';
-
-const routes = [
-    { name: 'home', pattern: '/' },
-    { name: 'department', pattern: '/departments/:id' },
-    { name: 'notFound', pattern: '/not-found' }
-];
-
-const home = new RouterState('home');
-const notFound = new RouterState('notFound');
-const dept1 = new RouterState('department', { id: 'dept1' });
-const dept2 = new RouterState('department', { id: 'dept2' });
-
-const routerStore = new RouterStore({}, routes, notFound);
+import { RouterState, RouterStore, Route } from '../src/router-store';
 
 @observer
 class DepartmentsPage extends React.Component {
@@ -48,6 +35,25 @@ class DepartmentsPage extends React.Component {
         );
     }
 }
+
+const routes: Route[] = [
+    {
+        name: 'department',
+        pattern: '/departments/:id',
+        component: <DepartmentsPage />
+    },
+    {
+        name: 'notFound',
+        pattern: '/not-found',
+        component: <h1>Not found</h1>
+    }
+];
+
+const notFound = new RouterState('notFound');
+const dept1 = new RouterState('department', { id: 'dept1' });
+const dept2 = new RouterState('department', { id: 'dept2' });
+
+const routerStore = new RouterStore({}, routes, notFound);
 
 test('DepartmentsPage changes tabs when a tab button is clicked', () => {
     // Set up router state to point to department 1

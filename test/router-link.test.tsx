@@ -2,12 +2,21 @@ import * as React from 'react';
 import { mount } from 'enzyme';
 import { RouterLink } from '../src/components/router-link';
 import { RouterState, RouterStore } from '../src/router-store';
+import { generateComponent } from './utils';
 
 const routes = [
-    { name: 'home', pattern: '/home' },
-    { name: 'department', pattern: '/departments/:id' },
-    { name: 'items', pattern: '/items' },
-    { name: 'notFound', pattern: '/not-found' }
+    { name: 'home', pattern: '/home', component: generateComponent('home') },
+    {
+        name: 'department',
+        pattern: '/departments/:id',
+        component: generateComponent('department')
+    },
+    { name: 'items', pattern: '/items', component: generateComponent('items') },
+    {
+        name: 'notFound',
+        pattern: '/not-found',
+        component: generateComponent('notFound')
+    }
 ];
 const home = new RouterState('home');
 const notFound = new RouterState('notFound');

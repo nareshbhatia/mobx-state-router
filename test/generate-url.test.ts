@@ -1,7 +1,13 @@
 import { generateUrl, routerStateToUrl } from '../src/adapters/generate-url';
-import { RouterState, RouterStore } from '../src/router-store';
+import { RouterState, RouterStore, Route } from '../src/router-store';
 
-const routes = [{ name: 'department', pattern: '/departments/:id' }];
+const routes: Route[] = [
+    {
+        name: 'department',
+        pattern: '/departments/:id',
+        component: ''
+    }
+];
 const notFound = new RouterState('notFound');
 const deptElectronics = new RouterState('department', { id: 'electronics' });
 const routerStore = new RouterStore({}, routes, notFound);

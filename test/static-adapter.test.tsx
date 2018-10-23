@@ -5,6 +5,7 @@ import { observable, action, runInAction } from 'mobx';
 import { StaticAdapter } from '../src/adapters/static-adapter';
 import { Route, RouterState, RouterStore } from '../src/router-store';
 import { createLocation } from 'history';
+import { generateComponent } from './utils';
 
 const itemValue = `Hello World`;
 class RootStore {
@@ -25,10 +26,15 @@ class RootStore {
 }
 
 const routes: Route[] = [
-    { name: 'home', pattern: '/' },
+    {
+        name: 'home',
+        pattern: '/',
+        component: generateComponent('home')
+    },
     {
         name: 'department',
-        pattern: '/departments/:id'
+        pattern: '/departments/:id',
+        component: generateComponent('department')
     },
     {
         name: 'beforeEnter',
@@ -36,9 +42,14 @@ const routes: Route[] = [
         beforeEnter: (fromState, toState, routerStore) => {
             const rootStore = routerStore.rootStore;
             return rootStore.loadItem();
-        }
+        },
+        component: generateComponent('beforeEnter')
     },
-    { name: 'notFound', pattern: '/not-found' }
+    {
+        name: 'notFound',
+        pattern: '/not-found',
+        component: generateComponent('notFound')
+    }
 ];
 
 const rootStore = new RootStore();

@@ -1,45 +1,72 @@
 import { Route, RouterState, RouterStore } from '../src/router-store';
+import { generateComponent } from './utils';
+
+const components = {
+    home: generateComponent('home'),
+    department: generateComponent('department'),
+    gym: generateComponent('gym'),
+    gasStation: generateComponent('gasStation'),
+    work: generateComponent('work'),
+    mountains: generateComponent('mountains'),
+    sea: generateComponent('sea'),
+    dessert: generateComponent('desert'),
+    errrorRoute: generateComponent('errorRoute'),
+    notFound: generateComponent('notFound')
+};
 
 const routes: Route[] = [
-    { name: 'home', pattern: '/' },
-    { name: 'department', pattern: '/departments/:id' },
-    { name: 'gym', pattern: '/gym' },
-    { name: 'gasStation', pattern: '/gas-station' },
-    { name: 'notFound', pattern: '/not-found' },
+    { name: 'home', pattern: '/', component: components.home },
+    {
+        name: 'department',
+        pattern: '/departments/:id',
+        component: components.department
+    },
+    { name: 'gym', pattern: '/gym', component: components.gym },
+    {
+        name: 'gasStation',
+        pattern: '/gas-station',
+        component: components.gasStation
+    },
+    { name: 'notFound', pattern: '/not-found', component: components.notFound },
     {
         name: 'work',
         pattern: '/work',
         beforeExit: fromState => {
             return Promise.reject(gym);
-        }
+        },
+        component: components.work
     },
     {
         name: 'mountains',
         pattern: '/mountains',
         beforeEnter: fromState => {
             return Promise.reject(gasStation);
-        }
+        },
+        component: components.mountains
     },
     {
         name: 'sea',
         pattern: '/sea',
         onExit: fromState => {
             return Promise.reject(gasStation);
-        }
+        },
+        component: components.sea
     },
     {
         name: 'dessert',
         pattern: '/dessert',
         onEnter: fromState => {
             return Promise.reject(gasStation);
-        }
+        },
+        component: components.dessert
     },
     {
         name: 'errorRoute',
         pattern: '/error',
         onEnter: () => {
             throw new Error('Internal error');
-        }
+        },
+        component: components.errrorRoute
     }
 ];
 
@@ -62,23 +89,25 @@ const errorState = new RouterState('errorRoute');
 
 describe('RouterStore', () => {
     test('transitions to the desired state', () => {
-        expect.assertions(2);
+        expect.assertions(3);
 
         const routerStore = new RouterStore({}, routes, notFound);
         return routerStore.goTo(home).then(toState => {
             expect(toState.isEqual(home)).toBeTruthy();
+            expect(routerStore.activeView).toEqual(components.home);
             expect(routerStore.isTransitioning).toBeFalsy();
         });
     });
 
     test('transitions to the desired state using goto overload (variation 1)', () => {
-        expect.assertions(1);
+        expect.assertions(2);
 
         const routerStore = new RouterStore({}, routes, notFound);
         return routerStore
             .goTo('department', { id: 'electronics' })
             .then(toState => {
                 expect(toState.isEqual(deptElectronics)).toBeTruthy();
+                expect(routerStore.activeView).toEqual(components.department);
             });
     });
 
