@@ -116,18 +116,24 @@ Now let's define our routes, the `RouterStore` will need them. By convention we 
 // one or more parameters). For example:
 //     /items
 //     /items/:id
+import HomeComponent from './src/features/Home';
+import DepartmentComponent from './src/features/Department';
+
 export const routes = [
     {
         name: 'home',
-        pattern: '/'
+        pattern: '/',
+        component: HomeComponent
     },
     {
         name: 'department',
-        pattern: '/departments/:id'
+        pattern: '/departments/:id',
+        component: DepartmentComponent 
     },
     {
         name: 'notFound',
-        pattern: '/not-found'
+        pattern: '/not-found',
+        component: <h1>404 Page not found</h1>
     }
 ];
 ```
@@ -193,19 +199,13 @@ import { DepartmentPage } from './features/department/department-page';
 import { HomePage } from './features/home/home-page';
 import { NotFoundPage } from './features/not-found-page';
 
-const viewMap = {
-    department: <DepartmentPage />,
-    home: <HomePage />,
-    notFound: <NotFoundPage />
-};
-
 class ShellBase extends React.Component {
     render() {
         const { rootStore: { routerStore } } = this.props;
 
         return (
             <div>
-                <RouterView routerStore={routerStore} viewMap={viewMap} />
+                <RouterView routerStore={routerStore} />
             </div>
         );
     }
@@ -214,7 +214,7 @@ class ShellBase extends React.Component {
 export const Shell = inject('rootStore')(ShellBase);
 ```
 
-Here we instantiate the `RouterView` in the `render()` method. We supply the `routerStore` as a prop along with a `viewMap`. The `RouterView` uses the `viewMap` to instantiate views based on the router state. Note that we are injecting the `rootStore` into the Shell using the MobX `inject` method. If you have enabled decorators as described in the [MobX docs](https://mobx.js.org/best/decorators.html#enabling-decorators), you can use the nicer decorator syntax as we have done in MobX Shop.
+Here we instantiate the `RouterView` in the `render()` method. We supply the `routerStore` as a prop. Note that we are injecting the `rootStore` into the Shell using the MobX `inject` method. If you have enabled decorators as described in the [MobX docs](https://mobx.js.org/best/decorators.html#enabling-decorators), you can use the nicer decorator syntax as we have done in MobX Shop.
 
 The final pieces of the puzzle are the pages themselves. Here's the code for them:
 
@@ -511,16 +511,11 @@ export class StaticAdapter {
 ```
 
 ### RouterView
-The `RouterView` component watches the router state and instantiates the associated UI component. It expects two props: the `routerStore` and a `viewMap`. The `viewMap` is a simple mapping from `routeNames` to React components (or more generally `ReactNodes`).
+The `RouterView` component watches the router state and instantiates the associated UI component. It expects one prop, the `routerStore`..
 
 ```jsx
-export interface ViewMap {
-    [routeName: string]: React.ReactNode;
-}
-
 export interface RouterViewProps {
     routerStore: RouterStore;
-    viewMap: ViewMap;
 }
 
 @observer
