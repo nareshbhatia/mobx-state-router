@@ -30,8 +30,7 @@
     "report-coverage": "cat ./coverage/lcov.info | coveralls",
     "cz-commit": "git-cz",
     "semantic-release": "semantic-release",
-    "format": "prettier --write '{src,test}/**/*.ts*'",
-    "precommit": "lint-staged"
+    "format": "prettier --write '{src,test}/**/*.ts*'"
   },
   "dependencies": {
     "path-to-regexp": "^2.4.0",
@@ -81,12 +80,13 @@
   },
   "husky": {
     "hooks": {
+      "pre-commit": "lint-staged",
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   },
   "lint-staged": {
     "{src,test}/**/*.ts*": [
-      "prettier --print-width 80 --tab-width 4 --single-quote --write",
+      "prettier --write",
       "git add"
     ]
   },
