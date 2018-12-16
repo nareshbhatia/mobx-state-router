@@ -4,6 +4,7 @@ mobx-state-router
 [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 [![Travis](https://img.shields.io/travis/alexjoverm/typescript-library-starter.svg)](https://travis-ci.org/nareshbhatia/mobx-state-router)
 [![Coverage Status](https://coveralls.io/repos/github/nareshbhatia/mobx-state-router/badge.svg?branch=master)](https://coveralls.io/github/nareshbhatia/mobx-state-router?branch=master)
+[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
 MobX-powered router for React apps.
 
@@ -575,7 +576,12 @@ Contributors
 ------------
 When making a pull request, make sure that your commit messages conform to the [Angular Commit Message Conventions](https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#-git-commit-guidelines). Doing so allows us to automate the whole package release workflow using [semantic-release](https://github.com/semantic-release/semantic-release).
 
-To simplify this process, we have included [validate-commit-message](https://github.com/Frikki/validate-commit-message) and [Commitizen](https://github.com/commitizen/cz-cli) as dependencies of this project. To activate `validate-commit-message`, simply run the following command once in your local repo: `npm run activate-commit-hook`. From now on, you'll need to use `npm run commit` to commit to your repo. This will prompt you to fill out any required commit fields interactively.
+To simplify this process, we have included [Commitizen](http://commitizen.github.io/cz-cli/) as a dependency of this project. Always execute the following two commands to commit to your repo. This will prompt you to fill out any required commit fields interactively.
+
+```
+$ git add --all
+$ yarn cz-commit
+```
 
 Credits
 -------
