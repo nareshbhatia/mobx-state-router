@@ -1,0 +1,77 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Components · MobX State Router</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="&lt;p&gt;This section describes React components supplied with mobx-state-router.&lt;/p&gt;
+"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Components · MobX State Router"/><meta property="og:type" content="website"/><meta property="og:url" content="https://nareshbhatia.github.io/mobx-state-router/index.html"/><meta property="og:description" content="&lt;p&gt;This section describes React components supplied with mobx-state-router.&lt;/p&gt;
+"/><meta property="og:image" content="https://nareshbhatia.github.io/mobx-state-router/img/mobx-logo.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://nareshbhatia.github.io/mobx-state-router/img/mobx-logo.png"/><link rel="shortcut icon" href="/mobx-state-router/img/mobx-logo.png"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><link rel="stylesheet" href="/mobx-state-router/css/main.css"/></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/mobx-state-router/"><img class="logo" src="/mobx-state-router/img/mobx-logo.png" alt="MobX State Router"/><h2 class="headerTitleWithLogo">MobX State Router</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/mobx-state-router/docs/guides-getting-started" target="_self">Docs</a></li><li class=""><a href="https://github.com/nareshbhatia/mobx-state-router" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>API</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Guides</h3><ul><li class="navListItem"><a class="navItem" href="/mobx-state-router/docs/guides-getting-started">Getting Started</a></li><li class="navListItem"><a class="navItem" href="/mobx-state-router/docs/guides-recipes">Recipes</a></li><li class="navListItem"><a class="navItem" href="/mobx-state-router/docs/guides-examples">Examples</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">API</h3><ul><li class="navListItem"><a class="navItem" href="/mobx-state-router/docs/api-router">Router</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/mobx-state-router/docs/api-components">Components</a></li></ul></div></div></section></div><script>
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              const headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                if (event.target.tagName === 'A') {
+                  document.body.classList.remove('tocActive');
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">Components</h1></header><article><div><span><p>This section describes React components supplied with mobx-state-router.</p>
+<h2><a class="anchor" aria-hidden="true" id="routerview"></a><a href="#routerview" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>RouterView</h2>
+<p>The <code>RouterView</code> component watches the router state and instantiates the associated UI component. It expects two props: the <code>routerStore</code> and a <code>viewMap</code>. The <code>viewMap</code> is a simple mapping from <code>routeNames</code> to React components (or more generally <code>ReactNodes</code>).</p>
+<pre><code class="hljs css language-jsx"><span class="hljs-keyword">export</span> interface ViewMap {
+    [routeName: string]: React.ReactNode;
+}
+
+<span class="hljs-keyword">export</span> interface RouterViewProps {
+    <span class="hljs-attr">routerStore</span>: RouterStore;
+    viewMap: ViewMap;
+}
+
+@observer
+<span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RouterView</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">React</span>.<span class="hljs-title">Component</span>&lt;<span class="hljs-title">RouterViewProps</span>, </span>{}&gt; {...}
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="link"></a><a href="#link" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Link</h2>
+<p>The <code>Link</code> component creates an anchor tag that links to a router state. It redirects to the target state without reloading the entire app, thus avoiding potential flickers.</p>
+<p><code>Link</code> accepts <code>className</code> and <code>activeClassName</code> as optional properties to control the look of the link in normal and active states.</p>
+<pre><code class="hljs css language-jsx"><span class="hljs-keyword">export</span> interface LinkProps
+    extends React.AnchorHTMLAttributes&lt;HTMLAnchorElement&gt; {
+    <span class="hljs-attr">routerStore</span>: RouterStore;
+    toState: RouterState;
+    className?: string;
+    activeClassName?: string;
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Link</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">React</span>.<span class="hljs-title">Component</span>&lt;<span class="hljs-title">LinkProps</span>, </span>{}&gt; {...}
+</code></pre>
+<p>You can pass other anchor tag attributes (such as onClick and onBlur) to this component. They will be passed through to the child anchor tag except for <code>href</code>, which is fully computed by this component.</p>
+<p>See RouterLink below for simpler way to create anchor tags.</p>
+<h2><a class="anchor" aria-hidden="true" id="routerlink"></a><a href="#routerlink" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>RouterLink</h2>
+<p><code>&lt;RouterLink&gt;</code> is a simpler variation of <code>&lt;Link&gt;</code> that does not require the <code>routerStore</code> parameter. Also <code>toState</code> can be specified using simpler properties: <code>routeName</code>, <code>params</code> and <code>queryParams</code>.</p>
+<p><code>RouterLink</code> accepts <code>className</code> and <code>activeClassName</code> as optional properties to control the look of the link in normal and active states.</p>
+<p>Note that the <code>rootStore</code> property is injected into the <code>RouterLink</code>. There is no need to supply it in your tags.</p>
+<pre><code class="hljs css language-jsx"><span class="hljs-keyword">export</span> interface RouterLinkProps
+    extends React.AnchorHTMLAttributes&lt;HTMLAnchorElement&gt; {
+    rootStore?: any;
+    routeName: string;
+    params?: StringMap;
+    queryParams?: <span class="hljs-built_in">Object</span>;
+    className?: string;
+    activeClassName?: string;
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RouterLink</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">React</span>.<span class="hljs-title">Component</span>&lt;<span class="hljs-title">RouterLinkProps</span>, </span>{}&gt; {...}
+</code></pre>
+<p>You can pass other anchor tag attributes (such as onClick and onBlur) to this component. They will be passed through to the child anchor tag except for <code>href</code>, which is fully computed by this component.</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/mobx-state-router/docs/api-router"><span class="arrow-prev">← </span><span>Router</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#routerview">RouterView</a></li><li><a href="#link">Link</a></li><li><a href="#routerlink">RouterLink</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="copyright">Copyright © 2018 Naresh Bhatia</section></footer></div></body></html>
