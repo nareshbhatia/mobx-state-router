@@ -1,0 +1,95 @@
+a {
+    color: $secondaryColor;
+}
+
+.hero {
+    background: $secondaryColor;
+    padding: 50px 0;
+    color: #fdf3e7;
+    font-weight: 300;
+    line-height: 1.28;
+}
+
+.hero .text {
+    font-size: 64px;
+    text-align: center;
+}
+
+.hero .minitext {
+    font-size: 16px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+@media only screen and (max-width: 640px) {
+    .hero .text {
+        font-size: 48px;
+    }
+
+    .hero .minitext {
+        font-size: 14px;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .hero .text {
+        font-size: 36px;
+    }
+
+    .hero .minitext {
+        font-size: 12px;
+    }
+}
+
+.home-content {
+    width: 900px;
+    margin: 20px auto 40px auto;
+}
+
+@media only screen and (max-width: 960px) {
+    .home-content {
+        width: 100%;
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+}
+
+.toolbar {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.toolbar__element {
+    margin: 0 4px;
+}
+
+.button--reverse {
+    border-color: #fdf3e7;
+    border-radius: 3px;
+    color: #fdf3e7;
+}
+
+.button--reverse:hover {
+    background: #ed6b2c;
+}
+
+.nav-footer {
+    padding-bottom: 1em;
+    padding-top: 1em;
+}
+
+@media only screen and (min-device-width: 360px) and (max-device-width: 736px) {
+}
+
+@media only screen and (min-width: 1024px) {
+}
+
+@media only screen and (max-width: 1023px) {
+}
+
+@media only screen and (min-width: 1400px) {
+}
+
+@media only screen and (min-width: 1500px) {
+}

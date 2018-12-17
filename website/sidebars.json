@@ -1,0 +1,10 @@
+{
+    "docs": {
+        "Guides": [
+            "guides-getting-started",
+            "guides-recipes",
+            "guides-examples"
+        ],
+        "API": ["api-router", "api-components"]
+    }
+}
