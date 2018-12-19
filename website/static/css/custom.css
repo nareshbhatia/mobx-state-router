@@ -2,6 +2,7 @@ a {
     color: $secondaryColor;
 }
 
+/******************** hero ********************/
 .hero {
     background: $secondaryColor;
     padding: 50px 0;
@@ -41,6 +42,81 @@ a {
     }
 }
 
+/******************** navigationSlider ********************/
+/* Don't let it slide down until width < 500px            */
+/**********************************************************/
+@media only screen and (min-width: 500px) {
+    .navSearchWrapper {
+        padding-left: 10px;
+        position: relative;
+        right: auto;
+        top: auto;
+    }
+
+    .navSearchWrapper .algolia-autocomplete {
+        display: block;
+    }
+
+    .navigationSlider {
+        height: 34px;
+        margin-left: auto;
+        position: relative;
+    }
+
+    .navigationSlider .navSlideout {
+        display: none;
+    }
+
+    .navigationSlider nav.slidingNav {
+        background: none;
+        height: auto;
+        position: relative;
+        right: auto;
+        top: auto;
+        width: auto;
+    }
+
+    .navigationSlider .slidingNav ul {
+        background: none;
+        display: flex;
+        flex-flow: row nowrap;
+        margin: 0;
+        padding: 0;
+        width: auto;
+    }
+
+    .navigationSlider .slidingNav ul li a {
+        border: 0;
+        color: rgba(255, 255, 255, 0.8);
+        display: flex;
+        font-size: 16px;
+        font-size: 1em;
+        font-weight: 300;
+        height: 32px;
+        line-height: 1.2em;
+        margin: 0;
+        padding: 0;
+        padding: 6px 10px;
+    }
+
+    .navigationSlider .slidingNav ul li a:hover,
+    .navigationSlider .slidingNav ul li.siteNavItemActive a,
+    .navigationSlider .slidingNav ul li.siteNavGroupActive a {
+        color: #fff;
+    }
+
+    .navPusher {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        min-height: calc(100vh - 50px);
+        padding-top: 50px;
+    }
+}
+
+/******************** home-content ********************/
+/* Fix content to 900px with for wide widths          */
+/******************************************************/
 .home-content {
     width: 900px;
     margin: 20px auto 40px auto;
@@ -54,6 +130,7 @@ a {
     }
 }
 
+/******************** toolbar ********************/
 .toolbar {
     display: flex;
     justify-content: center;
@@ -74,6 +151,7 @@ a {
     background: #ed6b2c;
 }
 
+/******************** nav-footer ********************/
 .nav-footer {
     padding-bottom: 1em;
     padding-top: 1em;
