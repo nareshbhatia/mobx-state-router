@@ -12,7 +12,7 @@ import { action, observable } from 'mobx';
  * }
  */
 export interface StringMap {
-    [param: string]: string;
+    [key: string]: string;
 }
 
 /**
@@ -21,7 +21,7 @@ export interface StringMap {
 export interface JsRouterState {
     routeName: string;
     params?: StringMap;
-    queryParams?: Object;
+    queryParams?: { [key: string]: any };
 }
 
 /**
@@ -34,12 +34,12 @@ export class RouterState {
      * Creates RouterState
      * @param {string} routeName, e.g. 'department'
      * @param {StringMap} params, e.g. { id: 'electronics' }
-     * @param {Object} queryParams, e.g. { q: 'apple' } or { items: ['E1', 'E2'] }
+     * @param {[key: string]: any} queryParams, e.g. { q: 'apple' } or { items: ['E1', 'E2'] }
      */
     constructor(
         readonly routeName: string,
         readonly params: StringMap = {},
-        readonly queryParams: Object = {}
+        readonly queryParams: { [key: string]: any } = {}
     ) {}
 
     static create(jsRouterState: JsRouterState): RouterState {
@@ -140,12 +140,12 @@ export class RouterStore {
     goTo(
         routeName: string,
         params?: StringMap,
-        queryParams?: Object
+        queryParams?: { [key: string]: any }
     ): Promise<RouterState>;
     goTo(
         toStateOrRouteName: RouterState | string,
         params: StringMap = {},
-        queryParams: Object = {}
+        queryParams: { [key: string]: any } = {}
     ): Promise<RouterState> {
         const toState =
             typeof toStateOrRouteName === 'string'

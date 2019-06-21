@@ -16,7 +16,7 @@ export interface RouterLinkProps
     rootStore?: any;
     routeName: string;
     params?: StringMap;
-    queryParams?: Object;
+    queryParams?: { [key: string]: any };
     className?: string;
     activeClassName?: string;
 }
