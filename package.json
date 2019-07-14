@@ -46,43 +46,48 @@
     "devDependencies": {
         "@commitlint/cli": "^8.0.0",
         "@commitlint/config-conventional": "^8.0.0",
-        "@types/enzyme": "^3.9.1",
+        "@types/enzyme": "^3.10.2",
         "@types/history": "^4.7.2",
         "@types/jest": "^24.0.11",
-        "@types/node": "^12.0.8",
+        "@types/node": "^12.6.2",
         "@types/query-string": "^5.1.0",
-        "@types/react": "^16.8.10",
+        "@types/react": "^16.8.23",
         "@types/react-dom": "^16.8.3",
         "colors": "^1.3.3",
         "commitizen": "^3.0.7",
-        "coveralls": "^3.0.3",
+        "coveralls": "^3.0.5",
         "cz-conventional-changelog": "^2.1.0",
         "enzyme": "^3.9.0",
         "enzyme-adapter-react-16": "^1.11.2",
         "history": "^4.9.0",
-        "husky": "^2.4.1",
+        "husky": "^3.0.0",
         "jest": "^24.5.0",
-        "mobx": "^5.9.4",
-        "mobx-react": "^5.4.4",
+        "mobx": "^5.11.0",
+        "mobx-react": "^6.1.1",
         "prettier": "^1.16.4",
         "pretty-quick": "^1.10.0",
         "prompt": "^1.0.0",
         "react": "^16.8.6",
         "react-dom": "^16.8.6",
         "rimraf": "^2.6.3",
-        "semantic-release": "^15.13.3",
+        "semantic-release": "^15.13.18",
         "ts-jest": "^24.0.1",
         "ts-node": "^8.0.3",
-        "tslint": "^5.14.0",
+        "tslint": "^5.18.0",
         "tslint-config-prettier": "^1.18.0",
         "tslint-config-standard": "^8.0.1",
-        "typescript": "^3.4.1"
+        "typescript": "^3.5.3"
     },
     "husky": {
         "hooks": {
             "pre-commit": "pretty-quick --staged",
             "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
         }
+    },
+    "commitlint": {
+        "extends": [
+            "@commitlint/config-conventional"
+        ]
     },
     "config": {
         "commitizen": {
