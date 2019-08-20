@@ -168,7 +168,6 @@ const Concepts = ({ siteConfig, language }) => (
                 <a href={liveDemoUrl}>Live Demo</a>, Mobx Shop.
             </li>
             <li>
-                yarn
                 <code>params</code>: A set of key-value pairs that enhances the
                 state. For example, <code>&#123;id: "electronics"&#125;</code>{' '}
                 may signify that we are in the "department" state, but
