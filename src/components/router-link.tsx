@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { inject, observer } from 'mobx-react';
-import { RouterState, StringMap } from '../router-store';
+import { RouterState, StringMap, RouterStateOptions } from '../router-store';
 import { routerStateToUrl } from '../adapters/generate-url';
 
 function isLeftClickEvent(event: React.MouseEvent<HTMLElement>) {
@@ -19,6 +19,7 @@ export interface RouterLinkProps
     queryParams?: { [key: string]: any };
     className?: string;
     activeClassName?: string;
+    options?: RouterStateOptions;
 }
 
 /**
@@ -58,13 +59,19 @@ export class RouterLink extends React.Component<RouterLinkProps, {}> {
             queryParams,
             className,
             activeClassName,
+            options,
             children,
             href, // remove from `...others`
             onClick, // remove from `...others`
             ...others
         } = this.props;
 
-        const toState = new RouterState(routeName, params, queryParams);
+        const toState = new RouterState(
+            routeName,
+            params,
+            queryParams,
+            options
+        );
 
         const isActive = routerStore.routerState.isEqual(toState);
         const joinedClassName =
@@ -97,6 +104,7 @@ export class RouterLink extends React.Component<RouterLinkProps, {}> {
             routeName,
             params,
             queryParams,
+            options,
             onClick
         } = this.props;
         const { routerStore } = rootStore;
@@ -105,6 +113,6 @@ export class RouterLink extends React.Component<RouterLinkProps, {}> {
         if (onClick) onClick(event);
 
         // Change the router state to trigger a refresh
-        return routerStore.goTo(routeName, params, queryParams);
+        return routerStore.goTo(routeName, params, queryParams, options);
     };
 }

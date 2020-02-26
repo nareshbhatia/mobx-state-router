@@ -73,7 +73,11 @@ export class HistoryAdapter {
                     routerState
                 );
                 if (currentUrl !== routerStateUrl) {
-                    this.history.push(routerStateUrl);
+                    if (routerState.options && routerState.options.replace) {
+                        this.history.replace(routerStateUrl);
+                    } else {
+                        this.history.push(routerStateUrl);
+                    }
                     // if (process.env.NODE_ENV === 'development') {
                     //     console.log(
                     //         `HistoryAdapter: history.push(${routerStateUrl}),`,
