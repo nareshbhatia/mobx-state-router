@@ -1,9 +1,8 @@
 import { History, Location } from 'history';
 import { reaction } from 'mobx';
-import { parse } from 'query-string';
 import { RouterState, RouterStore } from '../router-store';
 import { routerStateToUrl } from './generate-url';
-import { matchUrl } from './match-url';
+import { findMatchingRoute } from './match-current-route';
 
 /**
  * Responsible for keeping the browser address bar and the `RouterState`
@@ -33,26 +32,12 @@ export class HistoryAdapter {
         // }
 
         // Find the matching route
-        const routes = this.routerStore.routes;
-        let matchingRoute = null;
-        let params = undefined;
-        for (let i = 0; i < routes.length; i++) {
-            const route = routes[i];
-            params = matchUrl(location.pathname, route.pattern);
-            if (params) {
-                matchingRoute = route;
-                break;
-            }
-        }
-
+        const matchingRoute = findMatchingRoute(
+            location,
+            this.routerStore.routes
+        );
         if (matchingRoute) {
-            return this.routerStore.goTo(
-                new RouterState(
-                    matchingRoute.name,
-                    params,
-                    parse(location.search)
-                )
-            );
+            return this.routerStore.goTo(RouterState.create(matchingRoute));
         } else {
             return this.routerStore.goToNotFound();
         }
