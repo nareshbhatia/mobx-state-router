@@ -2,7 +2,7 @@ import { History, Location } from 'history';
 import { reaction } from 'mobx';
 import { RouterState, RouterStore } from '../router-store';
 import { routerStateToUrl } from './generate-url';
-import { findMatchingRoute } from './match-current-route';
+import { findMatchingRoute } from './find-matching-route';
 
 /**
  * Responsible for keeping the browser address bar and the `RouterState`

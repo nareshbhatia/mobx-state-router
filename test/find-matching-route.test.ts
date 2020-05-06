@@ -1,4 +1,4 @@
-import { findMatchingRoute } from '../src/adapters/match-current-route';
+import { findMatchingRoute } from '../src/adapters/find-matching-route';
 import { createLocation } from 'history';
 import { Route } from '../src/router-store';
 

@@ -1,6 +1,6 @@
 import { Location } from 'history';
 import { RouterState, RouterStore } from '../router-store';
-import { findMatchingRoute } from './match-current-route';
+import { findMatchingRoute } from './find-matching-route';
 
 /**
  * Responsible for driving `RouterState` programmatically instead of the

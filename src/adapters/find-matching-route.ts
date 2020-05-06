@@ -3,7 +3,7 @@ import { matchUrl } from './match-url';
 import { parse } from 'query-string';
 import { Location } from 'history';
 
-/**
+/*
  * Find a route that matches the URL to a pattern and extracts the components.
  * 
  * Can be used to generate the initial routerState when initialising the RouterStore.
