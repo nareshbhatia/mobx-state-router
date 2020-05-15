@@ -1,4 +1,4 @@
-# mobx-state-router
+# MobX State Router
 
 [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 [![Travis](https://img.shields.io/travis/alexjoverm/typescript-library-starter.svg)](https://travis-ci.org/nareshbhatia/mobx-state-router)
@@ -22,20 +22,37 @@ MobX-powered router for React apps.
 
 ## Contributors
 
-When making a pull request, make sure that your commit messages conform to the
+Make sure all your commit messages conform to the
 [Angular Commit Message Conventions](https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#-git-commit-guidelines).
-Doing so allows us to automate the whole package release workflow using
-[semantic-release](https://github.com/semantic-release/semantic-release).
 
 To simplify this process, we have included
 [Commitizen](http://commitizen.github.io/cz-cli/) as a dependency of this
-project. Always execute the following two commands to commit to your repo. This
-will prompt you to fill out any required commit fields interactively.
+project. Always execute the following command sequence to commit your changes.
+It will prompt you to fill out any required commit fields interactively.
 
 ```
-$ git add --all
-$ yarn cz-commit
+git add --all
+yarn cz-commit # interactive conventional commit
+git push
 ```
+
+## Release to NPM
+
+1. Change the version number in package.json. Use semver. For pre-release
+   versions add a suffix & build number, e.g 5.0.0-beta.1.
+
+2. Commit and push (see above)
+
+3. Build the package
+
+    yarn build:local
+
+4. Release to npm
+
+    npm publish # for normal release npm publish --tag next # if doing a
+    pre-release
+
+5. Tag the release and push the tag to remote
 
 ## Credits
 
