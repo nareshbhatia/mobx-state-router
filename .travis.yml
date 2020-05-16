@@ -7,7 +7,8 @@ notifications:
 node_js:
   - node
 script:
-  - yarn test:prod && yarn build
+  - yarn lint
+  - yarn test:coverage
+  - yarn build
 after_success:
   - yarn report-coverage
-  - yarn semantic-release

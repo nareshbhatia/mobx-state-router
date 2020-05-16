@@ -2,6 +2,7 @@
 
 # Compiled output
 /dist
+/mobx-state-router-*
 
 # Dependencies
 /node_modules

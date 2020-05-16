@@ -1,7 +1,7 @@
 {
     "name": "mobx-state-router",
     "description": "MobX powered router for React apps",
-    "version": "0.0.0-development",
+    "version": "5.0.0-beta.1",
     "author": "Naresh Bhatia",
     "license": "MIT",
     "homepage": "https://github.com/nareshbhatia/mobx-state-router",
@@ -15,68 +15,67 @@
         "router"
     ],
     "main": "dist/index.js",
-    "types": "dist/types/index.d.ts",
+    "types": "dist/index.d.ts",
     "files": [
         "src/",
         "dist/"
     ],
     "scripts": {
         "lint": "tslint --project tsconfig.json -t codeFrame 'src/**/*.ts*' 'test/**/*.ts*'",
-        "prebuild": "rimraf dist",
+        "prebuild": "rimraf dist mobx-state-router-$npm_package_version",
         "build": "tsc",
+        "build:local": "yarn lint && yarn test:coverage && yarn build && npm pack && tar -xzf mobx-state-router-$npm_package_version.tgz && mv package mobx-state-router-$npm_package_version && rm mobx-state-router-$npm_package_version.tgz",
         "start": "tsc -w",
-        "test": "yarn lint && jest",
-        "test:watch": "jest --watch",
-        "test:prod": "yarn test --coverage --no-cache",
+        "test": "jest --watch",
+        "test:coverage": "jest --coverage --no-cache",
         "report-coverage": "cat ./coverage/lcov.info | coveralls",
         "cz-commit": "git-cz",
-        "semantic-release": "semantic-release",
         "format": "prettier --write README.md '{src,test}/**/*.ts*'"
     },
     "dependencies": {
-        "path-to-regexp": "^3.0.0",
-        "query-string": "^5.1.1"
+        "@react-force/utils": "^2.1.0",
+        "history": "^4.10.1",
+        "path-to-regexp": "^6.1.0",
+        "query-string": "^6.12.1"
     },
     "peerDependencies": {
-        "history": "^4.x",
         "mobx": "^4.x || ^5.x",
         "mobx-react": "^5.x || ^6.x",
         "react": "^16.x"
     },
     "devDependencies": {
-        "@commitlint/cli": "^8.0.0",
-        "@commitlint/config-conventional": "^8.0.0",
-        "@types/enzyme": "^3.10.2",
-        "@types/history": "^4.7.2",
-        "@types/jest": "^24.0.11",
-        "@types/node": "^12.6.2",
-        "@types/query-string": "^5.1.0",
-        "@types/react": "^16.8.23",
-        "@types/react-dom": "^16.8.3",
-        "colors": "^1.3.3",
-        "commitizen": "^3.0.7",
-        "coveralls": "^3.0.5",
-        "cz-conventional-changelog": "^2.1.0",
-        "enzyme": "^3.9.0",
-        "enzyme-adapter-react-16": "^1.11.2",
-        "history": "^4.9.0",
-        "husky": "^3.0.0",
-        "jest": "^24.5.0",
-        "mobx": "^5.11.0",
-        "mobx-react": "^6.1.1",
-        "prettier": "^1.16.4",
-        "pretty-quick": "^1.10.0",
+        "@commitlint/cli": "^8.3.5",
+        "@commitlint/config-conventional": "^8.3.4",
+        "@testing-library/dom": "^7.5.6",
+        "@testing-library/jest-dom": "^5.7.0",
+        "@testing-library/react": "^10.0.4",
+        "@types/history": "^4.7.5",
+        "@types/jest": "^25.2.2",
+        "@types/node": "^14.0.1",
+        "@types/query-string": "^6.3.0",
+        "@types/react": "^16.9.35",
+        "@types/react-dom": "^16.9.8",
+        "colors": "^1.4.0",
+        "commitizen": "^4.1.2",
+        "coveralls": "^3.1.0",
+        "cz-conventional-changelog": "^3.2.0",
+        "husky": "^4.2.5",
+        "jest": "^26.0.1",
+        "mobx": "^5.15.4",
+        "mobx-react": "^6.2.2",
+        "prettier": "^2.0.5",
+        "pretty-quick": "^2.0.1",
         "prompt": "^1.0.0",
-        "react": "^16.8.6",
-        "react-dom": "^16.8.6",
-        "rimraf": "^2.6.3",
-        "semantic-release": "^15.13.18",
-        "ts-jest": "^24.0.1",
-        "ts-node": "^8.0.3",
-        "tslint": "^5.18.0",
+        "react": "^16.13.1",
+        "react-dom": "^16.13.1",
+        "react-test-renderer": "^16.13.1",
+        "rimraf": "^3.0.2",
+        "ts-jest": "^25.5.1",
+        "ts-node": "^8.10.1",
+        "tslint": "^6.1.2",
         "tslint-config-prettier": "^1.18.0",
-        "tslint-config-standard": "^8.0.1",
-        "typescript": "^3.5.3"
+        "tslint-config-standard": "^9.0.0",
+        "typescript": "^3.9.2"
     },
     "husky": {
         "hooks": {
@@ -87,59 +86,41 @@
     "commitlint": {
         "extends": [
             "@commitlint/config-conventional"
-        ]
+        ],
+        "rules": {
+            "subject-case": [0]
+        }
     },
     "config": {
         "commitizen": {
             "path": "node_modules/cz-conventional-changelog"
         }
     },
-    "release": {
-        "analyzeCommits": {
-            "preset": "angular",
-            "releaseRules": [
-                {
-                    "type": "docs",
-                    "scope": "README",
-                    "release": "patch"
-                },
-                {
-                    "type": "refactor",
-                    "release": "patch"
-                },
-                {
-                    "type": "style",
-                    "release": "patch"
-                }
-            ]
-        }
-    },
     "jest": {
+        "verbose": true,
+        "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
         "transform": {
             ".(ts|tsx)": "ts-jest"
         },
-        "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
         "moduleFileExtensions": [
             "ts",
             "tsx",
             "js"
         ],
-        "setupFiles": [
-            "./test/test-shim.ts",
-            "./test/test-setup.ts"
-        ],
         "coveragePathIgnorePatterns": [
             "/node_modules/",
             "/test/"
         ],
+        "setupFilesAfterEnv": [
+            "./test/setupTestsAfterEnv.ts"
+        ],
         "coverageThreshold": {
             "global": {
-                "branches": 90,
-                "functions": 95,
-                "lines": 95,
-                "statements": 95
+                "branches": 80,
+                "functions": 75,
+                "lines": 80,
+                "statements": 80
             }
-        },
-        "collectCoverage": true
+        }
     }
 }
