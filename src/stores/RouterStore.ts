@@ -91,17 +91,21 @@ export class RouterStore {
         return Promise.resolve(this.notFoundState);
     }
 
-    getRoute(routeName: string): Route {
-        const result = this.routes.find((route) => route.name === routeName);
-        if (result) {
-            return result;
-        } else {
-            throw new Error(`Route ${routeName} does not exist`);
-        }
+    getRoute(routeName: string): Route | undefined {
+        return this.routes.find((route) => route.name === routeName);
     }
 
-    getCurrentRoute(): Route {
+    getCurrentRoute(): Route | undefined {
         return this.getRoute(this.routerState.routeName);
+    }
+
+    getNotFoundRoute(): Route {
+        const routeName = this.notFoundState.routeName;
+        const route = this.getRoute(routeName);
+        if (!route) {
+            throw new Error(`Route ${routeName} does not exist`);
+        }
+        return route;
     }
 
     /**
@@ -139,8 +143,14 @@ export class RouterStore {
         // }
 
         // Get transition hooks from the two states
-        const { beforeExit, onExit } = this.getRoute(fromState.routeName);
-        const { beforeEnter, onEnter } = this.getRoute(toState.routeName);
+        const fromRoute = this.getRoute(fromState.routeName);
+        const toRoute = this.getRoute(toState.routeName);
+        if (!fromRoute || !toRoute) {
+            this.setRouterState(this.notFoundState);
+            return toState;
+        }
+        const { beforeExit, onExit } = fromRoute;
+        const { beforeEnter, onEnter } = toRoute;
 
         // Call the transition hook chain
         let redirectState;

@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react';
 import { render } from '@testing-library/react';
 import { observer } from 'mobx-react';
-import { observable, action, runInAction } from 'mobx';
+import { action, decorate, observable, runInAction } from 'mobx';
 import {
     createRouterState,
     Route,
@@ -33,9 +33,8 @@ const notFound = createRouterState('notFound');
 
 const selectedCar = `Tesla Model 3`;
 class TeslaStore {
-    @observable
     selectedCar: string = '';
-    @action
+
     loadSelectedCar() {
         return new Promise((resolve) => {
             // emulate async load
@@ -48,6 +47,11 @@ class TeslaStore {
         });
     }
 }
+
+decorate(TeslaStore, {
+    selectedCar: observable,
+    loadSelectedCar: action,
+});
 
 const teslaStore = new TeslaStore();
 const routerStore = new RouterStore(routes, notFound, {

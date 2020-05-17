@@ -38,21 +38,25 @@ git push
 
 ## Release to NPM
 
-1. Change the version number in package.json. Use semver. For pre-release
-   versions add a suffix & build number, e.g 5.0.0-beta.1.
+-   Change the version number in package.json. Use semver. For pre-release
+    versions add a suffix & build number, e.g 5.0.0-beta.1.
 
-2. Commit and push (see above)
+-   Commit and push (see above)
 
-3. Build the package
+-   Build the package
 
-    yarn build:local
+```bash
+yarn build:local
+```
 
-4. Release to npm
+-   Release to npm
 
-    npm publish # for normal release npm publish --tag next # if doing a
-    pre-release
+```bash
+npm publish             # for normal release
+npm publish --tag next  # if doing a pre-release
+```
 
-5. Tag the release and push the tag to remote
+-   Tag the release and push the tag to remote
 
 ## Credits
 

@@ -1,7 +1,7 @@
 {
     "name": "mobx-state-router",
     "description": "MobX powered router for React apps",
-    "version": "5.0.0-beta.1",
+    "version": "5.0.0-beta.2",
     "author": "Naresh Bhatia",
     "license": "MIT",
     "homepage": "https://github.com/nareshbhatia/mobx-state-router",
@@ -107,6 +107,10 @@
             "tsx",
             "js"
         ],
+        "testPathIgnorePatterns": [
+            "/node_modules/",
+            "/examples/"
+        ],
         "coveragePathIgnorePatterns": [
             "/node_modules/",
             "/test/"
@@ -116,7 +120,7 @@
         ],
         "coverageThreshold": {
             "global": {
-                "branches": 80,
+                "branches": 75,
                 "functions": 75,
                 "lines": 80,
                 "statements": 80

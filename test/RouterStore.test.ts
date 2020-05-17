@@ -179,9 +179,9 @@ describe('RouterStore', () => {
             });
     });
 
-    test('throws an error if asked for an unknown route', () => {
+    test('returns undefined if asked for an unknown route', () => {
         const routerStore = new RouterStore(routes, notFound);
-        expect(() => routerStore.getRoute('unknown')).toThrow();
+        expect(routerStore.getRoute('unknown')).toBeUndefined();
     });
 
     test('throws an error if a transition function throws an error', () => {

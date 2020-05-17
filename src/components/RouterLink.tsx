@@ -48,8 +48,8 @@ export interface RouterLinkProps
 export const RouterLink = observer(
     ({
         routeName,
-        params,
-        queryParams,
+        params = {},
+        queryParams = {},
         className,
         activeClassName,
         children,
@@ -60,11 +60,7 @@ export const RouterLink = observer(
         const routerStore = useRouterStore();
         const { routerState } = routerStore;
 
-        // Make sure we don't send undefined params or query params
-        const toState = createRouterState(routeName, {
-            params: params ? params : {},
-            queryParams: queryParams ? queryParams : {},
-        });
+        const toState = createRouterState(routeName, { params, queryParams });
 
         const isActive = valueEqual(routerState, toState);
         const joinedClassName =
