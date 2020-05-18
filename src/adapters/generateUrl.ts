@@ -52,7 +52,7 @@ export const routerStateToUrl = (
     const { routeName, params, queryParams } = routerState;
     let route = routerStore.getRoute(routeName);
     if (!route) {
-       route = routerStore.getNotFoundRoute();
+        route = routerStore.getNotFoundRoute();
     }
     return generateUrl(route.pattern, params, queryParams);
 };

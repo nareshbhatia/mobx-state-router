@@ -1,0 +1,24 @@
+.content-holder {
+    flex: 1;
+    position: relative;
+}
+
+.content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 100%;
+    padding: 16px;
+}
+
+.fade-enter {
+    opacity: 0;
+    z-index: 1;
+}
+
+.fade-enter.fade-enter-active {
+    opacity: 1;
+    transition: opacity 250ms ease-in;
+}
