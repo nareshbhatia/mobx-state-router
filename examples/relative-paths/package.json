@@ -1,21 +1,28 @@
 {
-  "name": "animated-transitions",
+  "name": "relative-paths",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://archfirst.org/myapp",
   "scripts": {
     "start": "react-scripts start",
+    "prebuild": "rimraf deploy",
     "build": "react-scripts build",
+    "postbuild": "yarn copy-build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "format": "prettier --write README.md 'src/**/{*.md,*.json,*.ts*,*.css}'"
+    "copy-build": "run-script-os",
+    "copy-build:win32": "echo '***** Copy build/* to deploy/myapp *****'",
+    "copy-build:darwin:linux": "mkdir deploy && cp -R ./build ./deploy && mv ./deploy/build ./deploy/myapp",
+    "format": "prettier --write README.md '{src,server}/**/{*.md,*.json,*.js,*.ts*,*.css}'",
+    "serve": "node server"
   },
   "dependencies": {
+    "express": "^4.17.1",
     "mobx": "^5.15.4",
     "mobx-react": "^6.2.2",
     "mobx-state-router": "file:../../mobx-state-router-5.0.0-beta.2",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-transition-group": "^4.4.1"
+    "react-dom": "^16.13.1"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.7.0",
@@ -25,9 +32,10 @@
     "@types/node": "^14.0.1",
     "@types/react": "16.9.35",
     "@types/react-dom": "16.9.8",
-    "@types/react-transition-group": "^4.2.4",
     "prettier": "^2.0.5",
     "react-scripts": "3.4.1",
+    "rimraf": "^3.0.2",
+    "run-script-os": "^1.1.1",
     "typescript": "3.9.2"
   },
   "eslintConfig": {
