@@ -1,0 +1,15 @@
+.title-link {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+.title-link__link {
+    color: #0366d6;
+    text-decoration: none;
+}
+
+.title-link__link:hover {
+    text-decoration: underline;
+}

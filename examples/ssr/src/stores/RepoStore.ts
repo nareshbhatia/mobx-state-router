@@ -1,0 +1,37 @@
+import { action, decorate, observable } from 'mobx';
+import { Repo } from '../models';
+import { GitHubService } from '../services';
+import { RootStore } from './RootStore';
+
+export class RepoStore {
+    rootStore: RootStore;
+    loading: boolean = true;
+    repos: Array<Repo> = [];
+
+    constructor(rootStore: RootStore, repos: Array<Repo> = []) {
+        this.rootStore = rootStore;
+        this.handleLoaded(repos);
+    }
+
+    handleStartLoading() {
+        this.loading = true;
+    }
+
+    handleLoaded(repos: Array<Repo>) {
+        this.loading = false;
+        this.repos = repos;
+    }
+
+    async loadTopRepos() {
+        this.handleStartLoading();
+        const repos = await GitHubService.fetchTopRepos();
+        this.handleLoaded(repos);
+    }
+}
+
+decorate(RepoStore, {
+    loading: observable,
+    repos: observable.ref,
+    handleStartLoading: action,
+    handleLoaded: action,
+});

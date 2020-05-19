@@ -6,7 +6,7 @@ export const HomePage = () => {
 
     const handleClick = () => {
         routerStore.goTo('department', {
-            params: { id: 'electronics' }
+            params: { id: 'electronics' },
         });
     };
 
