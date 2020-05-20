@@ -37,7 +37,7 @@ const InitialRouterState = createRouterState(InitialRouteName);
 
 /**
  * Holds the router state. It allows transitioning between states using
- * the `goTo()` method.
+ * `goTo` methods.
  */
 export class RouterStore {
     routes: Route[];
@@ -90,10 +90,29 @@ export class RouterStore {
     /**
      * Requests a transition to a new state. Note that the actual transition
      * may be different from the requested one based on enter and exit hooks.
+     * Internally calls createRouterState() with the supplied parameters to
+     * construct the target state.
+     *
+     * @param routeName
+     *   Example 'department'
+     *
+     * @param options (optional) { [key: string]: any }
+     *   Any key-value pair that application wants to stuff in RouterState.
+     *   The following options have special meaning to mobx-state-router.
+     *
+     *   params: StringMap
+     *     Example { id: 'electronics' }
+     *
+     *   queryParams: { [key: string]: any }
+     *     Example { q: 'apple' } or { items: ['E1', 'E2'] }
+     *
+     *   replaceHistory: boolean
+     *     If true, the router uses history.replace() when transitioning to a new state.
+     *     The default is to use history.push().
      */
     goTo(
         routeName: string,
-        options: Partial<RouterState> = {}
+        options: { [key: string]: any } = {}
     ): Promise<RouterState> {
         const toState = createRouterState(routeName, options);
         const fromState = this.routerState;

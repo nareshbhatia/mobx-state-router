@@ -1,9 +1,5 @@
 const React = require('react');
 
-const liveDemoUrl = 'https://mobx-shop.firebaseapp.com';
-const srpUrl = 'https://en.wikipedia.org/wiki/Single_responsibility_principle';
-const mwArticleUrl =
-    'https://hackernoon.com/how-to-decouple-state-and-ui-a-k-a-you-dont-need-componentwillmount-cc90b787aa37';
 const GETTING_STARTED = 'guides-getting-started.html';
 
 const getDocUrl = (siteConfig, language, doc) => {
@@ -26,37 +22,35 @@ const Image = ({ src, alt }) => (
     </p>
 );
 
-class HomeSplash extends React.Component {
-    render() {
-        const { siteConfig, language } = this.props;
-        const docUrl = doc => getDocUrl(siteConfig, language, doc);
+const HomeSplash = ({ siteConfig, language }) => {
+    const { liveDemoUrl } = siteConfig;
+    const docUrl = (doc) => getDocUrl(siteConfig, language, doc);
 
-        const Button = props => (
-            <div className="toolbar__element">
-                <a
-                    className="button button--reverse"
-                    href={props.href}
-                    target={props.target}
-                >
-                    {props.children}
-                </a>
-            </div>
-        );
+    const Button = (props) => (
+        <div className="toolbar__element">
+            <a
+                className="button button--reverse"
+                href={props.href}
+                target={props.target}
+            >
+                {props.children}
+            </a>
+        </div>
+    );
 
-        return (
-            <div className="hero">
-                <div className="text">
-                    <strong>{siteConfig.title}</strong>
-                </div>
-                <div className="minitext">{siteConfig.tagline}</div>
-                <div className="toolbar">
-                    <Button href={docUrl(GETTING_STARTED)}>Get Started</Button>
-                    <Button href={liveDemoUrl}>Live Demo</Button>
-                </div>
+    return (
+        <div className="hero">
+            <div className="text">
+                <strong>{siteConfig.title}</strong>
             </div>
-        );
-    }
-}
+            <div className="minitext">{siteConfig.tagline}</div>
+            <div className="toolbar">
+                <Button href={docUrl(GETTING_STARTED)}>Get Started</Button>
+                <Button href={liveDemoUrl}>Live Demo</Button>
+            </div>
+        </div>
+    );
+};
 
 const Features = () => (
     <React.Fragment>
@@ -86,7 +80,7 @@ const Features = () => (
     </React.Fragment>
 );
 
-const Motivation = () => (
+const Motivation = ({ siteConfig }) => (
     <React.Fragment>
         <h2>Motivation: Decouple State and UI</h2>
         <p>
@@ -95,11 +89,12 @@ const Motivation = () => (
             in <code>componentDidMount()</code>. Moreover, why should a
             component be responsible for fetching data in addition to rendering
             it? It feels like a violation of the{' '}
-            <a href={srpUrl}>Single Responsibility Principle</a>. Looking for a
-            better way, I came across this article by Michel Weststrate&mdash;
-            <a href={mwArticleUrl}>How to decouple state and UI</a>. Here's an
-            excerpt from the article which clearly describes the root cause of
-            my problems:
+            <a href={siteConfig.srpUrl}>Single Responsibility Principle</a>.
+            Looking for a better way, I came across this article by Michel
+            Weststrate&mdash;
+            <a href={siteConfig.mwArticleUrl}>How to decouple state and UI</a>.
+            Here's an excerpt from the article which clearly describes the root
+            cause of my problems:
         </p>
 
         <blockquote>
@@ -136,8 +131,9 @@ const Motivation = () => (
         <p>
             My hope is that mobx-state-router will allow developers around the
             world to create more robust React applications with less headaches.
-            If you like my work, please star the repo and refer it to your
-            friends. Suggestions and PRs are welcome!
+            If you like my work,{' '}
+            <a href={siteConfig.githubUrl}>please star the repo</a> and refer it
+            to your friends. Suggestions and PRs are welcome!
         </p>
     </React.Fragment>
 );
@@ -165,7 +161,7 @@ const Concepts = ({ siteConfig, language }) => (
             <li>
                 <code>routeName</code>: A string that defines the state of the
                 router. For example, <code>"department"</code> in the e-commerce{' '}
-                <a href={liveDemoUrl}>Live Demo</a>, Mobx Shop.
+                <a href={siteConfig.liveDemoUrl}>Live Demo</a>, Mobx Shop.
             </li>
             <li>
                 <code>params</code>: A set of key-value pairs that enhances the
@@ -285,8 +281,8 @@ class Index extends React.Component {
             <div>
                 <HomeSplash siteConfig={siteConfig} language={language} />
                 <section className="home-content">
-                    <Features />
-                    <Motivation />
+                    <Features siteConfig={siteConfig} language={language} />
+                    <Motivation siteConfig={siteConfig} language={language} />
                     <Concepts siteConfig={siteConfig} language={language} />
                 </section>
             </div>

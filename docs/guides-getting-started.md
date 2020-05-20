@@ -4,243 +4,287 @@ title: Getting Started
 sidebar_label: Getting Started
 ---
 
-Welcome! We’re excited that you’ve decided to learn mobx-state-router. This tutorial will guide you through building your first React app with mobx-state-router.
+Welcome! We’re excited that you’ve decided to learn mobx-state-router. This
+tutorial will guide you through building your first React app with
+mobx-state-router.
 
-The finished app will consist of two simple pages: Home (shown below) and Electronics. Clicking the _Go to Electronics_ button on the Home page will take you to the Electronics page. Clicking the _Go Home_ button on the Electronics page will take you back to the Home page. That's it!
+The finished app will consist of two simple pages: Home (shown below) and
+Electronics. Clicking the _Go to Electronics_ button on the Home page will take
+you to the Electronics page. Clicking the _Go Home_ button on the Electronics
+page will take you back to the Home page. That's it!
 
 ![Quick Start App](assets/screen-shot-quick-start.png)
 
-We have the [finished example](https://github.com/nareshbhatia/mobx-state-router-quick-start) in Github, so if you get stuck, check out the working code there.
+We have the
+[finished example](https://github.com/nareshbhatia/mobx-state-router/tree/master/examples/quick-start)
+in Github, so if you get stuck, check out the working code there.
 
 ## Create React App
 
-Create a simple React app using [create-react-app](https://github.com/facebookincubator/create-react-app).
+Create a simple React app using
+[create-react-app](https://github.com/facebookincubator/create-react-app).
+
+```bash
+npx create-react-app quick-start --template typescript
+cd quick-start
+```
 
 ## Install mobx-state-router
 
 Install the router and its peer dependencies:
 
-    npm install --save mobx-state-router history mobx mobx-react
+```bash
+npm install --save mobx-state-router mobx mobx-react
+```
 
-Note that mobx-state-router does not require you to switch all your state management to MobX. If you are already using other state management libraries in your app (such as Redux), you can continue to use them, only the router will use MobX.
+Note that mobx-state-router does not require you to switch all your state
+management to MobX. If you are already using other state management libraries in
+your app (such as Redux), you can continue to use them, only the router will use
+MobX.
 
-Define Routes
+## Define Routes
 
----
-
-Let's first define our routes, the `RouterStore` will need them. By convention we define our routes in [src/shared/stores/routes.js](https://github.com/nareshbhatia/mobx-state-router-quick-start/blob/master/src/shared/stores/routes.js). We will keep our route configuration very simple for right now. Let's define three routes: `home`, `department` and `notFound`:
+Let's first define our routes. Create a file
+[src/initRouter.ts](https://github.com/nareshbhatia/mobx-state-router/blob/master/examples/quick-start/src/initRouter.ts)
+and add three routes to it: `home`, `department` and `notFound` as shown below:
 
 ```jsx
-// Routes are matched from top to bottom. Make sure they are sequenced
-// in the order of priority. It is generally best to sort them by pattern,
-// prioritizing specific patterns over generic patterns (patterns with
-// one or more parameters). For example:
-//     /items
-//     /items/:id
 export const routes = [
     {
         name: 'home',
-        pattern: '/'
+        pattern: '/',
     },
     {
         name: 'department',
-        pattern: '/departments/:id'
+        pattern: '/departments/:id',
     },
     {
         name: 'notFound',
-        pattern: '/not-found'
-    }
+        pattern: '/not-found',
+    },
 ];
 ```
 
-## Define RootStore
+## Create RouterStore and HistoryAdapter
 
-We will use the [best practices](https://mobx.js.org/best/store.html#combining-multiple-stores) described in the MobX documentation to create our stores. According to this document, an effective way to structure our stores is to create a `RootStore` that instantiates all other stores and shares their references. So let's create this `RootStore` and let it instantiate the `RouterStore`. By convention, we define the `RootStore` in [src/shared/stores/root.store.js](https://github.com/nareshbhatia/mobx-state-router-quick-start/blob/master/src/shared/stores/root.store.js). Add the following code to this file. Note that the `RouterStore` expects the `RootStore`, the routes and the `notFound` state as the parameters of its constructor.
+Now add code in the same file (`initRouter.ts`) to create the router and the
+history adapter.
 
 ```jsx
-import { RouterState, RouterStore } from 'mobx-state-router';
-import { routes } from './routes';
+import {
+    browserHistory,
+    createRouterState,
+    HistoryAdapter,
+    RouterStore,
+} from 'mobx-state-router';
 
-const notFound = new RouterState('notFound');
+const notFound = createRouterState('notFound');
 
-export class RootStore {
-    routerStore = new RouterStore(this, routes, notFound);
+const routes = [
+    // from above
+];
+
+export function initRouter() {
+    const routerStore = new RouterStore(routes, notFound);
+
+    // Observe history changes
+    const historyAdapter = new HistoryAdapter(routerStore, browserHistory);
+    historyAdapter.observeRouterStateChanges();
+
+    return routerStore;
 }
 ```
 
-## Create RootStore & HistoryAdapter
+Note that `RouterStore` expects the routes and the `notFound` state as
+constructor parameters.
 
-The next step is to create the `RootStore` and the `HistoryAdapter`.
+The `HistoryAdapter` is responsible for keeping the browser address bar in sync
+with the `RouterState`. It needs a
+[history](https://github.com/ReactTraining/history) object to manage the browser
+history. While you can create an instance yourself, mobx-state-router provides
+one for your convenience - it's called `browserHistory`. Let's just use it.
 
-`HistoryAdapter` is responsible for keeping the browser address bar in sync with the `RouterState`. It depends on the [history](https://github.com/ReactTraining/history) library to manage the browser history. It needs a `history` object in the constructor, so let's create it first. By convention, we create the history object in [src/shared/utils/history.js](https://github.com/nareshbhatia/mobx-state-router-quick-start/blob/master/src/shared/utils/history.js). Add the following code to your `history.js` file:
+## Create a viewMap
 
-```jsx
-import { createBrowserHistory } from 'history';
-
-export const history = createBrowserHistory();
-```
-
-We are now ready to create the `RootStore` and the `HistoryAdapter`. By convention, we do this in [src/App.js](https://github.com/nareshbhatia/mobx-state-router-quick-start/blob/master/src/App.js):
-
-```jsx
-import React, { Component } from 'react';
-import { Provider } from 'mobx-react';
-import { HistoryAdapter } from 'mobx-state-router';
-import { RootStore } from './shared/stores/root.store';
-import { history } from './shared/utils/history';
-import { Shell } from './shell';
-
-// Create the rootStore
-const rootStore = new RootStore();
-
-// Observe history changes
-const historyAdapter = new HistoryAdapter(rootStore.routerStore, history);
-historyAdapter.observeRouterStateChanges();
-
-class App extends Component {
-    render() {
-        return (
-            <Provider rootStore={rootStore}>
-                <Shell />
-            </Provider>
-        );
-    }
-}
-
-export default App;
-```
-
-Here we create an instance of the `RootStore` and give it to the MobX `Provider`. The `Provider` makes the `RootStore` (and hence the `RouterStore`) available to any nested component via React context. We also create the `HistoryAdapter` and ask it to observe route changes.
-
-## Create RouterView
-
-The next step is to create the `RouterView` which is responsible for instantiating the UI component associated with the state of the router. By convention, we create it in the `Shell` located in [src/shell.js](https://github.com/nareshbhatia/mobx-state-router-quick-start/blob/master/src/shell.js). Add the following code to this file:
+The `viewMap` is a simple structure that maps the routes to React components
+(a.k.a. views). Let's map the three routes defined above to three views that we
+will define later. Create a file
+[src/viewMap.tsx](https://github.com/nareshbhatia/mobx-state-router/blob/master/examples/quick-start/src/viewMap.tsx)
+and add the following `viewMap` to it:
 
 ```jsx
 import React from 'react';
-import { inject } from 'mobx-react';
-import { RouterView } from 'mobx-state-router';
-import { DepartmentPage } from './features/department/department-page';
-import { HomePage } from './features/home/home-page';
-import { NotFoundPage } from './features/not-found-page';
+import { DepartmentPage, HomePage, NotFoundPage } from './pages';
 
-const viewMap = {
+export const viewMap = {
     department: <DepartmentPage />,
     home: <HomePage />,
-    notFound: <NotFoundPage />
+    notFound: <NotFoundPage />,
 };
-
-export const Shell = inject('rootStore')(
-    class extends React.Component {
-        render() {
-            const { rootStore } = this.props;
-            const { routerStore } = rootStore;
-
-            return <RouterView routerStore={routerStore} viewMap={viewMap} />;
-        }
-    }
-);
 ```
 
-Here we instantiate the `RouterView` in the `render()` method. We supply the `routerStore` as a prop along with a `viewMap`. The `RouterView` uses the `viewMap` to instantiate views based on the router state. Note that we are injecting the `rootStore` into the Shell using the MobX `inject` method. If you have enabled decorators as described in the [MobX docs](https://mobx.js.org/best/decorators.html#enabling-decorators), you can use the nicer decorator syntax as we have done in [MobX Shop](https://github.com/nareshbhatia/mobx-shop.git).
+## Provide routerStore to the React view hierarchy
 
-## Create Pages
-
-The final step is to create the pages themselves. Here's the code for them:
-
-[src/features/home/home-page.js](https://github.com/nareshbhatia/mobx-state-router-quick-start/blob/master/src/features/home/home-page.js)
+Now we have the basic parts to assemble our application. Overwrite
+[src/App.tsx](https://github.com/nareshbhatia/mobx-state-router/blob/master/examples/quick-start/src/App.tsx)
+with the contents below to provide `routerStore` to the React view hierarchy.
 
 ```jsx
 import React from 'react';
-import { inject } from 'mobx-react';
+import { RouterContext, RouterView } from 'mobx-state-router';
+import { initRouter } from './initRouter';
+import { viewMap } from './viewMap';
 
-const styles = {
-    root: {
-        padding: 16
-    }
-};
+export const App = () => {
+    const routerStore = initRouter();
 
-export const HomePage = inject('rootStore')(
-    class extends React.Component {
-        render() {
-            return (
-                <div style={styles.root}>
-                    <h1>Home</h1>
-                    <button onClick={this.handleClick}>
-                        Go to Electronics
-                    </button>
-                </div>
-            );
-        }
-
-        handleClick = () => {
-            const { rootStore } = this.props;
-            rootStore.routerStore.goTo('department', { id: 'electronics' });
-        };
-    }
-);
-```
-
-The home page has a button that allows the user to navigate to the Electronics department. Note the call to `routerStore.goTo()` to transition to the `department` route with parameter `id` set to `electronics`.
-
-[src/features/department/department-page.js](https://github.com/nareshbhatia/mobx-state-router-quick-start/blob/master/src/features/department/department-page.js)
-
-```jsx
-import React from 'react';
-import { inject } from 'mobx-react';
-
-const styles = {
-    root: {
-        padding: 16
-    }
-};
-
-export const DepartmentPage = inject('rootStore')(
-    class extends React.Component {
-        render() {
-            const { rootStore } = this.props;
-            const { params } = rootStore.routerStore.routerState;
-
-            return (
-                <div style={styles.root}>
-                    <h1>Welcome to {params.id}</h1>
-                    <button onClick={this.handleClick}>Go Home!</button>
-                </div>
-            );
-        }
-
-        handleClick = () => {
-            const { rootStore } = this.props;
-            rootStore.routerStore.goTo('home');
-        };
-    }
-);
-```
-
-The department page has a button that allows the user to navigate to home. Note the call to `routerStore.goTo()` to transition to the `home` state.
-
-[src/features/not-found-page.js](https://github.com/nareshbhatia/mobx-state-router-quick-start/blob/master/src/features/not-found-page.js)
-
-```jsx
-import React from 'react';
-
-const styles = {
-    root: {
-        padding: 16
-    }
-};
-
-export function NotFoundPage() {
     return (
-        <div style={styles.root}>
-            <h1>Page Not Found</h1>
+        <RouterContext.Provider value={routerStore}>
+            <RouterView viewMap={viewMap} />
+        </RouterContext.Provider>
+    );
+};
+```
+
+Here we give an instance of the `RouterStore` to `RouterContext.Provider`. While
+you can create your own context, mobx-state-router gives you `RouterContext` for
+your convenience. `RouterContext.Provider` now makes the `routerStore` available
+to the entire view hierarchy below it.
+
+In our case, the view hierarchy is created by the `RouterView` component, which
+instantiates a UI component associated with the current router state. As the
+router state changes, different components are instantiated based on the
+mappings in the `viewMap`. The instantiated component (and its descendents) all
+have access to the `routerStore`.
+
+## Create Views
+
+Now let's create the views that we specified in `viewMap`. Here's the code for
+the three views:
+
+[src/pages/HomePage.tsx](https://github.com/nareshbhatia/mobx-state-router/blob/master/examples/quick-start/src/pages/HomePage.tsx)
+
+```jsx
+import React from 'react';
+import { useRouterStore } from 'mobx-state-router';
+
+export const HomePage = () => {
+    const routerStore = useRouterStore();
+
+    const handleClick = () => {
+        routerStore.goTo('department', {
+            params: { id: 'electronics' },
+        });
+    };
+
+    return (
+        <div>
+            <h1>Home</h1>
+            <button onClick={handleClick}>Go to Electronics</button>
         </div>
     );
+};
+```
+
+The home page has a button that allows the user to navigate to the Electronics
+department. Note that we are using the `useRouterStore` hook to access the
+RouterStore. Remember the RouterStore that was provided to the view hierarchy in
+App.tsx? When the user clicks the _Go to Electronics_ button, we call
+`routerStore.goTo()` to transition to the `department` route with parameter `id`
+set to `electronics`.
+
+[src/pages/DepartmentPage.tsx](https://github.com/nareshbhatia/mobx-state-router/blob/master/examples/quick-start/src/pages/DepartmentPage.tsx)
+
+```jsx
+import React from 'react';
+import { useRouterStore } from 'mobx-state-router';
+
+export const DepartmentPage = () => {
+    const routerStore = useRouterStore();
+    const { params } = routerStore.routerState;
+
+    const handleClick = () => {
+        routerStore.goTo('home');
+    };
+
+    return (
+        <div>
+            <h1>Welcome to {params.id}</h1>
+            <button onClick={handleClick}>Go Home!</button>
+        </div>
+    );
+};
+```
+
+The department page is very similar to the home page, the only difference is
+that the _Go Home!_ button here calls `routerStore.goTo('home')`, navigating
+back to the home page.
+
+[src/pages/NotFoundPage.tsx](https://github.com/nareshbhatia/mobx-state-router/blob/master/examples/quick-start/src/pages/NotFoundPage.tsx)
+
+```jsx
+import React from 'react';
+
+export const NotFoundPage = () => {
+    return <h1>Page Not Found</h1>;
+};
+```
+
+This page simply displays "Page Not Found".
+
+[src/pages/index.ts](https://github.com/nareshbhatia/mobx-state-router/blob/master/examples/quick-start/src/pages/index.ts)
+
+```jsx
+export * from './DepartmentPage';
+export * from './HomePage';
+export * from './NotFoundPage';
+```
+
+This file exports all the pages in the `pages` folder for access from outside.
+
+## Final Touches...
+
+Overwrite
+[src/index.tsx](https://github.com/nareshbhatia/mobx-state-router/blob/master/examples/quick-start/src/index.tsx)
+with the simplified version below. The important bit is the named import for
+`App` (just a preference).
+
+```jsx
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { App } from './App';
+import './index.css';
+
+ReactDOM.render(
+    <React.StrictMode>
+        <App />
+    </React.StrictMode>,
+    document.getElementById('root')
+);
+```
+
+Finally, overwrite
+[src/index.css](https://github.com/nareshbhatia/mobx-state-router/blob/master/examples/quick-start/src/index.css)
+with the version below. This provides the styling we need for our pages.
+
+```css
+body {
+    margin: 0;
+    padding: 16px;
+    font-family: sans-serif;
 }
 ```
 
 ## Start Your App
 
-Your React app is now ready for prime time! Execute `npm start` on your command line and point your browser to http://localhost:3000. You will see the home page. Click on the button to go to the Electronics page (watch the URL change). Now enter an invalid URL in the browser address bar, e.g. http://localhost:3000/junk. The router will automatically navigate to the not found page.
+Your React app is now ready for prime time! Execute `npm start` on your command
+line and point your browser to http://localhost:3000. You will see the home
+page. Click on the button to go to the Electronics page (watch the URL change).
+Now enter an invalid URL in the browser address bar, e.g.
+http://localhost:3000/junk. The router will automatically navigate to the not
+found page.
 
-Now that you have a taste of the basics, you can try out some advanced scenarios. Go to the Recipes section to explore. You can also look at [MobX Shop](https://github.com/nareshbhatia/mobx-shop.git) for a more realistic app.
+Now that you have a taste of the basics, you can try out some advanced
+scenarios. Go to the Recipes section to explore. You can also look at the
+[MobX Shop](https://github.com/nareshbhatia/mobx-state-router/tree/master/examples/mobx-shop)
+example for a more realistic app.

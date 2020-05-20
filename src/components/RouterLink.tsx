@@ -1,13 +1,9 @@
 import React from 'react';
-import { StringMap, valueEqual } from '@react-force/utils';
+import { StringMap } from '@react-force/utils';
 import { observer } from 'mobx-react';
 import { routerStateToUrl } from '../adapters';
 import { useRouterStore } from '../contexts';
-import { createRouterState } from '../stores';
-
-function isLeftClickEvent(event: React.MouseEvent<HTMLElement>) {
-    return event.button === 0;
-}
+import { createRouterState, RouterState } from '../stores';
 
 function isModifiedEvent(event: React.MouseEvent<HTMLElement>) {
     return event.metaKey || event.altKey || event.ctrlKey || event.shiftKey;
@@ -20,7 +16,12 @@ export interface RouterLinkProps
     queryParams?: { [key: string]: any };
     className?: string;
     activeClassName?: string;
+    isActive?: (currentState: RouterState, toState: RouterState) => boolean;
 }
+
+// Default check for isActive is to match the routeNames
+const defaultIsActive = (currentState: RouterState, toState: RouterState) =>
+    currentState.routeName === toState.routeName;
 
 /**
  * Creates an anchor tag that links to a router state. Redirects to the target
@@ -45,31 +46,37 @@ export interface RouterLinkProps
  * child anchor tag except for `href`, which is fully computed by this
  * component.
  */
-export const RouterLink = observer(
+export const RouterLink: React.FC<RouterLinkProps> = observer(
     ({
         routeName,
         params = {},
         queryParams = {},
         className,
         activeClassName,
+        isActive = defaultIsActive,
         children,
         href, // remove from `...others`
         onClick, // remove from `...others`
         ...others
-    }: RouterLinkProps) => {
+    }) => {
         const routerStore = useRouterStore();
         const { routerState } = routerStore;
 
         const toState = createRouterState(routeName, { params, queryParams });
 
-        const isActive = valueEqual(routerState, toState);
         const joinedClassName =
             (className ? className : '') +
-            (isActive && activeClassName ? ' ' + activeClassName : '');
+            (isActive(routerState, toState) && activeClassName
+                ? ' ' + activeClassName
+                : '');
 
         const handleClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
-            // Ignore if link is clicked using a modifier key or not left-clicked
-            if (isModifiedEvent(event) || !isLeftClickEvent(event)) {
+            // Ignore if link is clicked using a modifier key.
+            // Note: The click event is only fired for the primary pointer button,
+            // i.e. the left mouse button. So no need to check for right-click.
+            // https://w3c.github.io/uievents/#event-type-click
+            // https://github.com/testing-library/testing-library-docs/issues/469
+            if (isModifiedEvent(event)) {
                 return undefined;
             }
 

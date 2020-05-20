@@ -5,13 +5,16 @@ import {
     createRouterState,
     RouterContext,
     RouterLink,
+    RouterState,
     RouterStore,
 } from '../src';
 
 const routes = [
     { name: 'home', pattern: '/home' },
+    { name: 'about', pattern: '/about' },
     { name: 'department', pattern: '/departments/:id' },
     { name: 'items', pattern: '/items' },
+    { name: 'item', pattern: '/items/:id/:tabId' },
     { name: 'notFound', pattern: '/not-found' },
 ];
 
@@ -93,37 +96,63 @@ describe('RouterLink', () => {
         expect(getByText('Home')).toHaveClass('linkClass');
     });
 
-    test('does not render activeClassName when link is inactive', () => {
-        const { getByText } = render(
-            <RouterContextProvider>
-                <RouterLink
-                    routeName="home"
-                    className="linkClass"
-                    activeClassName="activeLinkClass"
-                >
-                    Home
-                </RouterLink>
-            </RouterContextProvider>
-        );
-        expect(getByText('Home')).toHaveClass('linkClass');
-    });
-
-    test('renders activeClassName when link is active', () => {
+    test('renders activeClassName with default isActive() function', () => {
         const routerStore = new RouterStore(routes, notFound, {
             initialState: home,
         });
         const { getByText } = render(
             <RouterContext.Provider value={routerStore}>
-                <RouterLink
-                    routeName="home"
-                    className="linkClass"
-                    activeClassName="activeLinkClass"
-                >
+                <RouterLink routeName="home" activeClassName="activeLinkClass">
                     Home
+                </RouterLink>
+                <RouterLink routeName="about" activeClassName="activeLinkClass">
+                    About
                 </RouterLink>
             </RouterContext.Provider>
         );
-        expect(getByText('Home')).toHaveClass('linkClass', 'activeLinkClass');
+        expect(getByText('Home')).toHaveClass('activeLinkClass');
+        expect(getByText('About')).not.toHaveClass();
+    });
+
+    test('renders activeClassName with custom isActive() function', () => {
+        // Set initial state to summary tab for an item
+        const summaryTabState = createRouterState('item', {
+            params: {
+                id: 'item123', // this would be different for different items
+                tabId: 'summary',
+            },
+        });
+        const routerStore = new RouterStore(routes, notFound, {
+            initialState: summaryTabState,
+        });
+
+        // Custom is active function
+        const isActive = (currentState: RouterState, toState: RouterState) =>
+            currentState.routeName === toState.routeName &&
+            currentState.params.tabId === toState.params.tabId;
+
+        const { getByText } = render(
+            <RouterContext.Provider value={routerStore}>
+                <RouterLink
+                    routeName="item"
+                    params={{ id: 'item123', tabId: 'summary' }}
+                    activeClassName="activeLinkClass"
+                    isActive={isActive}
+                >
+                    Summary
+                </RouterLink>
+                <RouterLink
+                    routeName="item"
+                    params={{ id: 'item123', tabId: 'detail' }}
+                    activeClassName="activeLinkClass"
+                    isActive={isActive}
+                >
+                    Detail
+                </RouterLink>
+            </RouterContext.Provider>
+        );
+        expect(getByText('Summary')).toHaveClass('activeLinkClass');
+        expect(getByText('Detail')).not.toHaveClass();
     });
 
     test('changes RouterState when left-clicked', () => {
@@ -139,11 +168,11 @@ describe('RouterLink', () => {
         expect(link).toHaveAttribute('href', '/items');
 
         // Left-click the link
-        fireEvent.click(link, { button: 0 });
+        fireEvent.click(link);
         expect(valueEqual(routerStore.routerState, items)).toBe(true);
     });
 
-    test('does not change RouterState when right-clicked', () => {
+    test('does not change RouterState when left-clicked with a modifier key', () => {
         const routerStore = new RouterStore(routes, notFound, {
             initialState: home,
         });
@@ -155,27 +184,28 @@ describe('RouterLink', () => {
         const link = getByText('Items');
         expect(link).toHaveAttribute('href', '/items');
 
-        // Right-click the link
-        // TODO: right-click (button: 2) is not working, so use button: 1.
-        // See https://github.com/testing-library/dom-testing-library/issues/584
-        fireEvent.click(link, { button: 1 });
+        // Left-click the link with shift key pressed
+        fireEvent.click(link, { shiftKey: true });
         expect(valueEqual(routerStore.routerState, home)).toBe(true);
     });
 
     test('calls onClick prop when passed in', () => {
+        const routerStore = new RouterStore(routes, notFound, {
+            initialState: home,
+        });
         const handleClick = jest.fn();
         const { getByText } = render(
-            <RouterContextProvider>
-                <RouterLink routeName="home" onClick={handleClick}>
-                    Home
+            <RouterContext.Provider value={routerStore}>
+                <RouterLink routeName="items" onClick={handleClick}>
+                    Items
                 </RouterLink>
-            </RouterContextProvider>
+            </RouterContext.Provider>
         );
-        const link = getByText('Home');
-        expect(link).toHaveAttribute('href', '/home');
+        const link = getByText('Items');
+        expect(link).toHaveAttribute('href', '/items');
 
         // Left-click the link
-        fireEvent.click(link, { button: 0 });
+        fireEvent.click(link);
         expect(handleClick).toHaveBeenCalledTimes(1);
     });
 });

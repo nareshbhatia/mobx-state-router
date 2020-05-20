@@ -63,25 +63,7 @@ const dessert = createRouterState('dessert');
 const errorState = createRouterState('errorRoute');
 
 describe('RouterStore', () => {
-    test('transitions to the desired state', () => {
-        expect.assertions(1);
-
-        const routerStore = new RouterStore(routes, notFound);
-        return routerStore.goToState(home).then((toState) => {
-            expect(valueEqual(toState, home)).toBe(true);
-        });
-    });
-
-    test('transitions to the desired state using goto overload (variation 1)', () => {
-        expect.assertions(1);
-
-        const routerStore = new RouterStore(routes, notFound);
-        return routerStore.goToState(deptElectronics).then((toState) => {
-            expect(valueEqual(toState, deptElectronics)).toBe(true);
-        });
-    });
-
-    test('transitions to the desired state using goto overload (variation 2)', () => {
+    test('transitions to the desired state using goto()', () => {
         expect.assertions(1);
 
         const routerStore = new RouterStore(routes, notFound);
@@ -90,6 +72,15 @@ describe('RouterStore', () => {
             .then((toState) => {
                 expect(valueEqual(toState, deptElectronics)).toBe(true);
             });
+    });
+
+    test('transitions to the desired state using gotoState()', () => {
+        expect.assertions(1);
+
+        const routerStore = new RouterStore(routes, notFound);
+        return routerStore.goToState(deptElectronics).then((toState) => {
+            expect(valueEqual(toState, deptElectronics)).toBe(true);
+        });
     });
 
     test('transitions to the same state with same params', () => {
@@ -125,13 +116,19 @@ describe('RouterStore', () => {
         });
     });
 
-    test('transitions to notFound state', () => {
+    test('transitions to notFound state using goToNotFound()', () => {
         const routerStore = new RouterStore(routes, notFound);
         routerStore.goToNotFound();
         expect(valueEqual(routerStore.routerState, notFound)).toBe(true);
     });
 
-    test('rejects a transition as directed by beforeExit', () => {
+    test('transitions to notFound state when toState is unknown', () => {
+        const routerStore = new RouterStore(routes, notFound);
+        routerStore.goTo('unknown');
+        expect(valueEqual(routerStore.routerState, notFound)).toBe(true);
+    });
+
+    test('redirects a transition as directed by beforeExit', () => {
         expect.assertions(1);
 
         const routerStore = new RouterStore(routes, notFound);
@@ -143,7 +140,7 @@ describe('RouterStore', () => {
             });
     });
 
-    test('rejects a transition as directed by beforeEnter', () => {
+    test('redirects a transition as directed by beforeEnter', () => {
         expect.assertions(1);
 
         const routerStore = new RouterStore(routes, notFound);
@@ -155,7 +152,7 @@ describe('RouterStore', () => {
             });
     });
 
-    test('rejects a transition as directed by onExit', () => {
+    test('redirects a transition as directed by onExit', () => {
         expect.assertions(1);
 
         const routerStore = new RouterStore(routes, notFound);
@@ -167,7 +164,7 @@ describe('RouterStore', () => {
             });
     });
 
-    test('rejects a transition as directed by onEnter', () => {
+    test('redirects a transition as directed by onEnter', () => {
         expect.assertions(1);
 
         const routerStore = new RouterStore(routes, notFound);
@@ -213,5 +210,11 @@ describe('RouterStore', () => {
             initialState: home,
         });
         expect(routerStore.getCurrentRoute()).toEqual(expectedRoute);
+    });
+
+    test('getNotFoundRoute() throws if notFound route does not exist', () => {
+        const routes: Route[] = [{ name: 'home', pattern: '/' }];
+        const routerStore = new RouterStore(routes, notFound);
+        expect(() => routerStore.getNotFoundRoute()).toThrow();
     });
 });

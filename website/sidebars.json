@@ -5,6 +5,14 @@
             "guides-recipes",
             "guides-examples"
         ],
-        "API": ["api-router", "api-components"]
+        "API": [
+            "api-route",
+            "api-router-link",
+            "api-router-state",
+            "api-router-store",
+            "api-router-view",
+            "api-history-adapter",
+            "api-static-adapter"
+        ]
     }
 }

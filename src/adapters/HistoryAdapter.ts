@@ -37,7 +37,7 @@ export class HistoryAdapter {
             this.routerStore.routes
         );
         if (routerState) {
-            return this.routerStore.goTo(routerState.routeName, routerState);
+            return this.routerStore.goToState(routerState);
         } else {
             return this.routerStore.goToNotFound();
         }

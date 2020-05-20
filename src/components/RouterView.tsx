@@ -15,7 +15,7 @@ export interface RouterViewProps {
  * It expects two props: the `routerStore` and a `viewMap`. The `viewMap`
  * is a simple mapping from `routeNames` to React components.
  */
-export const RouterView = observer(({ viewMap }: RouterViewProps) => {
+export const RouterView: React.FC<RouterViewProps> = observer(({ viewMap }) => {
     const routerStore = useRouterStore();
     const { routerState } = routerStore;
     // if (process.env.NODE_ENV === 'development') {

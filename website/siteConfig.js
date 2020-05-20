@@ -74,7 +74,7 @@ const siteConfig = {
 
     // Open Graph and Twitter card images.
     ogImage: 'img/mobx-logo.png',
-    twitterImage: 'img/mobx-logo.png'
+    twitterImage: 'img/mobx-logo.png',
 
     // Show documentation's last contributor's name.
     // enableUpdateBy: true,
@@ -85,6 +85,10 @@ const siteConfig = {
     // You may provide arbitrary config keys to be used as needed by your
     // template. For example, if you need your repo's URL...
     //   repoUrl: 'https://github.com/facebook/test-site',
+    githubUrl: 'https://github.com/nareshbhatia/mobx-state-router',
+    liveDemoUrl: 'https://mobx-shop.firebaseapp.com',
+    srpUrl: 'https://en.wikipedia.org/wiki/Single_responsibility_principle',
+    mwArticleUrl: 'https://hackernoon.com/how-to-decouple-state-and-ui-a-k-a-you-dont-need-componentwillmount-cc90b787aa37'
 };
 
 module.exports = siteConfig;

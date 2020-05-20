@@ -4,7 +4,7 @@ import { createLocation } from 'history';
 const routes: Route[] = [
     { name: 'home', pattern: '/' },
     {
-        name: 'department',
+        name: 'departments',
         pattern: '/departments',
     },
     {
@@ -20,7 +20,7 @@ describe('createMatchingRouterState', () => {
             createLocation('/departments'),
             routes
         );
-        expect(routerState).toEqual(createRouterState('department'));
+        expect(routerState).toEqual(createRouterState('departments'));
     });
 
     test('returns RouterState when url matches pattern, params, no queryParams', () => {
