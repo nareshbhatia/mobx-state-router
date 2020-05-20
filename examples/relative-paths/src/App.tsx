@@ -1,14 +1,22 @@
 import React from 'react';
-import { RouterContext } from 'mobx-state-router';
+import { RouterContext, RouterView } from 'mobx-state-router';
+import { Header } from './components';
 import { initRouter } from './initRouter';
-import { Shell } from './Shell';
+import { AboutPage, HomePage, NotFoundPage } from './pages';
+
+const viewMap = {
+    home: <HomePage />,
+    about: <AboutPage />,
+    notFound: <NotFoundPage />,
+};
 
 export const App = () => {
     const routerStore = initRouter();
 
     return (
         <RouterContext.Provider value={routerStore}>
-            <Shell />
+            <Header />
+            <RouterView viewMap={viewMap} />
         </RouterContext.Provider>
     );
 };

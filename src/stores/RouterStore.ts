@@ -45,23 +45,42 @@ export class RouterStore {
     routerState: RouterState;
     options: { [key: string]: any };
 
+    /**
+     * @param routes: Route[]
+     *   Any array of routes that will be used by the router
+     *   to transition between states.
+     *
+     * @param notFoundState: RouterState
+     *   The state the router will transition to if it does not
+     *   know about the requested goTo state.
+     *
+     * @param options (optional) { [key: string]: any }
+     *   Any key-value pair that application wants to stuff in RouterStore.
+     *   The following options have special meaning to mobx-state-router.
+     *
+     *   initialState: RouterState
+     *     The initial state of the router. If not specified, the router
+     *     will be initialized to an internal default state and will wait
+     *     for history to drive the next state.
+     */
     constructor(
         routes: Route[],
         notFoundState: RouterState,
         options: { [key: string]: any } = {}
     ) {
+        // Set routes and push an internal route for the default state
         this.routes = routes;
-        this.notFoundState = notFoundState;
-        this.options = options;
+        this.routes.push(InitialRoute);
 
-        // Set the initial state
-        if (options.initialState) {
-            this.routerState = options.initialState;
-        } else {
-            // Create an artificial route and set the initial state to it
-            this.routes.push(InitialRoute);
-            this.routerState = InitialRouterState;
-        }
+        // Set options
+        const defaultOptions = {
+            initialState: InitialRouterState,
+        };
+        this.options = Object.assign(defaultOptions, options);
+
+        // Set states
+        this.notFoundState = notFoundState;
+        this.routerState = this.options.initialState;
     }
 
     setRouterState(routerState: RouterState) {

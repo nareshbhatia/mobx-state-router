@@ -24,9 +24,7 @@ interface RouterContextProviderProps {
     children: ReactNode;
 }
 
-export const RouterContextProvider = ({
-    children,
-}: RouterContextProviderProps) => {
+const RouterContextProvider = ({ children }: RouterContextProviderProps) => {
     const routerStore = new RouterStore(routes, notFound);
     return (
         <RouterContext.Provider value={routerStore}>
@@ -158,7 +156,9 @@ describe('RouterLink', () => {
         expect(link).toHaveAttribute('href', '/items');
 
         // Right-click the link
-        fireEvent.click(link, { button: 2 });
+        // TODO: right-click (button: 2) is not working, so use button: 1.
+        // See https://github.com/testing-library/dom-testing-library/issues/584
+        fireEvent.click(link, { button: 1 });
         expect(valueEqual(routerStore.routerState, home)).toBe(true);
     });
 

@@ -58,7 +58,7 @@ export class HistoryAdapter {
                     routerState
                 );
                 if (currentUrl !== routerStateUrl) {
-                    if (routerState.replaceHistory) {
+                    if (routerState.options.replaceHistory) {
                         this.history.replace(routerStateUrl);
                     } else {
                         this.history.push(routerStateUrl);

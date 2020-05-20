@@ -27,10 +27,7 @@ export const App = observer(() => {
                         <RootStoreContext.Provider value={rootStore}>
                             <RouterContext.Provider value={routerStore}>
                                 <CssBaseline />
-                                <RouterView
-                                    routerStore={routerStore}
-                                    viewMap={viewMap}
-                                />
+                                <RouterView viewMap={viewMap} />
                                 <MessageRenderer />
                             </RouterContext.Provider>
                         </RootStoreContext.Provider>

@@ -5,8 +5,12 @@ import {
     RouterStore,
 } from '../src';
 
-const routes = [{ name: 'department', pattern: '/departments/:id' }];
+const routes = [
+    { name: 'department', pattern: '/departments/:id' },
+    { name: 'notFound', pattern: '/not-found' },
+];
 const notFound = createRouterState('notFound');
+const unknown = createRouterState('unknown');
 const deptElectronics = createRouterState('department', {
     params: { id: 'electronics' },
 });
@@ -44,8 +48,13 @@ describe('generateUrl', () => {
 });
 
 describe('routerStateToUrl', () => {
-    test('converts a state with with specified params to a url', () => {
+    test('converts a state with specified params to a url', () => {
         const url = routerStateToUrl(routerStore, deptElectronics);
         expect(url).toEqual('/departments/electronics');
+    });
+
+    test('if route is not found returns the notFound url', () => {
+        const url = routerStateToUrl(routerStore, unknown);
+        expect(url).toEqual('/not-found');
     });
 });

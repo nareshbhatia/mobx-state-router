@@ -1,6 +1,6 @@
 import React from 'react';
 import { observer } from 'mobx-react';
-import { RouterView, useRouterStore } from 'mobx-state-router';
+import { RouterView } from 'mobx-state-router';
 import { Header } from './components';
 import { ContentfulPage, GitHubPage, HomePage, NotFoundPage } from './pages';
 
@@ -12,12 +12,10 @@ const viewMap = {
 };
 
 export const App = observer(() => {
-    const routerStore = useRouterStore();
-
     return (
         <React.Fragment>
             <Header />
-            <RouterView routerStore={routerStore} viewMap={viewMap} />
+            <RouterView viewMap={viewMap} />
         </React.Fragment>
     );
 });
