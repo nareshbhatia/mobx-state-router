@@ -71,7 +71,7 @@ export const HomeButton = () => {
 };
 ```
 
-### Remove `routerStore` prop from `RouterView`
+### Remove routerStore prop from RouterView
 
 It is no longer required.
 
@@ -180,7 +180,7 @@ const routes = [
 ];
 ```
 
-## Use browserHistory from mobx-state-router
+### Use browserHistory from mobx-state-router
 
 In earlier versions, we used to create a history instance in the app, and
 provided it to `HistoryAdapter` (this code spanned over two files):
@@ -203,10 +203,10 @@ import { browserHistory, HistoryAdapter } from 'mobx-state-router';
 const historyAdapter = new HistoryAdapter(routerStore, browserHistory);
 ```
 
-## <Link> component has been dropped in favor of <RouterLink>
+### Link component has been dropped in favor of RouterLink
 
 `RouterLink` is much more convenient to use anyway.
 
-## RouterStore.setErrorHook() has been dropped
+### RouterStore.setErrorHook() has been dropped
 
 It is no longer supported

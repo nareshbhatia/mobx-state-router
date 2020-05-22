@@ -6,18 +6,13 @@ import { matchUrl } from './matchUrl';
 /*
  * Create a RouterState that matches the specified URL.
  *
- * Can be used to generate the initial routerState when initialising the RouterStore.
- * For example:
- *    const history = createBrowserHistory();
- *    routerStore = new RouterStore(
- *      routes,
- *      notFound,
- *      createMatchingRouterState(history.location, routes)
- *    );
+ * Used by HistoryAdapter & StaticAdapter to convert the received URL
+ * into a RouterState.
  */
 export const createMatchingRouterState = (
     location: Location,
-    routes: Route[]
+    routes: Route[],
+    queryParseOptions?: any
 ): RouterState | undefined => {
     // Find the matching route
     let matchingRoute = null;
@@ -31,9 +26,10 @@ export const createMatchingRouterState = (
         }
     }
     if (matchingRoute) {
+        const queryParams = parse(location.search, queryParseOptions);
         return createRouterState(matchingRoute.name, {
             params,
-            queryParams: parse(location.search),
+            queryParams,
         });
     }
 };

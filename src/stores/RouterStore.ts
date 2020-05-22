@@ -62,6 +62,16 @@ export class RouterStore {
      *     The initial state of the router. If not specified, the router
      *     will be initialized to an internal default state and will wait
      *     for history to drive the next state.
+     *
+     *   queryParseOptions: any
+     *     Options for parsing query strings. These are passed directly to
+     *     the [query-string](https://github.com/sindresorhus/query-string)
+     *     library that is used internally.
+     *
+     *   queryStringifyOptions: any
+     *     Options for stringifying query params. These are passed directly to
+     *     the [query-string](https://github.com/sindresorhus/query-string)
+     *     library that is used internally.
      */
     constructor(
         routes: Route[],

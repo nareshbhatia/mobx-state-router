@@ -26,14 +26,19 @@ const getGenerator = (pattern: string): PathFunction => {
  *     generateUrl('/departments/:id', { id: 'electronics' })
  *     => '/departments/electronics'
  */
-export const generateUrl = (pattern = '/', params = {}, queryParams = {}) => {
+export const generateUrl = (
+    pattern = '/',
+    params = {},
+    queryParams = {},
+    queryStringifyOptions?: any
+) => {
     // inject params
     const generator = getGenerator(pattern);
     let url = generator(params);
 
     // inject queryParams (remember to insert the question mark)
     if (Object.keys(queryParams).length > 0) {
-        url = `${url}?${stringify(queryParams)}`;
+        url = `${url}?${stringify(queryParams, queryStringifyOptions)}`;
     }
 
     return url;
@@ -49,10 +54,15 @@ export const routerStateToUrl = (
     routerStore: RouterStore,
     routerState: RouterState
 ): string => {
-    const { routeName, params, queryParams } = routerState;
+    const { routeName, params, queryParams, options } = routerState;
     let route = routerStore.getRoute(routeName);
     if (!route) {
         route = routerStore.getNotFoundRoute();
     }
-    return generateUrl(route.pattern, params, queryParams);
+    return generateUrl(
+        route.pattern,
+        params,
+        queryParams,
+        options.queryStringifyOptions
+    );
 };

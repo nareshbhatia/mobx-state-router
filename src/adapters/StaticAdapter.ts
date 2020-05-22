@@ -26,7 +26,8 @@ export class StaticAdapter {
         // Create the matching RouterState
         const routerState = createMatchingRouterState(
             location,
-            this.routerStore.routes
+            this.routerStore.routes,
+            this.routerStore.options.queryParseOptions
         );
         if (routerState) {
             return this.routerStore.goTo(routerState.routeName, routerState);

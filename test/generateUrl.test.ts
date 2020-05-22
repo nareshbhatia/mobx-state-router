@@ -45,6 +45,16 @@ describe('generateUrl', () => {
         );
         expect(url).toEqual('/departments/electronics?q=apple');
     });
+
+    test('appends the specified query parameters in bracket format', () => {
+        const url = generateUrl(
+            '/users',
+            {},
+            { userIds: ['1', '2', '3'] },
+            { arrayFormat: 'bracket' }
+        );
+        expect(url).toEqual('/users?userIds[]=1&userIds[]=2&userIds[]=3');
+    });
 });
 
 describe('routerStateToUrl', () => {

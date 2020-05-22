@@ -62,7 +62,7 @@ target state.
 
 #### options
 
-Array of key-value pairs to store in `RouterStore`. The following option is
+Array of key-value pairs to store in `RouterStore`. The following options are
 supported. However, you can pass additional options that you may want to use in
 transition hooks.
 
@@ -71,6 +71,20 @@ initialState: RouterState
     The initial state of the router. If not specified, the router
     will be initialized to an internal default state and will wait
     for history to drive the next state.
+```
+
+```jsx
+queryParseOptions: any
+    Options for parsing query strings. These are passed directly to
+    the [query-string](https://github.com/sindresorhus/query-string)
+    library that is used internally.
+```
+
+```jsx
+queryStringifyOptions: any
+    Options for stringifying query params. These are passed directly to
+    the [query-string](https://github.com/sindresorhus/query-string)
+    library that is used internally.
 ```
 
 ## goTo()

@@ -53,8 +53,8 @@ yarn build:local
 -   Release to npm
 
 ```bash
-npm publish             # for normal release
-npm publish --tag next  # if doing a pre-release
+npm publish             # for normal release (adds `latest` tag)
+npm publish --tag next  # for pre-release (adds `next` tag)
 ```
 
 -   Tag the release and push the tag to remote

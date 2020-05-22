@@ -35,16 +35,17 @@ const defaultIsActive = (currentState: RouterState, toState: RouterState) =>
  * The target state is specified by the `routeName`, `params` and `queryParams`
  * properties.
  *
- * RouterLink accepts `className` and `activeClassName` as optional
- * properties. `className` is always applied to the anchor tag.
- * `activeClassName` is applied in addition if the current `routerState`
- * matches the state specified by the `RouterLink`. This feature is
- * useful for highlighting the active link in a navbar.
+ * `RouterLink` accepts `className` and `activeClassName` as optional
+ * properties to control the look of the link in normal and active states.
+ * This feature is useful for highlighting the active link in a navbar.
+ * The default test for checking if a link is active is very simple - the
+ * routeName of the current RouterState should match the target routeName
+ * of the link. For more control over this test, you can supply your own
+ * custom `isActive` function.
  *
- * Note that you can pass other anchor tag attributes (such as onClick
- * and onBlur) to this component. They will be passed through to the
- * child anchor tag except for `href`, which is fully computed by this
- * component.
+ * You can pass other anchor tag attributes (such as onClick and onBlur) to
+ * this component. They will be passed through to the child anchor tag except
+ * for `href`, which is fully computed by this component.
  */
 export const RouterLink: React.FC<RouterLinkProps> = observer(
     ({
