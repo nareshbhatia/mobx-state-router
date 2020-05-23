@@ -188,15 +188,21 @@ export class RouterStore {
             this.setRouterState(this.notFoundState);
             return toState;
         }
-        const { beforeExit, onExit } = fromRoute;
-        const { beforeEnter, onEnter } = toRoute;
 
         // Call the transition hook chain
         let redirectState;
 
+        // Note: Do not destructure routes so that they can be implemented as
+        // classes instead of simple objects.
+        // See: https://github.com/nareshbhatia/mobx-state-router/issues/74
+
         // ----- beforeExit -----
-        if (beforeExit) {
-            redirectState = await beforeExit(fromState, toState, this);
+        if (fromRoute.beforeExit) {
+            redirectState = await fromRoute.beforeExit(
+                fromState,
+                toState,
+                this
+            );
             if (redirectState) {
                 this.setRouterState(redirectState);
                 return redirectState;
@@ -204,8 +210,8 @@ export class RouterStore {
         }
 
         // ----- beforeEnter -----
-        if (beforeEnter) {
-            redirectState = await beforeEnter(fromState, toState, this);
+        if (toRoute.beforeEnter) {
+            redirectState = await toRoute.beforeEnter(fromState, toState, this);
             if (redirectState) {
                 this.setRouterState(redirectState);
                 return redirectState;
@@ -213,8 +219,8 @@ export class RouterStore {
         }
 
         // ----- onExit -----
-        if (onExit) {
-            redirectState = await onExit(fromState, toState, this);
+        if (fromRoute.onExit) {
+            redirectState = await fromRoute.onExit(fromState, toState, this);
             if (redirectState) {
                 this.setRouterState(redirectState);
                 return redirectState;
@@ -222,8 +228,8 @@ export class RouterStore {
         }
 
         // ----- onEnter -----
-        if (onEnter) {
-            redirectState = await onEnter(fromState, toState, this);
+        if (toRoute.onEnter) {
+            redirectState = await toRoute.onEnter(fromState, toState, this);
             if (redirectState) {
                 this.setRouterState(redirectState);
                 return redirectState;
