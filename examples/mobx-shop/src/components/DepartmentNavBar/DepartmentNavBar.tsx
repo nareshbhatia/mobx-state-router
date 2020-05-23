@@ -18,7 +18,7 @@ export const DepartmentNavBar = observer(() => {
     return (
         <Tabs value={id} onChange={handleNavItemSelected}>
             {Object.values(Departments).map((dept) => (
-                <Tab value={dept.id} label={dept.name} />
+                <Tab key={dept.id} value={dept.id} label={dept.name} />
             ))}
         </Tabs>
     );

@@ -1,6 +1,9 @@
 import React, { Fragment } from 'react';
+import Debug from 'debug';
 import { observer } from 'mobx-react';
 import { useRouterStore } from '../contexts';
+
+const debug = Debug('msr:RouterView');
 
 export interface ViewMap {
     [routeName: string]: React.ReactNode;
@@ -18,9 +21,7 @@ export interface RouterViewProps {
 export const RouterView: React.FC<RouterViewProps> = observer(({ viewMap }) => {
     const routerStore = useRouterStore();
     const { routerState } = routerStore;
-    // if (process.env.NODE_ENV === 'development') {
-    //     console.log(`RouterView.render() - ${JSON.stringify(routerState)}`);
-    // }
+    debug('render %o', routerState);
 
     const view = viewMap[routerState.routeName];
     return view ? <Fragment>{view}</Fragment> : null;

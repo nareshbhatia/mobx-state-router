@@ -1,6 +1,10 @@
 import { valueEqual } from '@react-force/utils';
+import Debug from 'debug';
 import { action, decorate, observable } from 'mobx';
 import { createRouterState, RouterState } from './RouterState';
+
+const debug = Debug('msr:RouterStore');
+const debugSetState = Debug('msr:setRouterState');
 
 /**
  * A function called when transitioning from fromState to toState.
@@ -94,6 +98,7 @@ export class RouterStore {
     }
 
     setRouterState(routerState: RouterState) {
+        debugSetState('%o', routerState);
         this.routerState = routerState;
     }
 
@@ -165,30 +170,16 @@ export class RouterStore {
         fromState: RouterState,
         toState: RouterState
     ): Promise<RouterState> {
+        debug('transition from %o to %o)', fromState, toState);
+
         // If fromState = toState, do nothing
         // This is important to avoid infinite loops caused by RouterStore.goTo()
         // triggering a change in history, which in turn causes HistoryAdapter
         // to call RouterStore.goTo().
         if (valueEqual(fromState, toState)) {
-            /* istanbul ignore if */
-            if (process.env.NODE_ENV === 'development') {
-                // const fromStateStr = JSON.stringify(fromState);
-                // console.log(
-                //     `RouterStore.transition(${fromStateStr}):`,
-                //     'states are equal, skipping'
-                // );
-            }
+            debug('states are equal, skipping');
             return toState;
         }
-
-        // /* istanbul ignore if */
-        // if (process.env.NODE_ENV === 'development') {
-        //     const fromStateStr = JSON.stringify(fromState);
-        //     const toStateStr = JSON.stringify(toState);
-        //     console.log(
-        //         `RouterStore.transition(${fromStateStr}, ${toStateStr})`
-        //     );
-        // }
 
         // Get transition hooks from the two states
         const fromRoute = this.getRoute(fromState.routeName);

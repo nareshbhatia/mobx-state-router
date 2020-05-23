@@ -1392,9 +1392,9 @@
     "@types/testing-library__react" "^10.0.1"
 
 "@testing-library/user-event@^10.3.1":
-  version "10.3.4"
-  resolved "https://registry.yarnpkg.com/@testing-library/user-event/-/user-event-10.3.4.tgz#701905a19bad92805820b816327ab086bdd0e832"
-  integrity sha512-ZuqR2cBAOArvBdPiIjmAKaZdFAtZSH6Oz2I5+uHonMXRyR0uTtz2fTWyPuiu4JATdK7gLIq1s02BMJGWgmh1lA==
+  version "10.3.5"
+  resolved "https://registry.yarnpkg.com/@testing-library/user-event/-/user-event-10.3.5.tgz#4a47cdc0b2f41255a7140afbe4933b0e9483cf86"
+  integrity sha512-9Jg5pg12099EoOb4Z/+UNtCFpFIblD6INkgeWuV/AjUiYP+s/u6aYGPaLrUYioJ8duQ3V421B29GVE/3JELjCQ==
   dependencies:
     "@babel/runtime" "^7.9.6"
 
@@ -2158,9 +2158,9 @@ aws-sign2@~0.7.0:
   integrity sha1-tG6JCTSpWR8tL2+G1+ap8bP+dqg=
 
 aws4@^1.8.0:
-  version "1.9.1"
-  resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.9.1.tgz#7e33d8f7d449b3f673cd72deb9abdc552dbe528e"
-  integrity sha512-wMHVg2EOHaMRxbzgFJ9gtjOOCrI80OHLG14rxi28XwOW8ux6IiEbRCGGGqCtdAIg4FQCbW20k9RsT4y3gJlFug==
+  version "1.10.0"
+  resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.10.0.tgz#a17b3a8ea811060e74d47d306122400ad4497ae2"
+  integrity sha512-3YDiu347mtVtjpyV3u5kVqQLP242c06zwDOgpeRnybmXlYYsLbtTrUBUm8i8srONt+FWobl5aibnU1030PeeuA==
 
 axobject-query@^2.0.2:
   version "2.1.2"
@@ -2715,9 +2715,9 @@ caniuse-api@^3.0.0:
     lodash.uniq "^4.5.0"
 
 caniuse-lite@^1.0.0, caniuse-lite@^1.0.30000981, caniuse-lite@^1.0.30001035, caniuse-lite@^1.0.30001043, caniuse-lite@^1.0.30001061:
-  version "1.0.30001062"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001062.tgz#d814b648338504b315222ace6f1a533d9a55e390"
-  integrity sha512-ei9ZqeOnN7edDrb24QfJ0OZicpEbsWxv7WusOiQGz/f2SfvBgHHbOEwBJ8HKGVSyx8Z6ndPjxzR6m0NQq+0bfw==
+  version "1.0.30001064"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001064.tgz#a0f49689119ba08943b09968e118faf3f645add0"
+  integrity sha512-hdBcQMFvJIrOhkpAZiRXz04Cmetwc9NekeuNl0qZfHOugxOhJKxsjF1RmISMPFjIF4PPx1reliIzbfN42EiQ5A==
 
 capture-exit@^2.0.0:
   version "2.0.0"
@@ -6178,9 +6178,9 @@ js-tokens@^3.0.2:
   integrity sha1-mGbfOVECEw449/mWvOtlRDIJwls=
 
 js-yaml@^3.13.1:
-  version "3.13.1"
-  resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-3.13.1.tgz#aff151b30bfdfa8e49e05da22e7415e9dfa37847"
-  integrity sha512-YfbcO7jXDdyj0DGxYVSlSeQNHbD7XPWvrVWeVUujrQEoZzWJIRrCPoyk6kL6IAjAG2IolMK4T0hNUe0HOUs5Jw==
+  version "3.14.0"
+  resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-3.14.0.tgz#a7a34170f26a21bb162424d8adacb4113a69e482"
+  integrity sha512-/4IbIeHcD9VMHFqDR/gQ7EdZdLimOvW2DdcxFjdyyZ9NsbS+ccrXqVWDtab/lRl5AlUqmpBx8EhPaWR+OtY17A==
   dependencies:
     argparse "^1.0.7"
     esprima "^4.0.0"
@@ -6880,10 +6880,11 @@ mobx-react@^6.2.2:
   dependencies:
     mobx-react-lite "2"
 
-"mobx-state-router@file:../../mobx-state-router-5.0.0-beta.4":
-  version "5.0.0-beta.4"
+"mobx-state-router@file:../../mobx-state-router-5.0.0":
+  version "5.0.0"
   dependencies:
     "@react-force/utils" "^2.1.0"
+    debug "^4.1.1"
     history "^4.10.1"
     path-to-regexp "^6.1.0"
     query-string "^6.12.1"

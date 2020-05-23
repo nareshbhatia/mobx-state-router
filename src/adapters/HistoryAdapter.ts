@@ -1,8 +1,11 @@
+import Debug from 'debug';
 import { History, Location } from 'history';
 import { reaction } from 'mobx';
 import { RouterState, RouterStore } from '../stores';
 import { createMatchingRouterState } from './createMatchingRouterState';
 import { routerStateToUrl } from './generateUrl';
+
+const debug = Debug('msr:HistoryAdapter');
 
 /**
  * Responsible for keeping the browser address bar and the `RouterState`
@@ -25,11 +28,7 @@ export class HistoryAdapter {
     }
 
     goToLocation = (location: Location): Promise<RouterState> => {
-        // if (process.env.NODE_ENV === 'development') {
-        //     console.log(
-        //         `HistoryAdapter.goToLocation(${JSON.stringify(location)})`
-        //     );
-        // }
+        debug('goToLocation: %o', location);
 
         // Create the matching RouterState
         const routerState = createMatchingRouterState(
@@ -64,12 +63,11 @@ export class HistoryAdapter {
                     } else {
                         this.history.push(routerStateUrl);
                     }
-                    // if (process.env.NODE_ENV === 'development') {
-                    //     console.log(
-                    //         `HistoryAdapter: history.push(${routerStateUrl}),`,
-                    //         `history.length=${this.history.length}`
-                    //     );
-                    // }
+                    debug(
+                        'history.push(%o), history.length=%d',
+                        routerStateUrl,
+                        this.history.length
+                    );
                 }
             }
         );

@@ -49,6 +49,13 @@ my-docusaurus/
     siteConfig.js
 ```
 
+# Publishing to GitHub Pages
+
+```sh
+yarn
+GIT_USER=nareshbhatia CURRENT_BRANCH=master USE_SSH=true yarn publish-gh-pages
+```
+
 # Editing Content
 
 ## Editing an existing docs page

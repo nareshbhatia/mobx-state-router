@@ -1,6 +1,9 @@
+import Debug from 'debug';
 import { Location } from 'history';
 import { RouterState, RouterStore } from '../stores';
 import { createMatchingRouterState } from './createMatchingRouterState';
+
+const debug = Debug('msr:StaticAdapter');
 
 /**
  * Responsible for driving `RouterState` programmatically instead of the
@@ -16,12 +19,7 @@ export class StaticAdapter {
     }
 
     goToLocation = (location: Location): Promise<RouterState> => {
-        // /* istanbul ignore if */
-        // if (process.env.NODE_ENV === 'development') {
-        //     console.log(
-        //         `StaticAdapter.goToLocation(${JSON.stringify(location)})`
-        //     );
-        // }
+        debug('goToLocation: %o', location);
 
         // Create the matching RouterState
         const routerState = createMatchingRouterState(

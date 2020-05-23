@@ -1,4 +1,4 @@
-## 5.0.0 (May 22, 2020)
+## 5.0.0 (May 23, 2020)
 
 The overall theme of this release is to simplify the API and make it more
 flexible. Consequently, there are a few breaking changes, but nothing very
@@ -209,4 +209,9 @@ const historyAdapter = new HistoryAdapter(routerStore, browserHistory);
 
 ### RouterStore.setErrorHook() has been dropped
 
-It is no longer supported
+We now include debug statements that can be turned on at runtime. Simply go to
+the Chrome Dev Tools console and enter this command:
+
+```jsx
+localStorage.debug = 'msr:*';
+```
