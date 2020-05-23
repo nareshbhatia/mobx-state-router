@@ -1,14 +1,41 @@
-<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Getting Started · MobX State Router</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="&lt;p&gt;Welcome! We’re excited that you’ve decided to learn mobx-state-router. This tutorial will guide you through building your first React app with mobx-state-router.&lt;/p&gt;
-"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Getting Started · MobX State Router"/><meta property="og:type" content="website"/><meta property="og:url" content="https://nareshbhatia.github.io/mobx-state-router/index.html"/><meta property="og:description" content="&lt;p&gt;Welcome! We’re excited that you’ve decided to learn mobx-state-router. This tutorial will guide you through building your first React app with mobx-state-router.&lt;/p&gt;
-"/><meta property="og:image" content="https://nareshbhatia.github.io/mobx-state-router/img/mobx-logo.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://nareshbhatia.github.io/mobx-state-router/img/mobx-logo.png"/><link rel="shortcut icon" href="/mobx-state-router/img/mobx-logo.png"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><link rel="stylesheet" href="/mobx-state-router/css/main.css"/></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/mobx-state-router/"><img class="logo" src="/mobx-state-router/img/mobx-logo.png" alt="MobX State Router"/><h2 class="headerTitleWithLogo">MobX State Router</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive siteNavItemActive"><a href="/mobx-state-router/docs/guides-getting-started" target="_self">Docs</a></li><li class=""><a href="https://github.com/nareshbhatia/mobx-state-router" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Guides</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Guides</h3><ul><li class="navListItem navListItemActive"><a class="navItem" href="/mobx-state-router/docs/guides-getting-started">Getting Started</a></li><li class="navListItem"><a class="navItem" href="/mobx-state-router/docs/guides-recipes">Recipes</a></li><li class="navListItem"><a class="navItem" href="/mobx-state-router/docs/guides-examples">Examples</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">API</h3><ul><li class="navListItem"><a class="navItem" href="/mobx-state-router/docs/api-router">Router</a></li><li class="navListItem"><a class="navItem" href="/mobx-state-router/docs/api-components">Components</a></li></ul></div></div></section></div><script>
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Getting Started · MobX State Router</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Welcome! We’re excited that you’ve decided to learn mobx-state-router. This"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Getting Started · MobX State Router"/><meta property="og:type" content="website"/><meta property="og:url" content="https://nareshbhatia.github.io/mobx-state-router/"/><meta property="og:description" content="Welcome! We’re excited that you’ve decided to learn mobx-state-router. This"/><meta property="og:image" content="https://nareshbhatia.github.io/mobx-state-router/img/mobx-logo.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://nareshbhatia.github.io/mobx-state-router/img/mobx-logo.png"/><link rel="shortcut icon" href="/mobx-state-router/img/mobx-logo.png"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="/mobx-state-router/js/scrollSpy.js"></script><link rel="stylesheet" href="/mobx-state-router/css/main.css"/><script src="/mobx-state-router/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/mobx-state-router/"><img class="logo" src="/mobx-state-router/img/mobx-logo.png" alt="MobX State Router"/><h2 class="headerTitleWithLogo">MobX State Router</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive siteNavItemActive"><a href="/mobx-state-router/docs/guides-getting-started" target="_self">Docs</a></li><li class=""><a href="https://github.com/nareshbhatia/mobx-state-router" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Guides</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Guides</h3><ul class=""><li class="navListItem navListItemActive"><a class="navItem" href="/mobx-state-router/docs/guides-getting-started">Getting Started</a></li><li class="navListItem"><a class="navItem" href="/mobx-state-router/docs/guides-recipes">Recipes</a></li><li class="navListItem"><a class="navItem" href="/mobx-state-router/docs/guides-examples">Examples</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">API</h3><ul class=""><li class="navListItem"><a class="navItem" href="/mobx-state-router/docs/api-route">Route</a></li><li class="navListItem"><a class="navItem" href="/mobx-state-router/docs/api-router-link">RouterLink</a></li><li class="navListItem"><a class="navItem" href="/mobx-state-router/docs/api-router-state">RouterState</a></li><li class="navListItem"><a class="navItem" href="/mobx-state-router/docs/api-router-store">RouterStore</a></li><li class="navListItem"><a class="navItem" href="/mobx-state-router/docs/api-router-view">RouterView</a></li><li class="navListItem"><a class="navItem" href="/mobx-state-router/docs/api-history-adapter">HistoryAdapter</a></li><li class="navListItem"><a class="navItem" href="/mobx-state-router/docs/api-static-adapter">StaticAdapter</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
             document.addEventListener('DOMContentLoaded', function() {
               createToggler('#navToggler', '#docsNav', 'docsSliderActive');
               createToggler('#tocToggler', 'body', 'tocActive');
 
-              const headings = document.querySelector('.toc-headings');
+              var headings = document.querySelector('.toc-headings');
               headings && headings.addEventListener('click', function(event) {
-                if (event.target.tagName === 'A') {
-                  document.body.classList.remove('tocActive');
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
                 }
               }, false);
 
@@ -27,197 +54,228 @@
                 };
               }
             });
-        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">Getting Started</h1></header><article><div><span><p>Welcome! We’re excited that you’ve decided to learn mobx-state-router. This tutorial will guide you through building your first React app with mobx-state-router.</p>
-<p>The finished app will consist of two simple pages: Home (shown below) and Electronics. Clicking the <em>Go to Electronics</em> button on the Home page will take you to the Electronics page. Clicking the <em>Go Home</em> button on the Electronics page will take you back to the Home page. That's it!</p>
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 id="__docusaurus" class="postHeaderTitle">Getting Started</h1></header><article><div><span><p>Welcome! We’re excited that you’ve decided to learn mobx-state-router. This
+tutorial will guide you through building your first React app with
+mobx-state-router.</p>
+<p>The finished app will consist of two simple pages: Home (shown below) and
+Electronics. Clicking the <em>Go to Electronics</em> button on the Home page will take
+you to the Electronics page. Clicking the <em>Go Home</em> button on the Electronics
+page will take you back to the Home page. That's it!</p>
 <p><img src="/mobx-state-router/docs/assets/screen-shot-quick-start.png" alt="Quick Start App"></p>
-<p>We have the <a href="https://github.com/nareshbhatia/mobx-state-router-quick-start">finished example</a> in Github, so if you get stuck, check out the working code there.</p>
+<p>We have the
+<a href="https://github.com/nareshbhatia/mobx-state-router/tree/master/examples/quick-start">finished example</a>
+in Github, so if you get stuck, check out the working code there.</p>
 <h2><a class="anchor" aria-hidden="true" id="create-react-app"></a><a href="#create-react-app" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Create React App</h2>
-<p>Create a simple React app using <a href="https://github.com/facebookincubator/create-react-app">create-react-app</a>.</p>
+<p>Create a simple React app using
+<a href="https://github.com/facebookincubator/create-react-app">create-react-app</a>.</p>
+<pre><code class="hljs css language-bash">npx create-react-app quick-start --template typescript
+<span class="hljs-built_in">cd</span> quick-start
+</code></pre>
 <h2><a class="anchor" aria-hidden="true" id="install-mobx-state-router"></a><a href="#install-mobx-state-router" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Install mobx-state-router</h2>
 <p>Install the router and its peer dependencies:</p>
-<pre><code class="hljs">npm install --save mobx-state-router history mobx mobx-react
+<pre><code class="hljs css language-bash">npm install --save mobx-state-router mobx mobx-react
 </code></pre>
-<p>Note that mobx-state-router does not require you to switch all your state management to MobX. If you are already using other state management libraries in your app (such as Redux), you can continue to use them, only the router will use MobX.</p>
-<p>Define Routes</p>
-<hr>
-<p>Let's first define our routes, the <code>RouterStore</code> will need them. By convention we define our routes in <a href="https://github.com/nareshbhatia/mobx-state-router-quick-start/blob/master/src/shared/stores/routes.js">src/shared/stores/routes.js</a>. We will keep our route configuration very simple for right now. Let's define three routes: <code>home</code>, <code>department</code> and <code>notFound</code>:</p>
-<pre><code class="hljs css language-jsx"><span class="hljs-comment">// Routes are matched from top to bottom. Make sure they are sequenced</span>
-<span class="hljs-comment">// in the order of priority. It is generally best to sort them by pattern,</span>
-<span class="hljs-comment">// prioritizing specific patterns over generic patterns (patterns with</span>
-<span class="hljs-comment">// one or more parameters). For example:</span>
-<span class="hljs-comment">//     /items</span>
-<span class="hljs-comment">//     /items/:id</span>
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> routes = [
+<p>Note that mobx-state-router does not require you to switch all your state
+management to MobX. If you are already using other state management libraries in
+your app (such as Redux), you can continue to use them, only the router will use
+MobX.</p>
+<h2><a class="anchor" aria-hidden="true" id="define-routes"></a><a href="#define-routes" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Define Routes</h2>
+<p>Let's first define our routes. Create a file
+<a href="https://github.com/nareshbhatia/mobx-state-router/blob/master/examples/quick-start/src/initRouter.ts">src/initRouter.ts</a>
+and add three routes to it: <code>home</code>, <code>department</code> and <code>notFound</code> as shown below:</p>
+<pre><code class="hljs css language-jsx"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> routes = [
     {
         <span class="hljs-attr">name</span>: <span class="hljs-string">'home'</span>,
-        <span class="hljs-attr">pattern</span>: <span class="hljs-string">'/'</span>
+        <span class="hljs-attr">pattern</span>: <span class="hljs-string">'/'</span>,
     },
     {
         <span class="hljs-attr">name</span>: <span class="hljs-string">'department'</span>,
-        <span class="hljs-attr">pattern</span>: <span class="hljs-string">'/departments/:id'</span>
+        <span class="hljs-attr">pattern</span>: <span class="hljs-string">'/departments/:id'</span>,
     },
     {
         <span class="hljs-attr">name</span>: <span class="hljs-string">'notFound'</span>,
-        <span class="hljs-attr">pattern</span>: <span class="hljs-string">'/not-found'</span>
-    }
+        <span class="hljs-attr">pattern</span>: <span class="hljs-string">'/not-found'</span>,
+    },
 ];
 </code></pre>
-<h2><a class="anchor" aria-hidden="true" id="define-rootstore"></a><a href="#define-rootstore" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Define RootStore</h2>
-<p>We will use the <a href="https://mobx.js.org/best/store.html#combining-multiple-stores">best practices</a> described in the MobX documentation to create our stores. According to this document, an effective way to structure our stores is to create a <code>RootStore</code> that instantiates all other stores and shares their references. So let's create this <code>RootStore</code> and let it instantiate the <code>RouterStore</code>. By convention, we define the <code>RootStore</code> in <a href="https://github.com/nareshbhatia/mobx-state-router-quick-start/blob/master/src/shared/stores/root.store.js">src/shared/stores/root.store.js</a>. Add the following code to this file. Note that the <code>RouterStore</code> expects the <code>RootStore</code>, the routes and the <code>notFound</code> state as the parameters of its constructor.</p>
-<pre><code class="hljs css language-jsx"><span class="hljs-keyword">import</span> { RouterState, RouterStore } <span class="hljs-keyword">from</span> <span class="hljs-string">'mobx-state-router'</span>;
-<span class="hljs-keyword">import</span> { routes } <span class="hljs-keyword">from</span> <span class="hljs-string">'./routes'</span>;
+<h2><a class="anchor" aria-hidden="true" id="create-routerstore-and-historyadapter"></a><a href="#create-routerstore-and-historyadapter" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Create RouterStore and HistoryAdapter</h2>
+<p>Now add code in the same file (<code>initRouter.ts</code>) to create the router and the
+history adapter.</p>
+<pre><code class="hljs css language-jsx"><span class="hljs-keyword">import</span> {
+    browserHistory,
+    createRouterState,
+    HistoryAdapter,
+    RouterStore,
+} <span class="hljs-keyword">from</span> <span class="hljs-string">'mobx-state-router'</span>;
 
-<span class="hljs-keyword">const</span> notFound = <span class="hljs-keyword">new</span> RouterState(<span class="hljs-string">'notFound'</span>);
+<span class="hljs-keyword">const</span> notFound = createRouterState(<span class="hljs-string">'notFound'</span>);
 
-<span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RootStore</span> </span>{
-    routerStore = <span class="hljs-keyword">new</span> RouterStore(<span class="hljs-keyword">this</span>, routes, notFound);
+<span class="hljs-keyword">const</span> routes = [
+    <span class="hljs-comment">// from above</span>
+];
+
+<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">initRouter</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">const</span> routerStore = <span class="hljs-keyword">new</span> RouterStore(routes, notFound);
+
+    <span class="hljs-comment">// Observe history changes</span>
+    <span class="hljs-keyword">const</span> historyAdapter = <span class="hljs-keyword">new</span> HistoryAdapter(routerStore, browserHistory);
+    historyAdapter.observeRouterStateChanges();
+
+    <span class="hljs-keyword">return</span> routerStore;
 }
 </code></pre>
-<h2><a class="anchor" aria-hidden="true" id="create-rootstore-historyadapter"></a><a href="#create-rootstore-historyadapter" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Create RootStore &amp; HistoryAdapter</h2>
-<p>The next step is to create the <code>RootStore</code> and the <code>HistoryAdapter</code>.</p>
-<p><code>HistoryAdapter</code> is responsible for keeping the browser address bar in sync with the <code>RouterState</code>. It depends on the <a href="https://github.com/ReactTraining/history">history</a> library to manage the browser history. It needs a <code>history</code> object in the constructor, so let's create it first. By convention, we create the history object in <a href="https://github.com/nareshbhatia/mobx-state-router-quick-start/blob/master/src/shared/utils/history.js">src/shared/utils/history.js</a>. Add the following code to your <code>history.js</code> file:</p>
-<pre><code class="hljs css language-jsx"><span class="hljs-keyword">import</span> { createBrowserHistory } <span class="hljs-keyword">from</span> <span class="hljs-string">'history'</span>;
-
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> history = createBrowserHistory();
-</code></pre>
-<p>We are now ready to create the <code>RootStore</code> and the <code>HistoryAdapter</code>. By convention, we do this in <a href="https://github.com/nareshbhatia/mobx-state-router-quick-start/blob/master/src/App.js">src/App.js</a>:</p>
-<pre><code class="hljs css language-jsx"><span class="hljs-keyword">import</span> React, { Component } <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
-<span class="hljs-keyword">import</span> { Provider } <span class="hljs-keyword">from</span> <span class="hljs-string">'mobx-react'</span>;
-<span class="hljs-keyword">import</span> { HistoryAdapter } <span class="hljs-keyword">from</span> <span class="hljs-string">'mobx-state-router'</span>;
-<span class="hljs-keyword">import</span> { RootStore } <span class="hljs-keyword">from</span> <span class="hljs-string">'./shared/stores/root.store'</span>;
-<span class="hljs-keyword">import</span> { history } <span class="hljs-keyword">from</span> <span class="hljs-string">'./shared/utils/history'</span>;
-<span class="hljs-keyword">import</span> { Shell } <span class="hljs-keyword">from</span> <span class="hljs-string">'./shell'</span>;
-
-<span class="hljs-comment">// Create the rootStore</span>
-<span class="hljs-keyword">const</span> rootStore = <span class="hljs-keyword">new</span> RootStore();
-
-<span class="hljs-comment">// Observe history changes</span>
-<span class="hljs-keyword">const</span> historyAdapter = <span class="hljs-keyword">new</span> HistoryAdapter(rootStore.routerStore, history);
-historyAdapter.observeRouterStateChanges();
-
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">App</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{
-    render() {
-        <span class="hljs-keyword">return</span> (
-            <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Provider</span> <span class="hljs-attr">rootStore</span>=<span class="hljs-string">{rootStore}</span>&gt;</span>
-                <span class="hljs-tag">&lt;<span class="hljs-name">Shell</span> /&gt;</span>
-            <span class="hljs-tag">&lt;/<span class="hljs-name">Provider</span>&gt;</span></span>
-        );
-    }
-}
-
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> App;
-</code></pre>
-<p>Here we create an instance of the <code>RootStore</code> and give it to the MobX <code>Provider</code>. The <code>Provider</code> makes the <code>RootStore</code> (and hence the <code>RouterStore</code>) available to any nested component via React context. We also create the <code>HistoryAdapter</code> and ask it to observe route changes.</p>
-<h2><a class="anchor" aria-hidden="true" id="create-routerview"></a><a href="#create-routerview" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Create RouterView</h2>
-<p>The next step is to create the <code>RouterView</code> which is responsible for instantiating the UI component associated with the state of the router. By convention, we create it in the <code>Shell</code> located in <a href="https://github.com/nareshbhatia/mobx-state-router-quick-start/blob/master/src/shell.js">src/shell.js</a>. Add the following code to this file:</p>
+<p>Note that <code>RouterStore</code> expects the routes and the <code>notFound</code> state as
+constructor parameters.</p>
+<p>The <code>HistoryAdapter</code> is responsible for keeping the browser address bar in sync
+with the <code>RouterState</code>. It needs a
+<a href="https://github.com/ReactTraining/history">history</a> object to manage the browser
+history. While you can create an instance yourself, mobx-state-router provides
+one for your convenience - it's called <code>browserHistory</code>. Let's just use it.</p>
+<h2><a class="anchor" aria-hidden="true" id="create-a-viewmap"></a><a href="#create-a-viewmap" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Create a viewMap</h2>
+<p>The <code>viewMap</code> is a simple structure that maps the routes to React components
+(a.k.a. views). Let's map the three routes defined above to three views that we
+will define later. Create a file
+<a href="https://github.com/nareshbhatia/mobx-state-router/blob/master/examples/quick-start/src/viewMap.tsx">src/viewMap.tsx</a>
+and add the following <code>viewMap</code> to it:</p>
 <pre><code class="hljs css language-jsx"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
-<span class="hljs-keyword">import</span> { inject } <span class="hljs-keyword">from</span> <span class="hljs-string">'mobx-react'</span>;
-<span class="hljs-keyword">import</span> { RouterView } <span class="hljs-keyword">from</span> <span class="hljs-string">'mobx-state-router'</span>;
-<span class="hljs-keyword">import</span> { DepartmentPage } <span class="hljs-keyword">from</span> <span class="hljs-string">'./features/department/department-page'</span>;
-<span class="hljs-keyword">import</span> { HomePage } <span class="hljs-keyword">from</span> <span class="hljs-string">'./features/home/home-page'</span>;
-<span class="hljs-keyword">import</span> { NotFoundPage } <span class="hljs-keyword">from</span> <span class="hljs-string">'./features/not-found-page'</span>;
+<span class="hljs-keyword">import</span> { DepartmentPage, HomePage, NotFoundPage } <span class="hljs-keyword">from</span> <span class="hljs-string">'./pages'</span>;
 
-<span class="hljs-keyword">const</span> viewMap = {
-    <span class="hljs-attr">department</span>: &lt;DepartmentPage /&gt;,
-    home: &lt;HomePage /&gt;,
-    notFound: &lt;NotFoundPage /&gt;
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> viewMap = {
+    <span class="hljs-attr">department</span>: <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">DepartmentPage</span> /&gt;</span></span>,
+    <span class="hljs-attr">home</span>: <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">HomePage</span> /&gt;</span></span>,
+    <span class="hljs-attr">notFound</span>: <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">NotFoundPage</span> /&gt;</span></span>,
 };
-
-export const Shell = inject('rootStore')(
-    class extends React.Component {
-        render() {
-            const { rootStore } = this.props;
-            const { routerStore } = rootStore;
-
-            return &lt;RouterView routerStore={routerStore} viewMap={viewMap} /&gt;;
-        }
-    }
-);
 </code></pre>
-<p>Here we instantiate the <code>RouterView</code> in the <code>render()</code> method. We supply the <code>routerStore</code> as a prop along with a <code>viewMap</code>. The <code>RouterView</code> uses the <code>viewMap</code> to instantiate views based on the router state. Note that we are injecting the <code>rootStore</code> into the Shell using the MobX <code>inject</code> method. If you have enabled decorators as described in the <a href="https://mobx.js.org/best/decorators.html#enabling-decorators">MobX docs</a>, you can use the nicer decorator syntax as we have done in <a href="https://github.com/nareshbhatia/mobx-shop.git">MobX Shop</a>.</p>
-<h2><a class="anchor" aria-hidden="true" id="create-pages"></a><a href="#create-pages" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Create Pages</h2>
-<p>The final step is to create the pages themselves. Here's the code for them:</p>
-<p><a href="https://github.com/nareshbhatia/mobx-state-router-quick-start/blob/master/src/features/home/home-page.js">src/features/home/home-page.js</a></p>
+<h2><a class="anchor" aria-hidden="true" id="provide-routerstore-to-the-react-view-hierarchy"></a><a href="#provide-routerstore-to-the-react-view-hierarchy" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Provide routerStore to the React view hierarchy</h2>
+<p>Now we have the basic parts to assemble our application. Overwrite
+<a href="https://github.com/nareshbhatia/mobx-state-router/blob/master/examples/quick-start/src/App.tsx">src/App.tsx</a>
+with the contents below to provide <code>routerStore</code> to the React view hierarchy.</p>
 <pre><code class="hljs css language-jsx"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
-<span class="hljs-keyword">import</span> { inject } <span class="hljs-keyword">from</span> <span class="hljs-string">'mobx-react'</span>;
+<span class="hljs-keyword">import</span> { RouterContext, RouterView } <span class="hljs-keyword">from</span> <span class="hljs-string">'mobx-state-router'</span>;
+<span class="hljs-keyword">import</span> { initRouter } <span class="hljs-keyword">from</span> <span class="hljs-string">'./initRouter'</span>;
+<span class="hljs-keyword">import</span> { viewMap } <span class="hljs-keyword">from</span> <span class="hljs-string">'./viewMap'</span>;
 
-<span class="hljs-keyword">const</span> styles = {
-    <span class="hljs-attr">root</span>: {
-        <span class="hljs-attr">padding</span>: <span class="hljs-number">16</span>
-    }
-};
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> App = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+    <span class="hljs-keyword">const</span> routerStore = initRouter();
 
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> HomePage = inject(<span class="hljs-string">'rootStore'</span>)(
-    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">React</span>.<span class="hljs-title">Component</span> </span>{
-        render() {
-            <span class="hljs-keyword">return</span> (
-                <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">style</span>=<span class="hljs-string">{styles.root}</span>&gt;</span>
-                    <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Home<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
-                    <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{this.handleClick}</span>&gt;</span>
-                        Go to Electronics
-                    <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
-                <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
-            );
-        }
-
-        handleClick = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
-            <span class="hljs-keyword">const</span> { rootStore } = <span class="hljs-keyword">this</span>.props;
-            rootStore.routerStore.goTo(<span class="hljs-string">'department'</span>, { <span class="hljs-attr">id</span>: <span class="hljs-string">'electronics'</span> });
-        };
-    }
-);
-</code></pre>
-<p>The home page has a button that allows the user to navigate to the Electronics department. Note the call to <code>routerStore.goTo()</code> to transition to the <code>department</code> route with parameter <code>id</code> set to <code>electronics</code>.</p>
-<p><a href="https://github.com/nareshbhatia/mobx-state-router-quick-start/blob/master/src/features/department/department-page.js">src/features/department/department-page.js</a></p>
-<pre><code class="hljs css language-jsx"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
-<span class="hljs-keyword">import</span> { inject } <span class="hljs-keyword">from</span> <span class="hljs-string">'mobx-react'</span>;
-
-<span class="hljs-keyword">const</span> styles = {
-    <span class="hljs-attr">root</span>: {
-        <span class="hljs-attr">padding</span>: <span class="hljs-number">16</span>
-    }
-};
-
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> DepartmentPage = inject(<span class="hljs-string">'rootStore'</span>)(
-    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">React</span>.<span class="hljs-title">Component</span> </span>{
-        render() {
-            <span class="hljs-keyword">const</span> { rootStore } = <span class="hljs-keyword">this</span>.props;
-            <span class="hljs-keyword">const</span> { params } = rootStore.routerStore.routerState;
-
-            <span class="hljs-keyword">return</span> (
-                <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">style</span>=<span class="hljs-string">{styles.root}</span>&gt;</span>
-                    <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Welcome to {params.id}<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
-                    <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{this.handleClick}</span>&gt;</span>Go Home!<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
-                <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
-            );
-        }
-
-        handleClick = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
-            <span class="hljs-keyword">const</span> { rootStore } = <span class="hljs-keyword">this</span>.props;
-            rootStore.routerStore.goTo(<span class="hljs-string">'home'</span>);
-        };
-    }
-);
-</code></pre>
-<p>The department page has a button that allows the user to navigate to home. Note the call to <code>routerStore.goTo()</code> to transition to the <code>home</code> state.</p>
-<p><a href="https://github.com/nareshbhatia/mobx-state-router-quick-start/blob/master/src/features/not-found-page.js">src/features/not-found-page.js</a></p>
-<pre><code class="hljs css language-jsx"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
-
-<span class="hljs-keyword">const</span> styles = {
-    <span class="hljs-attr">root</span>: {
-        <span class="hljs-attr">padding</span>: <span class="hljs-number">16</span>
-    }
-};
-
-<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">NotFoundPage</span>(<span class="hljs-params"></span>) </span>{
     <span class="hljs-keyword">return</span> (
-        <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">style</span>=<span class="hljs-string">{styles.root}</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Page Not Found<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+        <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">RouterContext.Provider</span> <span class="hljs-attr">value</span>=<span class="hljs-string">{routerStore}</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">RouterView</span> <span class="hljs-attr">viewMap</span>=<span class="hljs-string">{viewMap}</span> /&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">RouterContext.Provider</span>&gt;</span></span>
+    );
+};
+</code></pre>
+<p>Here we give an instance of the <code>RouterStore</code> to <code>RouterContext.Provider</code>. While
+you can create your own context, mobx-state-router gives you <code>RouterContext</code> for
+your convenience. <code>RouterContext.Provider</code> now makes the <code>routerStore</code> available
+to the entire view hierarchy below it.</p>
+<p>In our case, the view hierarchy is created by the <code>RouterView</code> component, which
+instantiates a UI component associated with the current router state. As the
+router state changes, different components are instantiated based on the
+mappings in the <code>viewMap</code>. The instantiated component (and its descendents) all
+have access to the <code>routerStore</code>.</p>
+<h2><a class="anchor" aria-hidden="true" id="create-views"></a><a href="#create-views" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Create Views</h2>
+<p>Now let's create the views that we specified in <code>viewMap</code>. Here's the code for
+the three views:</p>
+<p><a href="https://github.com/nareshbhatia/mobx-state-router/blob/master/examples/quick-start/src/pages/HomePage.tsx">src/pages/HomePage.tsx</a></p>
+<pre><code class="hljs css language-jsx"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> { useRouterStore } <span class="hljs-keyword">from</span> <span class="hljs-string">'mobx-state-router'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> HomePage = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+    <span class="hljs-keyword">const</span> routerStore = useRouterStore();
+
+    <span class="hljs-keyword">const</span> handleClick = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+        routerStore.goTo(<span class="hljs-string">'department'</span>, {
+            <span class="hljs-attr">params</span>: { <span class="hljs-attr">id</span>: <span class="hljs-string">'electronics'</span> },
+        });
+    };
+
+    <span class="hljs-keyword">return</span> (
+        <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Home<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{handleClick}</span>&gt;</span>Go to Electronics<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
         <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
     );
+};
+</code></pre>
+<p>The home page has a button that allows the user to navigate to the Electronics
+department. Note that we are using the <code>useRouterStore</code> hook to access the
+RouterStore. Remember the RouterStore that was provided to the view hierarchy in
+App.tsx? When the user clicks the <em>Go to Electronics</em> button, we call
+<code>routerStore.goTo()</code> to transition to the <code>department</code> route with parameter <code>id</code>
+set to <code>electronics</code>.</p>
+<p><a href="https://github.com/nareshbhatia/mobx-state-router/blob/master/examples/quick-start/src/pages/DepartmentPage.tsx">src/pages/DepartmentPage.tsx</a></p>
+<pre><code class="hljs css language-jsx"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> { useRouterStore } <span class="hljs-keyword">from</span> <span class="hljs-string">'mobx-state-router'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> DepartmentPage = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+    <span class="hljs-keyword">const</span> routerStore = useRouterStore();
+    <span class="hljs-keyword">const</span> { params } = routerStore.routerState;
+
+    <span class="hljs-keyword">const</span> handleClick = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+        routerStore.goTo(<span class="hljs-string">'home'</span>);
+    };
+
+    <span class="hljs-keyword">return</span> (
+        <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Welcome to {params.id}<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{handleClick}</span>&gt;</span>Go Home!<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+    );
+};
+</code></pre>
+<p>The department page is very similar to the home page, the only difference is
+that the <em>Go Home!</em> button here calls <code>routerStore.goTo('home')</code>, navigating
+back to the home page.</p>
+<p><a href="https://github.com/nareshbhatia/mobx-state-router/blob/master/examples/quick-start/src/pages/NotFoundPage.tsx">src/pages/NotFoundPage.tsx</a></p>
+<pre><code class="hljs css language-jsx"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> NotFoundPage = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+    <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Page Not Found<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></span>;
+};
+</code></pre>
+<p>This page simply displays &quot;Page Not Found&quot;.</p>
+<p><a href="https://github.com/nareshbhatia/mobx-state-router/blob/master/examples/quick-start/src/pages/index.ts">src/pages/index.ts</a></p>
+<pre><code class="hljs css language-jsx"><span class="hljs-keyword">export</span> * <span class="hljs-keyword">from</span> <span class="hljs-string">'./DepartmentPage'</span>;
+<span class="hljs-keyword">export</span> * <span class="hljs-keyword">from</span> <span class="hljs-string">'./HomePage'</span>;
+<span class="hljs-keyword">export</span> * <span class="hljs-keyword">from</span> <span class="hljs-string">'./NotFoundPage'</span>;
+</code></pre>
+<p>This file exports all the pages in the <code>pages</code> folder for access from outside.</p>
+<h2><a class="anchor" aria-hidden="true" id="final-touches"></a><a href="#final-touches" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Final Touches...</h2>
+<p>Overwrite
+<a href="https://github.com/nareshbhatia/mobx-state-router/blob/master/examples/quick-start/src/index.tsx">src/index.tsx</a>
+with the simplified version below. The important bit is the named import for
+<code>App</code> (just a preference).</p>
+<pre><code class="hljs css language-jsx"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> ReactDOM <span class="hljs-keyword">from</span> <span class="hljs-string">'react-dom'</span>;
+<span class="hljs-keyword">import</span> { App } <span class="hljs-keyword">from</span> <span class="hljs-string">'./App'</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-string">'./index.css'</span>;
+
+ReactDOM.render(
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">React.StrictMode</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">App</span> /&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">React.StrictMode</span>&gt;</span></span>,
+    <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'root'</span>)
+);
+</code></pre>
+<p>Finally, overwrite
+<a href="https://github.com/nareshbhatia/mobx-state-router/blob/master/examples/quick-start/src/index.css">src/index.css</a>
+with the version below. This provides the styling we need for our pages.</p>
+<pre><code class="hljs css language-css"><span class="hljs-selector-tag">body</span> {
+    <span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span>;
+    <span class="hljs-attribute">padding</span>: <span class="hljs-number">16px</span>;
+    <span class="hljs-attribute">font-family</span>: sans-serif;
 }
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="start-your-app"></a><a href="#start-your-app" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Start Your App</h2>
-<p>Your React app is now ready for prime time! Execute <code>npm start</code> on your command line and point your browser to <a href="http://localhost:3000">http://localhost:3000</a>. You will see the home page. Click on the button to go to the Electronics page (watch the URL change). Now enter an invalid URL in the browser address bar, e.g. <a href="http://localhost:3000/junk">http://localhost:3000/junk</a>. The router will automatically navigate to the not found page.</p>
-<p>Now that you have a taste of the basics, you can try out some advanced scenarios. Go to the Recipes section to explore. You can also look at <a href="https://github.com/nareshbhatia/mobx-shop.git">MobX Shop</a> for a more realistic app.</p>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-next button" href="/mobx-state-router/docs/guides-recipes"><span>Recipes</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#create-react-app">Create React App</a></li><li><a href="#install-mobx-state-router">Install mobx-state-router</a></li><li><a href="#define-rootstore">Define RootStore</a></li><li><a href="#create-rootstore-historyadapter">Create RootStore &amp; HistoryAdapter</a></li><li><a href="#create-routerview">Create RouterView</a></li><li><a href="#create-pages">Create Pages</a></li><li><a href="#start-your-app">Start Your App</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="copyright">Copyright © 2018 Naresh Bhatia</section></footer></div></body></html>
+<p>Your React app is now ready for prime time! Execute <code>npm start</code> on your command
+line and point your browser to <a href="http://localhost:3000">http://localhost:3000</a>. You will see the home
+page. Click on the button to go to the Electronics page (watch the URL change).
+Now enter an invalid URL in the browser address bar, e.g.
+<a href="http://localhost:3000/junk">http://localhost:3000/junk</a>. The router will automatically navigate to the not
+found page.</p>
+<p>Now that you have a taste of the basics, you can try out some advanced
+scenarios. Go to the Recipes section to explore. You can also look at the
+<a href="https://github.com/nareshbhatia/mobx-state-router/tree/master/examples/mobx-shop">MobX Shop</a>
+example for a more realistic app.</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-next button" href="/mobx-state-router/docs/guides-recipes"><span>Recipes</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#create-react-app">Create React App</a></li><li><a href="#install-mobx-state-router">Install mobx-state-router</a></li><li><a href="#define-routes">Define Routes</a></li><li><a href="#create-routerstore-and-historyadapter">Create RouterStore and HistoryAdapter</a></li><li><a href="#create-a-viewmap">Create a viewMap</a></li><li><a href="#provide-routerstore-to-the-react-view-hierarchy">Provide routerStore to the React view hierarchy</a></li><li><a href="#create-views">Create Views</a></li><li><a href="#final-touches">Final Touches...</a></li><li><a href="#start-your-app">Start Your App</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="copyright">Copyright © 2020 Naresh Bhatia</section></footer></div></body></html>

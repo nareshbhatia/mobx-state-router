@@ -1,14 +1,41 @@
-<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Recipes · MobX State Router</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="&lt;p&gt;This section describes mobx-state-router recipes for some common routing scenarios.&lt;/p&gt;
-"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Recipes · MobX State Router"/><meta property="og:type" content="website"/><meta property="og:url" content="https://nareshbhatia.github.io/mobx-state-router/index.html"/><meta property="og:description" content="&lt;p&gt;This section describes mobx-state-router recipes for some common routing scenarios.&lt;/p&gt;
-"/><meta property="og:image" content="https://nareshbhatia.github.io/mobx-state-router/img/mobx-logo.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://nareshbhatia.github.io/mobx-state-router/img/mobx-logo.png"/><link rel="shortcut icon" href="/mobx-state-router/img/mobx-logo.png"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><link rel="stylesheet" href="/mobx-state-router/css/main.css"/></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/mobx-state-router/"><img class="logo" src="/mobx-state-router/img/mobx-logo.png" alt="MobX State Router"/><h2 class="headerTitleWithLogo">MobX State Router</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/mobx-state-router/docs/guides-getting-started" target="_self">Docs</a></li><li class=""><a href="https://github.com/nareshbhatia/mobx-state-router" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Guides</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Guides</h3><ul><li class="navListItem"><a class="navItem" href="/mobx-state-router/docs/guides-getting-started">Getting Started</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/mobx-state-router/docs/guides-recipes">Recipes</a></li><li class="navListItem"><a class="navItem" href="/mobx-state-router/docs/guides-examples">Examples</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">API</h3><ul><li class="navListItem"><a class="navItem" href="/mobx-state-router/docs/api-router">Router</a></li><li class="navListItem"><a class="navItem" href="/mobx-state-router/docs/api-components">Components</a></li></ul></div></div></section></div><script>
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Recipes · MobX State Router</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="This section describes mobx-state-router recipes for some common routing"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Recipes · MobX State Router"/><meta property="og:type" content="website"/><meta property="og:url" content="https://nareshbhatia.github.io/mobx-state-router/"/><meta property="og:description" content="This section describes mobx-state-router recipes for some common routing"/><meta property="og:image" content="https://nareshbhatia.github.io/mobx-state-router/img/mobx-logo.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://nareshbhatia.github.io/mobx-state-router/img/mobx-logo.png"/><link rel="shortcut icon" href="/mobx-state-router/img/mobx-logo.png"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="/mobx-state-router/js/scrollSpy.js"></script><link rel="stylesheet" href="/mobx-state-router/css/main.css"/><script src="/mobx-state-router/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/mobx-state-router/"><img class="logo" src="/mobx-state-router/img/mobx-logo.png" alt="MobX State Router"/><h2 class="headerTitleWithLogo">MobX State Router</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/mobx-state-router/docs/guides-getting-started" target="_self">Docs</a></li><li class=""><a href="https://github.com/nareshbhatia/mobx-state-router" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Guides</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Guides</h3><ul class=""><li class="navListItem"><a class="navItem" href="/mobx-state-router/docs/guides-getting-started">Getting Started</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/mobx-state-router/docs/guides-recipes">Recipes</a></li><li class="navListItem"><a class="navItem" href="/mobx-state-router/docs/guides-examples">Examples</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">API</h3><ul class=""><li class="navListItem"><a class="navItem" href="/mobx-state-router/docs/api-route">Route</a></li><li class="navListItem"><a class="navItem" href="/mobx-state-router/docs/api-router-link">RouterLink</a></li><li class="navListItem"><a class="navItem" href="/mobx-state-router/docs/api-router-state">RouterState</a></li><li class="navListItem"><a class="navItem" href="/mobx-state-router/docs/api-router-store">RouterStore</a></li><li class="navListItem"><a class="navItem" href="/mobx-state-router/docs/api-router-view">RouterView</a></li><li class="navListItem"><a class="navItem" href="/mobx-state-router/docs/api-history-adapter">HistoryAdapter</a></li><li class="navListItem"><a class="navItem" href="/mobx-state-router/docs/api-static-adapter">StaticAdapter</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
             document.addEventListener('DOMContentLoaded', function() {
               createToggler('#navToggler', '#docsNav', 'docsSliderActive');
               createToggler('#tocToggler', 'body', 'tocActive');
 
-              const headings = document.querySelector('.toc-headings');
+              var headings = document.querySelector('.toc-headings');
               headings && headings.addEventListener('click', function(event) {
-                if (event.target.tagName === 'A') {
-                  document.body.classList.remove('tocActive');
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
                 }
               }, false);
 
@@ -27,73 +54,113 @@
                 };
               }
             });
-        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">Recipes</h1></header><article><div><span><p>This section describes mobx-state-router recipes for some common routing scenarios.</p>
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 id="__docusaurus" class="postHeaderTitle">Recipes</h1></header><article><div><span><p>This section describes mobx-state-router recipes for some common routing
+scenarios.</p>
 <h2><a class="anchor" aria-hidden="true" id="fetching-data"></a><a href="#fetching-data" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Fetching Data</h2>
-<p>As mentioned before, UI should not be responsible for fetching data. This means no data fetching in <code>componentWillMount()</code> or <code>componentDidMount()</code>. mobx-state-router facilitates data fetching during state transitions using the <code>onEnter</code> hook. This hook is called just before a new router state is entered and is the perfect place to kick off a data fetch. Here's <a href="https://github.com/nareshbhatia/mobx-shop/blob/master/src/shared/stores/routes.js">an example from MobX Shop</a>:</p>
+<p>As mentioned before, UI should not be responsible for fetching data. This means
+no data fetching in <code>componentWillMount()</code> or <code>componentDidMount()</code>. Lately
+React allows fetching data using hooks, which is somewhat better. However,
+mobx-state-router facilitates data fetching completely out of the view
+hierarchy. You can do this using the <code>onEnter</code> transition hook. This hook is
+called just before a new router state is entered and is the perfect place to
+kick off a data fetch. Here's
+<a href="https://github.com/nareshbhatia/mobx-state-router/blob/master/examples/mobx-shop/src/stores/routes.ts#L45-L57">an example</a>
+from MobX Shop:</p>
 <pre><code class="hljs css language-jsx">{
     <span class="hljs-attr">name</span>: <span class="hljs-string">'department'</span>,
     <span class="hljs-attr">pattern</span>: <span class="hljs-string">'/departments/:id'</span>,
-    <span class="hljs-attr">onEnter</span>: <span class="hljs-function">(<span class="hljs-params">fromState, toState, routerStore</span>) =&gt;</span> {
-        <span class="hljs-keyword">const</span> { <span class="hljs-attr">rootStore</span>: { itemStore } } = routerStore;
+    <span class="hljs-attr">onEnter</span>: <span class="hljs-keyword">async</span> (
+        fromState: RouterState,
+        <span class="hljs-attr">toState</span>: RouterState,
+        <span class="hljs-attr">routerStore</span>: RouterStore
+    ) =&gt; {
+        <span class="hljs-keyword">const</span> { rootStore } = routerStore.options;
+        <span class="hljs-keyword">const</span> { itemStore } = rootStore <span class="hljs-keyword">as</span> RootStore;
         itemStore.loadDepartmentItems(toState.params.id);
-        <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.resolve();
-    }
+    },
 },
 </code></pre>
-<p>This code is part of route definitions. We define an <code>onEnter</code> hook that calls <code>itemStore.loadDepartmentItems()</code> to kick off the fetching process. It does not have to wait for the fetch to complete. The <code>itemStore</code> maintains an <code>isLoading</code> flag to indicate the status of the fetch. The last line in the <code>onEnter</code> hook resolves the promise to let the router proceed to <code>toState</code>.</p>
+<p>This code is part of route definitions. We define an <code>onEnter</code> hook that calls
+<code>itemStore.loadDepartmentItems()</code> to kick off the fetching process. The hook
+does not have to wait for the fetch to complete (note no <code>await</code>). The
+<code>itemStore</code> can maintain state to indicate the status of the fetch. After
+calling <code>itemStore.loadDepartmentItems()</code>, the hook returns, allowing the router
+proceed to the target state.</p>
 <h2><a class="anchor" aria-hidden="true" id="redirecting-to-the-sign-in-page"></a><a href="#redirecting-to-the-sign-in-page" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Redirecting to the Sign In page</h2>
-<p>If the user is not logged in, we can redirect them to a Sign In page. Not only that, we can redirect them back to the requested page on a successful sign in. For example, in MobX Shop, we allow the user to add items to the shopping cart without having them sign in. However they can't proceed to checkout unless they are signed in. This is achieved by using the <code>beforeEnter</code> hook in the route configuration. Here's <a href="https://github.com/nareshbhatia/mobx-shop/blob/master/src/shared/stores/routes.js">the code</a> from MobX Shop:</p>
+<p>If the user is not logged in, we can direct them to a Sign In page. Not only
+that, we can direct them back to the requested page upon a successful sign in.
+For example, in MobX Shop, we allow the user to add items to the shopping cart
+without having to sign in. However they can't proceed to checkout unless signed
+in. This is achieved by using the <code>beforeEnter</code> hook in the route configuration.
+Here's
+<a href="https://github.com/nareshbhatia/mobx-state-router/blob/master/examples/mobx-shop/src/stores/routes.ts#L40-L44">the code</a>
+from MobX Shop:</p>
 <pre><code class="hljs css language-jsx">{
     <span class="hljs-attr">name</span>: <span class="hljs-string">'checkout'</span>,
     <span class="hljs-attr">pattern</span>: <span class="hljs-string">'/checkout'</span>,
     <span class="hljs-attr">beforeEnter</span>: checkForUserSignedIn
 }
 </code></pre>
-<p><code>checkForUserSignedIn()</code> is a shared function used by multiple routes. It is defined in the <a href="https://github.com/nareshbhatia/mobx-shop/blob/master/src/shared/stores/routes.js">routes.js</a> file:</p>
-<pre><code class="hljs css language-jsx"><span class="hljs-keyword">const</span> checkForUserSignedIn = <span class="hljs-function">(<span class="hljs-params">fromState, toState, routerStore</span>) =&gt;</span> {
-    <span class="hljs-keyword">const</span> {
-        <span class="hljs-attr">rootStore</span>: { authStore }
-    } = routerStore;
-    <span class="hljs-keyword">if</span> (authStore.user) {
-        <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.resolve();
-    } <span class="hljs-keyword">else</span> {
+<p><code>checkForUserSignedIn()</code> is a shared transition hook used by multiple routes. It
+is defined in the
+<a href="https://github.com/nareshbhatia/mobx-state-router/blob/master/examples/mobx-shop/src/stores/routes.ts#L40-L44">routes.js</a>
+file:</p>
+<pre><code class="hljs css language-jsx"><span class="hljs-keyword">const</span> checkForUserSignedIn = <span class="hljs-keyword">async</span> (
+    fromState: RouterState,
+    <span class="hljs-attr">toState</span>: RouterState,
+    <span class="hljs-attr">routerStore</span>: RouterStore
+) =&gt; {
+    <span class="hljs-keyword">const</span> { rootStore } = routerStore.options;
+    <span class="hljs-keyword">const</span> { authStore } = rootStore <span class="hljs-keyword">as</span> RootStore;
+    <span class="hljs-keyword">if</span> (!authStore.user) {
         authStore.setSignInRedirect(toState);
-        <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject(<span class="hljs-keyword">new</span> RouterState(<span class="hljs-string">'signin'</span>));
+        <span class="hljs-keyword">return</span> signin;
     }
 };
 </code></pre>
-<p>This function allows the router to proceed if the user is already signed in. If not, the requested state is saved in <code>authStore</code> and the app is redirected to the <code>signin</code> state. On a successful sign in, <code>authStore</code> redirects the app to the originally requested state. Here's <a href="https://github.com/nareshbhatia/mobx-shop/blob/master/src/shared/stores/auth.store.js">the code</a> from MobX Shop:</p>
-<pre><code class="hljs css language-jsx">@action
-setUser(user) {
+<p>This hook allows the router to proceed if the user is already signed in. If not,
+the requested state is saved in <code>authStore</code> and the app is redirected to the
+<code>signin</code> state. On a successful sign in, <code>authStore</code> redirects the app to the
+originally requested state. Here's
+<a href="https://github.com/nareshbhatia/mobx-state-router/blob/master/examples/mobx-shop/src/stores/AuthStore.ts#L20-L23">the code</a>
+from MobX Shop:</p>
+<pre><code class="hljs css language-jsx">setUser = <span class="hljs-function">(<span class="hljs-params">user: User</span>) =&gt;</span> {
     <span class="hljs-keyword">this</span>.user = user;
-    <span class="hljs-keyword">this</span>.rootStore.routerStore.goTo(<span class="hljs-keyword">this</span>.signInRedirect);
-}
+    <span class="hljs-keyword">this</span>.rootStore.routerStore.goToState(<span class="hljs-keyword">this</span>.signInRedirect);
+};
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="creating-links"></a><a href="#creating-links" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Creating Links</h2>
-<p>You will notice that anchor tags used for linking to internal pages cause a flicker when clicked. That's because such links reload the entire app! We need to prevent the default handling of these links and let the router handle the redirect. This can be done using the <code>&lt;Link&gt;</code> component provided by the router. Here's an example of linking to the home page:</p>
-<pre><code class="hljs css language-jsx"><span class="hljs-keyword">import</span> { Link, RouterState } <span class="hljs-keyword">from</span> <span class="hljs-string">'mobx-state-router'</span>;
+<p>You will notice that anchor tags used for linking to internal pages cause a
+flicker when clicked. That's because such links reload the entire app! We need
+to prevent the default handling of these links and let the router handle the
+redirects. This can be done using the <code>&lt;RouterLink&gt;</code> component provided by the
+router. Here's
+<a href="https://github.com/nareshbhatia/mobx-state-router/blob/master/examples/relative-paths/src/components/Header.tsx">an example</a>
+of a page header with links to the Home and About pages:</p>
+<pre><code class="hljs css language-jsx"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> { RouterLink } <span class="hljs-keyword">from</span> <span class="hljs-string">'mobx-state-router'</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-string">'./Header.css'</span>;
 
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Footer</span>(<span class="hljs-params">{ routerStore }</span>) </span>{
-    <span class="hljs-keyword">const</span> toState = <span class="hljs-keyword">new</span> RouterState(<span class="hljs-string">'home'</span>);
-    <span class="hljs-keyword">return</span> (
-        <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-name">Link</span> <span class="hljs-attr">routerStore</span>=<span class="hljs-string">{routerStore}</span> <span class="hljs-attr">toState</span>=<span class="hljs-string">{toState}</span>&gt;</span>
-                Home
-            <span class="hljs-tag">&lt;/<span class="hljs-name">Link</span>&gt;</span>
-        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
-    );
-}
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> Header = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">header</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"navbar"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">RouterLink</span> <span class="hljs-attr">routeName</span>=<span class="hljs-string">"home"</span> <span class="hljs-attr">activeClassName</span>=<span class="hljs-string">"link--active"</span>&gt;</span>
+                    Home
+                <span class="hljs-tag">&lt;/<span class="hljs-name">RouterLink</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">RouterLink</span> <span class="hljs-attr">routeName</span>=<span class="hljs-string">"about"</span> <span class="hljs-attr">activeClassName</span>=<span class="hljs-string">"link--active"</span>&gt;</span>
+                    About
+                <span class="hljs-tag">&lt;/<span class="hljs-name">RouterLink</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">header</span>&gt;</span></span>
+);
 </code></pre>
-<p><code>&lt;RouterLink&gt;</code> is a simpler variation of <code>&lt;Link&gt;</code> that does not require the <code>routerStore</code> parameter. Also <code>toState</code> can be specified using simpler properties: <code>routeName</code>, <code>params</code> and <code>queryParams</code>. For example, the link shown above can be specified using <code>RouterLink</code> as follows:</p>
-<pre><code class="hljs css language-jsx"><span class="hljs-keyword">import</span> { RouterLink } <span class="hljs-keyword">from</span> <span class="hljs-string">'mobx-state-router'</span>;
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Footer</span>(<span class="hljs-params"></span>) </span>{
-    <span class="hljs-keyword">return</span> (
-        <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-name">RouterLink</span> <span class="hljs-attr">routeName</span>=<span class="hljs-string">"home"</span>&gt;</span>Home<span class="hljs-tag">&lt;/<span class="hljs-name">RouterLink</span>&gt;</span>
-        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
-    );
-}
-</code></pre>
-<p>Both <code>Link</code> &amp; <code>RouterLink</code> accept <code>className</code> and <code>activeClassName</code> as optional properties. <code>className</code> is always applied to the generated anchor tag. <code>activeClassName</code> is applied in addition if the current <code>routerState</code> matches the state specified by the <code>RouterLink</code>. This feature is useful for highlighting the active link in a navbar.</p>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/mobx-state-router/docs/guides-getting-started"><span class="arrow-prev">← </span><span>Getting Started</span></a><a class="docs-next button" href="/mobx-state-router/docs/guides-examples"><span>Examples</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#fetching-data">Fetching Data</a></li><li><a href="#redirecting-to-the-sign-in-page">Redirecting to the Sign In page</a></li><li><a href="#creating-links">Creating Links</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="copyright">Copyright © 2018 Naresh Bhatia</section></footer></div></body></html>
+<p><code>RouterLink</code> accepts <code>className</code> and <code>activeClassName</code> as optional properties.
+<code>className</code> is always applied to the generated anchor tag. <code>activeClassName</code> is
+applied in addition if the current <code>routerState</code> matches the state specified by
+the <code>RouterLink</code>. This feature is useful for highlighting the active link in a
+navbar.</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/mobx-state-router/docs/guides-getting-started"><span class="arrow-prev">← </span><span>Getting Started</span></a><a class="docs-next button" href="/mobx-state-router/docs/guides-examples"><span>Examples</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#fetching-data">Fetching Data</a></li><li><a href="#redirecting-to-the-sign-in-page">Redirecting to the Sign In page</a></li><li><a href="#creating-links">Creating Links</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="copyright">Copyright © 2020 Naresh Bhatia</section></footer></div></body></html>

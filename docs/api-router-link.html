@@ -1,0 +1,80 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>RouterLink · MobX State Router</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="The `&lt;RouterLink&gt;` component creates an anchor tag that transitions to the"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="RouterLink · MobX State Router"/><meta property="og:type" content="website"/><meta property="og:url" content="https://nareshbhatia.github.io/mobx-state-router/"/><meta property="og:description" content="The `&lt;RouterLink&gt;` component creates an anchor tag that transitions to the"/><meta property="og:image" content="https://nareshbhatia.github.io/mobx-state-router/img/mobx-logo.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://nareshbhatia.github.io/mobx-state-router/img/mobx-logo.png"/><link rel="shortcut icon" href="/mobx-state-router/img/mobx-logo.png"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="/mobx-state-router/js/scrollSpy.js"></script><link rel="stylesheet" href="/mobx-state-router/css/main.css"/><script src="/mobx-state-router/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/mobx-state-router/"><img class="logo" src="/mobx-state-router/img/mobx-logo.png" alt="MobX State Router"/><h2 class="headerTitleWithLogo">MobX State Router</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/mobx-state-router/docs/guides-getting-started" target="_self">Docs</a></li><li class=""><a href="https://github.com/nareshbhatia/mobx-state-router" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>API</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Guides</h3><ul class=""><li class="navListItem"><a class="navItem" href="/mobx-state-router/docs/guides-getting-started">Getting Started</a></li><li class="navListItem"><a class="navItem" href="/mobx-state-router/docs/guides-recipes">Recipes</a></li><li class="navListItem"><a class="navItem" href="/mobx-state-router/docs/guides-examples">Examples</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">API</h3><ul class=""><li class="navListItem"><a class="navItem" href="/mobx-state-router/docs/api-route">Route</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/mobx-state-router/docs/api-router-link">RouterLink</a></li><li class="navListItem"><a class="navItem" href="/mobx-state-router/docs/api-router-state">RouterState</a></li><li class="navListItem"><a class="navItem" href="/mobx-state-router/docs/api-router-store">RouterStore</a></li><li class="navListItem"><a class="navItem" href="/mobx-state-router/docs/api-router-view">RouterView</a></li><li class="navListItem"><a class="navItem" href="/mobx-state-router/docs/api-history-adapter">HistoryAdapter</a></li><li class="navListItem"><a class="navItem" href="/mobx-state-router/docs/api-static-adapter">StaticAdapter</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 id="__docusaurus" class="postHeaderTitle">RouterLink</h1></header><article><div><span><p>The <code>&lt;RouterLink&gt;</code> component creates an anchor tag that transitions to the
+specified router state when clicked. It does so without reloading the entire
+app, thus avoiding potential flickers.</p>
+<pre><code class="hljs css language-jsx">interface RouterLinkProps {
+    <span class="hljs-attr">routeName</span>: string;
+    params?: StringMap;
+    queryParams?: { [key: string]: any };
+    className?: string;
+    activeClassName?: string;
+    isActive?: <span class="hljs-function">(<span class="hljs-params">currentState: RouterState, toState: RouterState</span>) =&gt;</span> boolean;
+}
+
+<span class="hljs-keyword">const</span> RouterLink: React.FC&lt;RouterLinkProps&gt; = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {...};
+</code></pre>
+<p><code>RouterLink</code> accepts <code>className</code> and <code>activeClassName</code> as optional properties to
+control the look of the link in normal and active states. This feature is useful
+for highlighting the active link in a navbar. The default test for checking if a
+link is active is very simple - the routeName of the current RouterState should
+match the target routeName of the link. For more control over this test, you can
+supply your own custom <code>isActive</code> function.</p>
+<p>You can pass other anchor tag attributes (such as onClick and onBlur) to this
+component. They will be passed through to the child anchor tag except for
+<code>href</code>, which is fully computed by this component.</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/mobx-state-router/docs/api-route"><span class="arrow-prev">← </span><span>Route</span></a><a class="docs-next button" href="/mobx-state-router/docs/api-router-state"><span class="function-name-prevnext">RouterState</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"></nav></div><footer class="nav-footer" id="footer"><section class="copyright">Copyright © 2020 Naresh Bhatia</section></footer></div></body></html>
