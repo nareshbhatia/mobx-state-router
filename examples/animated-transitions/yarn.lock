@@ -6880,8 +6880,10 @@ mobx-react@^6.2.2:
   dependencies:
     mobx-react-lite "2"
 
-"mobx-state-router@file:../../mobx-state-router-5.0.0":
+mobx-state-router@latest:
   version "5.0.0"
+  resolved "https://registry.yarnpkg.com/mobx-state-router/-/mobx-state-router-5.0.0.tgz#ca108b101a2db631970d1f2217e74d7dfe076f30"
+  integrity sha512-2z1odYNPPGKteFcA7gPaAN1ZqmYkmg7+z279FQrsJwI34XrOOlfp45KjAugfgqxSWDh/1rccoOujWfU6VUHW/w==
   dependencies:
     "@react-force/utils" "^2.1.0"
     debug "^4.1.1"
