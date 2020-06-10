@@ -1461,10 +1461,10 @@
   resolved "https://registry.yarnpkg.com/@nodelib/fs.stat/-/fs.stat-1.1.3.tgz#2b5a3ab3f918cca48a8c754c08168e3f03eba61b"
   integrity sha512-shAmDyaQC4H92APFoIaVDHCx5bStIocgvbwQyxPRrbUY20V1EYTbSDchWbuwlMG3V17cprZhA6+78JfB+3DTPw==
 
-"@react-force/core@^2.2.0":
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/@react-force/core/-/core-2.2.0.tgz#fd67a5d4aeede33d20f765f7151e111c2803a169"
-  integrity sha512-nlvOBf/4aBjJ3D0eZv8BJzzGmZ+Rv4IBoMZqhc58UDbWyBcflwCTEZuBwPGFKK5oPtf+M46dgb4tCzchfidixQ==
+"@react-force/core@^2.3.0":
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/@react-force/core/-/core-2.3.0.tgz#ca217d8ee1269ad40d8a7680f34aec4a75d2e0fb"
+  integrity sha512-WNfCc9V6m3g5fHtU3jbLTmFHGQOlNIxNF+Drv0rth99HjrVD2eC51icx54a8MY0ttZO6heunFD5aCUWWUlEz4Q==
   dependencies:
     "@react-force/utils" "^2.2.0"
 
@@ -1475,7 +1475,7 @@
   dependencies:
     numeral "^2.0.6"
 
-"@react-force/utils@^2.1.0", "@react-force/utils@^2.2.0":
+"@react-force/utils@^2.2.0":
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/@react-force/utils/-/utils-2.2.0.tgz#4a456f3f921c1a8a451ec9b717da8a9b5b8982db"
   integrity sha512-evC2ktZLNcF83/U8Ji7aXgKTfgMGD7TRErH2rYEIIVFQYySMqEyAolMvzjQc7h9DPmq3HKiZAmXOZSkb24X0pw==
@@ -1630,10 +1630,10 @@
     "@babel/runtime" "^7.10.2"
     "@testing-library/dom" "^7.9.0"
 
-"@testing-library/user-event@^11.4.0":
-  version "11.4.0"
-  resolved "https://registry.yarnpkg.com/@testing-library/user-event/-/user-event-11.4.0.tgz#acc52f4dc6c979cabe24d50dfa2d3b417d536a7d"
-  integrity sha512-FBI9smEqloQEbxRkBeL5YTK2fdHyXRPj4oNZkeWwpg2ItER+B4MOyLuMCBOgv/ZMyURlNVDD/OSr0pu7cg8H3Q==
+"@testing-library/user-event@^11.4.1":
+  version "11.4.1"
+  resolved "https://registry.yarnpkg.com/@testing-library/user-event/-/user-event-11.4.1.tgz#2134e4cbbb345dbc49001123ff9a036f09259464"
+  integrity sha512-ZaK+3AmocU2WjJ7UyrlnmdPecYt4fridqMwrniENCqoy/Pj2Nc9tTnpjCvMN/Ql/DQ0eRqfBoZdKNqYPBMZFhA==
   dependencies:
     "@babel/runtime" "^7.10.2"
 
@@ -7520,15 +7520,15 @@ mobx-react@^6.2.2:
     mobx-react-lite "2"
 
 mobx-state-router@latest:
-  version "5.0.1"
-  resolved "https://registry.yarnpkg.com/mobx-state-router/-/mobx-state-router-5.0.1.tgz#0ed5b6e32345eb3294e6288dc151b7795761a3b9"
-  integrity sha512-OhMonwIqNCSwGNimFiV7OOlXm4StXCgrUEWdJx8Gc6b67GhEhjeofVRaGf0Vu0Ymv1oYuGCNz2p4s5rdm/VEmQ==
+  version "5.0.2"
+  resolved "https://registry.yarnpkg.com/mobx-state-router/-/mobx-state-router-5.0.2.tgz#9c9f58a22dd30f144bc1af35ff2230a31da485ce"
+  integrity sha512-kEBXTbLGo6EwxofH7Amp2D+hk6wknWyZraoojCj3LqFrvinluI3dYIb+QjgjG7YuRfWStCmtTP8E6+9dODJF+A==
   dependencies:
-    "@react-force/utils" "^2.1.0"
+    "@react-force/utils" "^2.2.0"
     debug "^4.1.1"
     history "^4.10.1"
     path-to-regexp "^6.1.0"
-    query-string "^6.12.1"
+    query-string "^6.13.0"
 
 mobx@^5.15.4:
   version "5.15.4"
@@ -9243,7 +9243,7 @@ query-string@^4.1.0:
     object-assign "^4.1.0"
     strict-uri-encode "^1.0.0"
 
-query-string@^6.12.1:
+query-string@^6.13.0:
   version "6.13.0"
   resolved "https://registry.yarnpkg.com/query-string/-/query-string-6.13.0.tgz#8d875f66581c854d7480ac79478abb847de742f6"
   integrity sha512-KJe8p8EUcixhPCp4cJoTYVfmgKHjnAB/Pq3fiqlmyNHvpHnOL5U4YE7iI2PYivGHp4HFocWz300906BAQX0H7g==
