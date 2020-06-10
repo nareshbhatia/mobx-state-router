@@ -13,7 +13,7 @@ yarn start  # or npm start
 
 Now point your browser to http://localhost:3000/.
 
-## Running Integration Tests Using Cypress
+## Running End-to-End Tests Using Cypress
 
 ```bash
 # Start the server in dev mode
