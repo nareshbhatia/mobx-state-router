@@ -22,10 +22,24 @@ export type TransitionHook = (
  * A `Route` consists of a name, a URL matching pattern and optional
  * enter/exit hooks. The `RouterStore` is initialized with an array
  * of routes which it uses to transition between states.
+ *
+ * Note: Don't destructure routes to allow implementing them as classes.
+ * See https://github.com/nareshbhatia/mobx-state-router/issues/74
  */
 export interface Route {
-    name: string; // e.g. 'department'
-    pattern: string; // e.g. '/departments/:id'
+    /** route name, e.g. 'department' */
+    name: string;
+
+    /** route matching pattern, e.g. '/departments/:id' */
+    pattern: string;
+
+    /**
+     * Alternate route matching patterns. These support legacy routes
+     * and go one way only, from browser location to router state.
+     */
+    altPatterns?: Array<string>;
+
+    // Enter/exit hooks
     beforeExit?: TransitionHook;
     beforeEnter?: TransitionHook;
     onExit?: TransitionHook;

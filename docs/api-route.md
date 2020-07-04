@@ -5,8 +5,11 @@ sidebar_label: Route
 ---
 
 A `Route` is a pattern that is used to match a URL. Routes are identified by
-unique names, e.g. `home` and `about`. They can also specify hooks that can be
-used to perform actions when entering or exiting routes.
+unique names, e.g. `home` and `about`. Routes can also specify alternate
+patterns to match legacy URLs.
+
+Routes can optionally specify hooks to perform actions when entering or exiting
+the associated route.
 
 ```jsx
 type TransitionHook = (
@@ -16,8 +19,19 @@ type TransitionHook = (
 ) => Promise<RouterState | void>;
 
 interface Route {
-    name: string; // e.g. 'department'
-    pattern: string; // e.g. '/departments/:id'
+    /** route name, e.g. 'department' */
+    name: string;
+
+    /** route matching pattern, e.g. '/departments/:id' */
+    pattern: string;
+
+    /**
+     * Alternate route matching patterns. These support legacy routes
+     * and go one way only, from browser location to router state.
+     */
+    altPatterns?: Array<string>;
+
+    // Enter/exit hooks
     beforeExit?: TransitionHook;
     beforeEnter?: TransitionHook;
     onExit?: TransitionHook;

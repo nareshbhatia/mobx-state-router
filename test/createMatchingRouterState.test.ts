@@ -10,6 +10,7 @@ const routes: Route[] = [
     {
         name: 'department-category',
         pattern: '/departments/:id/:category',
+        altPatterns: ['/sections/:id/:category'],
     },
     {
         name: 'users',
@@ -61,6 +62,18 @@ describe('createMatchingRouterState', () => {
             createRouterState('department-category', {
                 params: { id: 'electronics', category: 'computers' },
                 queryParams: { q: 'apple', r: 'pear' },
+            })
+        );
+    });
+
+    test('returns RouterState when url matches altPattern', () => {
+        const routerState = createMatchingRouterState(
+            createLocation('/sections/electronics/computers'),
+            routes
+        );
+        expect(routerState).toEqual(
+            createRouterState('department-category', {
+                params: { id: 'electronics', category: 'computers' },
             })
         );
     });

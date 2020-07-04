@@ -1,3 +1,8 @@
+## 5.1.0 (July 4, 2020)
+
+Added optional `altPatterns` property to `Route` to support legacy routes.
+Legacy routes go one way only, from browser location to router state.
+
 ## 5.0.0 (May 23, 2020)
 
 The overall theme of this release is to simplify the API and make it more
