@@ -59,6 +59,17 @@ npm publish --tag next  # for pre-release (adds `next` tag)
 
 -   Tag the release and push the tag to remote
 
+## Publishing docs to GitHub Pages
+
+Make sure you are
+[connected to GitHub using your SSH key](https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh).
+
+```sh
+cd website
+yarn
+GIT_USER=nareshbhatia CURRENT_BRANCH=master USE_SSH=true yarn publish-gh-pages
+```
+
 ## Credits
 
 mobx-state-router is based on ideas from several Open Source projects. I am
