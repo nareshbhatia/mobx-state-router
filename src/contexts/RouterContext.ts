@@ -1,13 +1,19 @@
 import React, { useContext } from 'react';
-import { createRouterState, RouterState, RouterStore } from '../stores';
+import { RouterStore } from '../stores';
 
 // ---------- RouterContext ----------
-const notFound = createRouterState('notFound');
-export const RouterContext = React.createContext<RouterStore>(
-    new RouterStore([], notFound)
+export const RouterContext = React.createContext<RouterStore | undefined>(
+    undefined
 );
 
 // ---------- useRouterStore ----------
-export function useRouterStore() {
-    return useContext(RouterContext);
+export function useRouterStore(): RouterStore {
+    const routerStore = useContext(RouterContext);
+    if (routerStore === undefined) {
+        /* istanbul ignore next */
+        throw new Error(
+            'useRouterStore must be used within a RouterStoreProvider'
+        );
+    }
+    return routerStore;
 }
