@@ -20,5 +20,5 @@ Now point your browser to http://localhost:3000/.
 $ yarn start
 
 # In a different shell, start cypress and run the tests
-$ npm run start:cypress
+$ yarn start:cypress
 ```

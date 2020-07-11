@@ -7,7 +7,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import { makeStyles } from '@material-ui/core/styles';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
-import { MessageFactory, useMessageContext } from '@react-force/core';
+import { useMessageSetter } from '@react-force/core';
+import { MessageFactory } from '@react-force/models';
 import { observer } from 'mobx-react';
 import { useRootStore } from '../../contexts';
 import { Item } from '../../models';
@@ -24,7 +25,7 @@ interface ItemOrderProps {
 
 export const ItemOrder = observer(({ item }: ItemOrderProps) => {
     const classes = useStyles();
-    const messageContext = useMessageContext();
+    const setMessage = useMessageSetter();
     const [qty, setQty] = useState(1);
     const rootStore = useRootStore();
     const { cartStore } = rootStore;
@@ -35,7 +36,7 @@ export const ItemOrder = observer(({ item }: ItemOrderProps) => {
 
     const handleAddToCart = () => {
         cartStore.addOrder(item, qty);
-        messageContext.setMessage(
+        setMessage(
             MessageFactory.success(
                 `Added ${qty} ${item.name}${
                     qty > 1 ? 's' : ''

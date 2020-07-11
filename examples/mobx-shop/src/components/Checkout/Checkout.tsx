@@ -1,7 +1,8 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import { makeStyles, Theme } from '@material-ui/core/styles';
-import { MessageFactory, useMessageContext } from '@react-force/core';
+import { useMessageSetter } from '@react-force/core';
+import { MessageFactory } from '@react-force/models';
 import { CurrencyUtils } from '@react-force/number-utils';
 import { observer } from 'mobx-react';
 import { useRootStore } from '../../contexts';
@@ -18,14 +19,14 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 export const Checkout = observer(() => {
     const classes = useStyles();
-    const messageContext = useMessageContext();
+    const setMessage = useMessageSetter();
     const rootStore = useRootStore();
     const { cartStore } = rootStore;
     const { total: orderTotal } = cartStore;
 
     const handlePlaceOrder = () => {
         cartStore.clearCart();
-        messageContext.setMessage(
+        setMessage(
             MessageFactory.success(
                 'Order placed. We’ll send a confirmation when your items ship.'
             )
