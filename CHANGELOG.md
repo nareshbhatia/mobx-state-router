@@ -1,3 +1,11 @@
+## 5.2.0 (July 26, 2020)
+
+Changed build system to [TSDX](https://tsdx.io/).
+
+## 5.1.1 (July 10, 2020)
+
+Minor cleanup of RouterContext.
+
 ## 5.1.0 (July 4, 2020)
 
 Added optional `altPatterns` property to `Route` to support legacy routes.

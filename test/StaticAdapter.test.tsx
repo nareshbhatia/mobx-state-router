@@ -21,7 +21,7 @@ const routes: Route[] = [
     {
         name: 'teslaStore',
         pattern: '/tesla-store',
-        beforeEnter: async (fromState, toState, routerStore) => {
+        beforeEnter: async (_fromState, _toState, routerStore) => {
             const { teslaStore } = routerStore.options;
             await teslaStore.loadSelectedCar();
         },

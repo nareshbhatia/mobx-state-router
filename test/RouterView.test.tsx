@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import { render } from '@testing-library/react';
 import {
     createRouterState,
@@ -16,22 +16,6 @@ const routes = [
 const home = createRouterState('home');
 const notFound = createRouterState('notFound');
 const unknown = createRouterState('unknown');
-
-// ---------- RouterContextProvider ----------
-interface RouterContextProviderProps {
-    children: ReactNode;
-}
-
-const RouterContextProvider = ({ children }: RouterContextProviderProps) => {
-    const routerStore = new RouterStore(routes, notFound, {
-        initialState: home,
-    });
-    return (
-        <RouterContext.Provider value={routerStore}>
-            {children}
-        </RouterContext.Provider>
-    );
-};
 
 // ---------- Pages ----------
 const HomePage = () => <div data-testid="home-page">Home</div>;

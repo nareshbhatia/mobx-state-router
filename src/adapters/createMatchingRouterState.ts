@@ -36,4 +36,6 @@ export const createMatchingRouterState = (
             }
         }
     }
+
+    return undefined;
 };

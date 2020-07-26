@@ -39,8 +39,7 @@ export const matchUrl = (url: string, pattern: string) => {
         return undefined;
     }
 
-    // tslint:disable-next-line:no-unused-variable
-    const [matchedUrl, ...values] = match;
+    const [, ...values] = match;
 
     return keys.reduce((params: StringMap, key, index) => {
         params[key.name] = values[index];

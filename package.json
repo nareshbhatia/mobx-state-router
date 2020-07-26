@@ -1,7 +1,7 @@
 {
     "name": "mobx-state-router",
     "description": "MobX powered router for React apps",
-    "version": "5.1.1",
+    "version": "5.2.0",
     "author": "Naresh Bhatia",
     "license": "MIT",
     "homepage": "https://github.com/nareshbhatia/mobx-state-router",
@@ -15,22 +15,22 @@
         "router"
     ],
     "main": "dist/index.js",
+    "module": "dist/mobx-state-router.esm.js",
     "types": "dist/index.d.ts",
     "files": [
         "src/",
         "dist/"
     ],
     "scripts": {
-        "lint": "tslint --project tsconfig.json -t codeFrame 'src/**/*.ts*' 'test/**/*.ts*'",
-        "prebuild": "rimraf dist mobx-state-router-$npm_package_version",
-        "build": "tsc",
-        "build:local": "yarn lint && yarn test:coverage && yarn build && npm pack && tar -xzf mobx-state-router-$npm_package_version.tgz && mv package mobx-state-router-$npm_package_version && rm mobx-state-router-$npm_package_version.tgz",
-        "start": "tsc -w",
-        "test": "jest --watch",
-        "test:coverage": "jest --coverage --no-cache",
-        "report-coverage": "cat ./coverage/lcov.info | coveralls",
+        "build": "tsdx build",
+        "build:local": "yarn lint && yarn test:coverage && yarn build",
         "cz-commit": "git-cz",
-        "format": "prettier --write *.md docs/*.md '{src,test}/**/*.ts*'"
+        "format": "prettier --write *.md docs/*.md '{src,test}/**/*.ts*'",
+        "lint": "tsdx lint",
+        "prepare": "tsdx build",
+        "start": "tsdx watch",
+        "test": "tsdx test --watch",
+        "test:coverage": "tsdx test --coverage --no-cache"
     },
     "dependencies": {
         "@react-force/utils": "^2.2.1",
@@ -40,48 +40,35 @@
         "query-string": "^6.13.1"
     },
     "peerDependencies": {
-        "mobx": "^4.x || ^5.x",
-        "mobx-react": "^5.x || ^6.x",
-        "react": "^16.x"
+        "mobx": "^>=4",
+        "mobx-react": ">=5",
+        "react": ">=16"
     },
     "devDependencies": {
-        "@commitlint/cli": "^9.0.1",
-        "@commitlint/config-conventional": "^9.0.1",
-        "@testing-library/dom": "^7.20.0",
-        "@testing-library/jest-dom": "^5.11.0",
-        "@testing-library/react": "^10.4.5",
+        "@commitlint/cli": "^9.1.1",
+        "@commitlint/config-conventional": "^9.1.1",
+        "@testing-library/dom": "^7.21.5",
+        "@testing-library/jest-dom": "^5.11.1",
+        "@testing-library/react": "^10.4.7",
         "@types/debug": "^4.1.5",
-        "@types/history": "^4.7.6",
-        "@types/jest": "^26.0.4",
-        "@types/node": "^14.0.22",
+        "@types/history": "^4.7.7",
         "@types/query-string": "^6.3.0",
-        "@types/react": "^16.9.42",
+        "@types/react": "^16.9.43",
         "@types/react-dom": "^16.9.8",
-        "colors": "^1.4.0",
         "commitizen": "^4.1.2",
-        "coveralls": "^3.1.0",
         "cz-conventional-changelog": "^3.2.0",
         "husky": "^4.2.5",
-        "jest": "^26.1.0",
         "mobx": "^5.15.4",
         "mobx-react": "^6.2.2",
-        "prettier": "^2.0.5",
-        "pretty-quick": "^2.0.1",
-        "prompt": "^1.0.0",
         "react": "^16.13.1",
         "react-dom": "^16.13.1",
-        "react-test-renderer": "^16.13.1",
-        "rimraf": "^3.0.2",
-        "ts-jest": "^26.1.1",
-        "ts-node": "^8.10.2",
-        "tslint": "^6.1.2",
-        "tslint-config-prettier": "^1.18.0",
-        "tslint-config-standard": "^9.0.0",
-        "typescript": "^3.9.6"
+        "tsdx": "^0.13.2",
+        "tslib": "^2.0.0",
+        "typescript": "^3.9.7"
     },
     "husky": {
         "hooks": {
-            "pre-commit": "pretty-quick --staged",
+            "pre-commit": "tsdx lint",
             "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
         }
     },
@@ -100,35 +87,16 @@
             "path": "node_modules/cz-conventional-changelog"
         }
     },
-    "jest": {
-        "verbose": true,
-        "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
-        "transform": {
-            ".(ts|tsx)": "ts-jest"
-        },
-        "moduleFileExtensions": [
-            "ts",
-            "tsx",
-            "js"
-        ],
-        "testPathIgnorePatterns": [
-            "/node_modules/",
-            "/examples/"
-        ],
-        "coveragePathIgnorePatterns": [
-            "/node_modules/",
-            "/test/"
-        ],
-        "setupFilesAfterEnv": [
-            "./test/setupTestsAfterEnv.ts"
-        ],
-        "coverageThreshold": {
-            "global": {
-                "branches": 80,
-                "functions": 75,
-                "lines": 80,
-                "statements": 80
-            }
-        }
+    "prettier": {
+        "arrowParens": "always",
+        "printWidth": 80,
+        "proseWrap": "always",
+        "semi": true,
+        "singleQuote": true,
+        "tabWidth": 4,
+        "trailingComma": "es5"
+    },
+    "engines": {
+        "node": ">=10"
     }
 }

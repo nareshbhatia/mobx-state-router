@@ -20,7 +20,6 @@ export class HistoryAdapter {
         this.history = history;
 
         // Go to current history location
-        // tslint:disable-next-line:no-floating-promises
         this.goToLocation(this.history.location);
 
         // Listen for history changes
