@@ -15,7 +15,7 @@
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "4.0.0-alpha.56",
-    "@react-force/core": "^3.0.3",
+    "@react-force/core": "^3.2.0",
     "@react-force/models": "^1.1.2",
     "@react-force/number-utils": "^2.0.0",
     "@react-force/web-utils": "^2.0.1",
@@ -27,18 +27,18 @@
     "react-dom": "^16.13.1"
   },
   "devDependencies": {
-    "@testing-library/jest-dom": "^5.11.0",
-    "@testing-library/react": "^10.4.5",
-    "@testing-library/user-event": "^12.0.11",
+    "@testing-library/jest-dom": "^5.11.1",
+    "@testing-library/react": "^10.4.7",
+    "@testing-library/user-event": "^12.0.15",
     "@types/classnames": "^2.2.10",
-    "@types/jest": "26.0.4",
-    "@types/node": "^14.0.22",
-    "@types/react": "16.9.42",
+    "@types/jest": "26.0.7",
+    "@types/node": "^14.0.26",
+    "@types/react": "16.9.43",
     "@types/react-dom": "16.9.8",
-    "cypress": "^4.10.0",
+    "cypress": "^4.11.0",
     "prettier": "^2.0.5",
-    "react-scripts": "3.4.1",
-    "typescript": "3.9.6"
+    "react-scripts": "^3.4.1",
+    "typescript": "^3.9.7"
   },
   "eslintConfig": {
     "extends": "react-app"
