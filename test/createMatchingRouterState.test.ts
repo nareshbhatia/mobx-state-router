@@ -1,5 +1,5 @@
-import { createMatchingRouterState, createRouterState, Route } from '../src';
 import { createLocation } from 'history';
+import { createMatchingRouterState, createRouterState, Route } from '../src';
 
 const routes: Route[] = [
     { name: 'home', pattern: '/' },

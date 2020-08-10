@@ -1,6 +1,6 @@
-import React, { Fragment } from 'react';
 import Debug from 'debug';
 import { observer } from 'mobx-react';
+import React, { Fragment } from 'react';
 import { useRouterStore } from '../contexts';
 
 const debug = Debug('msr:RouterView');

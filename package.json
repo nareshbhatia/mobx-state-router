@@ -26,44 +26,56 @@
         "build:local": "yarn lint && yarn test:coverage && yarn build",
         "cz-commit": "git-cz",
         "format": "prettier --write *.md docs/*.md '{src,test}/**/*.ts*'",
-        "lint": "tsdx lint",
+        "lint": "eslint '{src,test}/**/*.ts*'",
         "prepare": "tsdx build",
         "start": "tsdx watch",
-        "test": "tsdx test --watch",
+        "test": "tsdx test",
+        "test:watch": "tsdx test --watch",
         "test:coverage": "tsdx test --coverage --no-cache"
     },
     "dependencies": {
-        "@react-force/utils": "^2.2.1",
+        "@react-force/utils": "^2.3.0",
         "debug": "^4.1.1",
         "history": "^4.10.1",
         "path-to-regexp": "^6.1.0",
         "query-string": "^6.13.1"
     },
     "peerDependencies": {
-        "mobx": "^>=4",
+        "mobx": ">=4",
         "mobx-react": ">=5",
         "react": ">=16"
     },
     "devDependencies": {
         "@commitlint/cli": "^9.1.1",
         "@commitlint/config-conventional": "^9.1.1",
-        "@testing-library/dom": "^7.21.5",
-        "@testing-library/jest-dom": "^5.11.1",
-        "@testing-library/react": "^10.4.7",
+        "@react-force/eslint-config": "^1.0.0",
+        "@testing-library/dom": "^7.22.0",
+        "@testing-library/jest-dom": "^5.11.2",
+        "@testing-library/react": "^10.4.8",
+        "@testing-library/user-event": "12.1.1",
         "@types/debug": "^4.1.5",
         "@types/history": "^4.7.7",
         "@types/query-string": "^6.3.0",
-        "@types/react": "^16.9.43",
+        "@types/react": "^16.9.45",
         "@types/react-dom": "^16.9.8",
+        "babel-eslint": "10.1.0",
         "commitizen": "^4.1.2",
         "cz-conventional-changelog": "^3.2.0",
+        "eslint": "7.6.0",
+        "eslint-plugin-flowtype": "^5.2.0",
+        "eslint-plugin-import": "^2.22.0",
+        "eslint-plugin-jsx-a11y": "^6.3.1",
+        "eslint-plugin-react": "^7.20.5",
+        "eslint-plugin-react-hooks": "^4.0.8",
+        "eslint-plugin-testing-library": "^3.4.1",
         "husky": "^4.2.5",
-        "mobx": "^5.15.4",
-        "mobx-react": "^6.2.2",
+        "mobx": "^5.15.5",
+        "mobx-react": "^6.2.5",
+        "prettier": "^2.0.5",
         "react": "^16.13.1",
         "react-dom": "^16.13.1",
         "tsdx": "^0.13.2",
-        "tslib": "^2.0.0",
+        "tslib": "^2.0.1",
         "typescript": "^3.9.7"
     },
     "husky": {
@@ -86,15 +98,6 @@
         "commitizen": {
             "path": "node_modules/cz-conventional-changelog"
         }
-    },
-    "prettier": {
-        "arrowParens": "always",
-        "printWidth": 80,
-        "proseWrap": "always",
-        "semi": true,
-        "singleQuote": true,
-        "tabWidth": 4,
-        "trailingComma": "es5"
     },
     "engines": {
         "node": ">=10"

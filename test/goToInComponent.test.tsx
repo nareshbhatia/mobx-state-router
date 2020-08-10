@@ -1,6 +1,6 @@
-import React from 'react';
 import { fireEvent, render } from '@testing-library/react';
 import { observer } from 'mobx-react';
+import React from 'react';
 import {
     createRouterState,
     RouterContext,

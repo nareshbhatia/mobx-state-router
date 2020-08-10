@@ -2,7 +2,7 @@ module.exports = {
     verbose: true,
     testPathIgnorePatterns: ['/node_modules/', '/examples/'],
     coveragePathIgnorePatterns: ['/node_modules/', '/test/'],
-    setupFilesAfterEnv: ['./test/setupTestsAfterEnv.ts'],
+    setupFilesAfterEnv: ['./jest.setup.ts'],
     coverageThreshold: {
         global: {
             branches: 80,

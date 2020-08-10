@@ -1,0 +1,6 @@
+# Keep in sync with .eslintignore + .gitignore
+**/node_modules
+**/dist
+**/coverage
+package.json
+package-lock.json

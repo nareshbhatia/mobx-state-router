@@ -1,6 +1,6 @@
-import React, { ReactNode } from 'react';
 import { valueEqual } from '@react-force/utils';
 import { fireEvent, render } from '@testing-library/react';
+import React, { ReactNode } from 'react';
 import {
     createRouterState,
     RouterContext,

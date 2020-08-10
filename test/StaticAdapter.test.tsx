@@ -1,7 +1,8 @@
-import React, { ReactNode } from 'react';
 import { render } from '@testing-library/react';
-import { observer } from 'mobx-react';
+import { createLocation } from 'history';
 import { action, decorate, observable, runInAction } from 'mobx';
+import { observer } from 'mobx-react';
+import React, { ReactNode } from 'react';
 import {
     createRouterState,
     Route,
@@ -10,7 +11,6 @@ import {
     StaticAdapter,
     useRouterStore,
 } from '../src';
-import { createLocation } from 'history';
 
 const routes: Route[] = [
     { name: 'home', pattern: '/' },

@@ -1,5 +1,5 @@
-import { parse } from 'query-string';
 import { Location } from 'history';
+import { parse } from 'query-string';
 import { createRouterState, Route, RouterState } from '../stores';
 import { matchUrl } from './matchUrl';
 
