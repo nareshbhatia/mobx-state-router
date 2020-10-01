@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react';
-import { createLocation } from 'history';
+import { parsePath, Path } from 'history';
 import { action, makeObservable, observable, runInAction } from 'mobx';
 import { observer } from 'mobx-react-lite';
 import React, { ReactNode } from 'react';
@@ -100,7 +100,7 @@ const DepartmentsPage = observer(() => {
 describe('StaticAdapter', () => {
     test('goes correctly to a known location', async () => {
         const staticAdapter = new StaticAdapter(routerStore);
-        await staticAdapter.goToLocation(createLocation('/departments/dept1'));
+        await staticAdapter.goToLocation(parsePath('/departments/dept1') as Path);
         const { getByTestId } = render(
             <RouterContextProvider>
                 <DepartmentsPage />
@@ -111,7 +111,7 @@ describe('StaticAdapter', () => {
 
     test('goes to Not Found if asked to go to an unknown location', async () => {
         const staticAdapter = new StaticAdapter(routerStore);
-        await staticAdapter.goToLocation(createLocation('/unknown/dept1'));
+        await staticAdapter.goToLocation(parsePath('/unknown/dept1') as Path);
         const { getByTestId } = render(
             <RouterContextProvider>
                 <DepartmentsPage />
@@ -122,7 +122,7 @@ describe('StaticAdapter', () => {
 
     test('runs beforeEnter hook before going to target location', async () => {
         const staticAdapter = new StaticAdapter(routerStore);
-        await staticAdapter.goToLocation(createLocation('/tesla-store'));
+        await staticAdapter.goToLocation(parsePath('/tesla-store') as Path);
         const { getByTestId } = render(
             <RouterContextProvider>
                 <DepartmentsPage />

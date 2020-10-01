@@ -1,4 +1,4 @@
-import { createLocation } from 'history';
+import { Path, parsePath } from 'history';
 import { createMatchingRouterState, createRouterState, Route } from '../src';
 
 const routes: Route[] = [
@@ -22,7 +22,7 @@ const routes: Route[] = [
 describe('createMatchingRouterState', () => {
     test('returns RouterState when url matches pattern, no params, no queryParams', () => {
         const routerState = createMatchingRouterState(
-            createLocation('/departments'),
+            parsePath('/departments') as Path,
             routes
         );
         expect(routerState).toEqual(createRouterState('departments'));
@@ -30,7 +30,7 @@ describe('createMatchingRouterState', () => {
 
     test('returns RouterState when url matches pattern, params, no queryParams', () => {
         const routerState = createMatchingRouterState(
-            createLocation('/departments/electronics/computers'),
+            parsePath('/departments/electronics/computers') as Path,
             routes
         );
         expect(routerState).toEqual(
@@ -42,7 +42,7 @@ describe('createMatchingRouterState', () => {
 
     test('returns RouterState when url matches pattern, params, single queryParam', () => {
         const routerState = createMatchingRouterState(
-            createLocation('/departments/electronics/computers?q=apple'),
+            parsePath('/departments/electronics/computers?q=apple') as Path,
             routes
         );
         expect(routerState).toEqual(
@@ -55,7 +55,7 @@ describe('createMatchingRouterState', () => {
 
     test('returns RouterState when url matches pattern, params, multiple queryParams', () => {
         const routerState = createMatchingRouterState(
-            createLocation('/departments/electronics/computers?q=apple&r=pear'),
+            parsePath('/departments/electronics/computers?q=apple&r=pear') as Path,
             routes
         );
         expect(routerState).toEqual(
@@ -68,7 +68,7 @@ describe('createMatchingRouterState', () => {
 
     test('returns RouterState when url matches altPattern', () => {
         const routerState = createMatchingRouterState(
-            createLocation('/sections/electronics/computers'),
+            parsePath('/sections/electronics/computers') as Path,
             routes
         );
         expect(routerState).toEqual(
@@ -80,7 +80,7 @@ describe('createMatchingRouterState', () => {
 
     test('returns RouterState when url contains bracket format arrays', () => {
         const routerState = createMatchingRouterState(
-            createLocation('/users?userIds[]=1&userIds[]=2&userIds[]=3'),
+            parsePath('/users?userIds[]=1&userIds[]=2&userIds[]=3') as Path,
             routes,
             { arrayFormat: 'bracket' }
         );
@@ -93,7 +93,7 @@ describe('createMatchingRouterState', () => {
 
     test('returns undefined when url matches no pattern', () => {
         const routerState = createMatchingRouterState(
-            createLocation('/notValidUrl'),
+            parsePath('/notValidUrl') as Path,
             routes
         );
         expect(routerState).toEqual(undefined);

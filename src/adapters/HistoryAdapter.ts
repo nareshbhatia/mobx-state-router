@@ -23,7 +23,7 @@ export class HistoryAdapter {
         this.goToLocation(this.history.location);
 
         // Listen for history changes
-        this.history.listen((location) => this.goToLocation(location));
+        this.history.listen((update) => this.goToLocation(update.location));
     }
 
     goToLocation = (location: Location): Promise<RouterState> => {
@@ -43,7 +43,7 @@ export class HistoryAdapter {
     };
 
     goBack = () => {
-        this.history.goBack();
+        this.history.back();
     };
 
     observeRouterStateChanges = () => {
@@ -63,9 +63,8 @@ export class HistoryAdapter {
                         this.history.push(routerStateUrl);
                     }
                     debug(
-                        'history.push(%o), history.length=%d',
-                        routerStateUrl,
-                        this.history.length
+                        'history.push(%o)',
+                        routerStateUrl
                     );
                 }
             }

@@ -5,9 +5,7 @@ import {
     RouterStore,
 } from 'mobx-state-router';
 
-const browserHistory = createBrowserHistory({
-    basename: '/myapp',
-});
+const browserHistory = createBrowserHistory();
 
 const notFound = createRouterState('notFound');
 

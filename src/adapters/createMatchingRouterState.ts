@@ -1,4 +1,4 @@
-import { Location } from 'history';
+import { Path } from 'history';
 import { parse } from 'query-string';
 import { createRouterState, Route, RouterState } from '../stores';
 import { matchUrl } from './matchUrl';
@@ -10,7 +10,7 @@ import { matchUrl } from './matchUrl';
  * into a RouterState.
  */
 export const createMatchingRouterState = (
-    location: Location,
+    location: Path,
     routes: Route[],
     queryParseOptions?: any
 ): RouterState | undefined => {

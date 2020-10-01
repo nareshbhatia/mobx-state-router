@@ -1,5 +1,5 @@
 import Debug from 'debug';
-import { Location } from 'history';
+import { Path } from 'history';
 import { RouterState, RouterStore } from '../stores';
 import { createMatchingRouterState } from './createMatchingRouterState';
 
@@ -18,7 +18,7 @@ export class StaticAdapter {
         this.routerStore = routerStore;
     }
 
-    goToLocation = (location: Location): Promise<RouterState> => {
+    goToLocation = (location: Path): Promise<RouterState> => {
         debug('goToLocation: %o', location);
 
         // Create the matching RouterState
