@@ -1,5 +1,5 @@
 import React from 'react';
-import { observer } from 'mobx-react';
+import { observer } from 'mobx-react-lite';
 import { TitleLink } from '../components';
 import { useRootStore } from '../contexts';
 import { Repo } from '../models';

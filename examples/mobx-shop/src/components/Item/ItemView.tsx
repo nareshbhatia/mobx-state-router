@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
-import { observer } from 'mobx-react';
+import { observer } from 'mobx-react-lite';
 import { Item } from '../../models';
 import { ItemInfo } from './ItemInfo';
 import { ItemPhoto } from './ItemPhoto';

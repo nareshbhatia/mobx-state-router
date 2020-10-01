@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react';
 import { createLocation } from 'history';
 import { action, makeObservable, observable, runInAction } from 'mobx';
-import { observer } from 'mobx-react';
+import { observer } from 'mobx-react-lite';
 import React, { ReactNode } from 'react';
 import {
     createRouterState,

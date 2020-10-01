@@ -3,7 +3,7 @@ import Button from '@material-ui/core/Button';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import { CurrencyUtils } from '@react-force/number-utils';
-import { observer } from 'mobx-react';
+import { observer } from 'mobx-react-lite';
 import { useRouterStore } from 'mobx-state-router';
 import { useRootStore } from '../../contexts';
 import { ItemInfo, ItemPhoto } from '../Item';

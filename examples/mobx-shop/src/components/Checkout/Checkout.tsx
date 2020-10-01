@@ -4,7 +4,7 @@ import { makeStyles, Theme } from '@material-ui/core/styles';
 import { useMessageSetter } from '@react-force/core';
 import { MessageFactory } from '@react-force/models';
 import { CurrencyUtils } from '@react-force/number-utils';
-import { observer } from 'mobx-react';
+import { observer } from 'mobx-react-lite';
 import { useRootStore } from '../../contexts';
 
 const useStyles = makeStyles((theme: Theme) => ({

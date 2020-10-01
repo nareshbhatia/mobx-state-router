@@ -6,7 +6,7 @@ import { makeStyles, Theme } from '@material-ui/core/styles';
 import DarkIcon from '@material-ui/icons/Brightness2';
 import LightIcon from '@material-ui/icons/Brightness2Outlined';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import { observer } from 'mobx-react';
+import { observer } from 'mobx-react-lite';
 import { useRouterStore } from 'mobx-state-router';
 import { useRootStore } from '../../contexts';
 

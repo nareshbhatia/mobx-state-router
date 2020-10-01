@@ -7,7 +7,7 @@ import {
     MessageProvider,
     MessageRenderer,
 } from '@react-force/core';
-import { observer } from 'mobx-react';
+import { observer } from 'mobx-react-lite';
 import { RouterContext, RouterView } from 'mobx-state-router';
 import { RootStoreContext } from './contexts';
 import { initApp } from './init';
