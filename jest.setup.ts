@@ -5,5 +5,3 @@
 
 // Add jest-dom's custom assertions
 import '@testing-library/jest-dom';
-
-import 'mobx-react-lite/batchingForReactDom';

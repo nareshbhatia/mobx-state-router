@@ -1,6 +1,6 @@
 import { valueEqual } from '@react-force/utils';
 import Debug from 'debug';
-import { action, decorate, observable } from 'mobx';
+import { action, makeObservable, observable } from 'mobx';
 import { createRouterState, RouterState } from './RouterState';
 
 const debug = Debug('msr:RouterStore');
@@ -96,6 +96,11 @@ export class RouterStore {
         notFoundState: RouterState,
         options: { [key: string]: any } = {}
     ) {
+        makeObservable(this, {
+            routerState: observable.ref,
+            setRouterState: action,
+        });
+
         // Set routes and push an internal route for the default state
         this.routes = routes;
         this.routes.push(InitialRoute);
@@ -257,7 +262,4 @@ export class RouterStore {
     }
 }
 
-decorate(RouterStore, {
-    routerState: observable.ref,
-    setRouterState: action,
-});
+

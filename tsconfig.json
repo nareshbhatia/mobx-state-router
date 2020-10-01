@@ -16,6 +16,7 @@
         "rootDir": "./src",
         "sourceMap": true,
         "strict": true,
+        "useDefineForClassFields": true,
         "paths": {
             "*": ["src/*", "node_modules/*"]
         }
