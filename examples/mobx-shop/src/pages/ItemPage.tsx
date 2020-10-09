@@ -1,6 +1,6 @@
 import React from 'react';
 import { HorizontalContainer } from '@react-force/core';
-import { observer } from 'mobx-react';
+import { observer } from 'mobx-react-lite';
 import { useRootStore } from '../contexts';
 import {
     ItemInfo,

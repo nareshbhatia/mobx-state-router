@@ -1,5 +1,5 @@
 import React from 'react';
-import { observer } from 'mobx-react';
+import { observer } from 'mobx-react-lite';
 import { CurrencyUtils } from '@react-force/number-utils';
 import { useRootStore } from '../contexts';
 import { Item } from '../models';

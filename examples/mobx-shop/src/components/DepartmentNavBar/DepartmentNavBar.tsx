@@ -1,7 +1,7 @@
 import React from 'react';
 import Tab from '@material-ui/core/Tab';
 import Tabs from '@material-ui/core/Tabs';
-import { observer } from 'mobx-react';
+import { observer } from 'mobx-react-lite';
 import { useRouterStore } from 'mobx-state-router';
 import { Departments } from '../../models';
 

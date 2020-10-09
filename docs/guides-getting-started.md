@@ -34,7 +34,7 @@ cd quick-start
 Install the router and its peer dependencies:
 
 ```bash
-npm install --save mobx-state-router mobx mobx-react
+npm install --save mobx-state-router mobx mobx-react-lite
 ```
 
 Note that mobx-state-router does not require you to switch all your state

@@ -9,7 +9,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import { useMessageSetter } from '@react-force/core';
 import { MessageFactory } from '@react-force/models';
-import { observer } from 'mobx-react';
+import { observer } from 'mobx-react-lite';
 import { useRootStore } from '../../contexts';
 import { Item } from '../../models';
 

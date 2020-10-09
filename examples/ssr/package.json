@@ -17,8 +17,8 @@
     "contentful": "^7.14.6",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "mobx": "^5.15.4",
-    "mobx-react": "^6.2.2",
+    "mobx": "^6.0.0",
+    "mobx-react-lite": "^3.0.0",
     "mobx-state-router": "latest",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"

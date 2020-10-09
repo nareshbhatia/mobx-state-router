@@ -1,5 +1,5 @@
 import React from 'react';
-import { observer } from 'mobx-react';
+import { observer } from 'mobx-react-lite';
 import { RouterView } from 'mobx-state-router';
 import { Header } from './components';
 import { ContentfulPage, GitHubPage, HomePage, NotFoundPage } from './pages';

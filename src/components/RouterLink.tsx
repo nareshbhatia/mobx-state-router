@@ -1,5 +1,5 @@
 import { StringMap } from '@react-force/utils';
-import { observer } from 'mobx-react';
+import { observer } from 'mobx-react-lite';
 import React from 'react';
 import { routerStateToUrl } from '../adapters';
 import { useRouterStore } from '../contexts';

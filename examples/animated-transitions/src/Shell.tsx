@@ -1,5 +1,5 @@
 import React from 'react';
-import { observer } from 'mobx-react';
+import { observer } from 'mobx-react-lite';
 import { useRouterStore, ViewMap } from 'mobx-state-router';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { Header } from './components';
