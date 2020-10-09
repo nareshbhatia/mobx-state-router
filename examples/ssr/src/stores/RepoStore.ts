@@ -1,4 +1,4 @@
-import { action, decorate, observable } from 'mobx';
+import { action, makeObservable, observable } from 'mobx';
 import { Repo } from '../models';
 import { GitHubService } from '../services';
 import { RootStore } from './RootStore';
@@ -9,6 +9,12 @@ export class RepoStore {
     repos: Array<Repo> = [];
 
     constructor(rootStore: RootStore, repos: Array<Repo> = []) {
+        makeObservable(this, {
+            loading: observable,
+            repos: observable.ref,
+            handleStartLoading: action,
+            handleLoaded: action,
+        });
         this.rootStore = rootStore;
         this.handleLoaded(repos);
     }
@@ -28,10 +34,3 @@ export class RepoStore {
         this.handleLoaded(repos);
     }
 }
-
-decorate(RepoStore, {
-    loading: observable,
-    repos: observable.ref,
-    handleStartLoading: action,
-    handleLoaded: action,
-});

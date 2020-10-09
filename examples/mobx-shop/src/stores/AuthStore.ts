@@ -1,4 +1,4 @@
-import { action, decorate, observable } from 'mobx';
+import { action, makeObservable, observable } from 'mobx';
 import { createRouterState, RouterState } from 'mobx-state-router';
 import { User } from '../models';
 import { RootStore } from './RootStore';
@@ -14,6 +14,13 @@ export class AuthStore {
     signInRedirect: RouterState = defaultState;
 
     constructor(rootStore: RootStore) {
+        makeObservable(this, {
+            user: observable.ref,
+            signInRedirect: observable.ref,
+            setUser: action,
+            clearUser: action,
+            setSignInRedirect: action,
+        });
         this.rootStore = rootStore;
     }
 
@@ -35,11 +42,3 @@ export class AuthStore {
         this.rootStore.routerStore.goToState(signin);
     }
 }
-
-decorate(AuthStore, {
-    user: observable.ref,
-    signInRedirect: observable.ref,
-    setUser: action,
-    clearUser: action,
-    setSignInRedirect: action,
-});

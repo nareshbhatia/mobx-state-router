@@ -3,7 +3,7 @@ import red from '@material-ui/core/colors/red';
 import pink from '@material-ui/core/colors/pink';
 
 import { Storage } from '@react-force/web-utils';
-import { action, computed, decorate, observable } from 'mobx';
+import { action, computed, makeObservable, observable } from 'mobx';
 import { LsKeys } from './LsKeys';
 import { RootStore } from './RootStore';
 
@@ -12,6 +12,12 @@ export class PrefStore {
     paletteType: PaletteType = 'light';
 
     constructor(rootStore: RootStore) {
+        makeObservable(this, {
+            paletteType: observable,
+            theme: computed,
+            loadFromStorage: action,
+            toggleTheme: action,
+        });
         this.rootStore = rootStore;
     }
 
@@ -49,10 +55,3 @@ export class PrefStore {
         return createMuiTheme({ palette });
     }
 }
-
-decorate(PrefStore, {
-    paletteType: observable,
-    theme: computed,
-    loadFromStorage: action,
-    toggleTheme: action,
-});

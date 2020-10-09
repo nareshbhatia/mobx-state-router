@@ -1,4 +1,4 @@
-import { action, decorate, observable } from 'mobx';
+import { action, makeObservable, observable } from 'mobx';
 import { Item } from '../models';
 import { ContentfulService } from '../services';
 import { RootStore } from './RootStore';
@@ -9,6 +9,12 @@ export class ItemStore {
     items: Array<Item> = [];
 
     constructor(rootStore: RootStore, items: Array<Item> = []) {
+        makeObservable(this, {
+            loading: observable,
+            items: observable.ref,
+            handleStartLoading: action,
+            handleLoaded: action,
+        });
         this.rootStore = rootStore;
         this.handleLoaded(items);
     }
@@ -28,10 +34,3 @@ export class ItemStore {
         this.handleLoaded(items);
     }
 }
-
-decorate(ItemStore, {
-    loading: observable,
-    items: observable.ref,
-    handleStartLoading: action,
-    handleLoaded: action,
-});
