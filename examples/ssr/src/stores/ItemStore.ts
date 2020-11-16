@@ -17,6 +17,12 @@ export class ItemStore {
         });
         this.rootStore = rootStore;
         this.handleLoaded(items);
+        makeObservable(this, {
+            loading: observable,
+            items: observable.ref,
+            handleStartLoading: action,
+            handleLoaded: action,
+        });
     }
 
     handleStartLoading() {

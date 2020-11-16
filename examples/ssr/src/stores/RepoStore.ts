@@ -17,6 +17,12 @@ export class RepoStore {
         });
         this.rootStore = rootStore;
         this.handleLoaded(repos);
+        makeObservable(this, {
+            loading: observable,
+            repos: observable.ref,
+            handleStartLoading: action,
+            handleLoaded: action,
+        });
     }
 
     handleStartLoading() {

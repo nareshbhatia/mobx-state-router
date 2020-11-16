@@ -22,6 +22,13 @@ export class AuthStore {
             setSignInRedirect: action,
         });
         this.rootStore = rootStore;
+        makeObservable(this, {
+            user: observable.ref,
+            signInRedirect: observable.ref,
+            setUser: action,
+            clearUser: action,
+            setSignInRedirect: action,
+        });
     }
 
     setUser = (user: User) => {

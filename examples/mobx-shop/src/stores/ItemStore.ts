@@ -16,6 +16,12 @@ export class ItemStore {
             setSelectedItem: action,
         });
         this.rootStore = rootStore;
+        makeObservable(this, {
+            selectedItem: observable.ref,
+            setItems: action,
+            clearItems: action,
+            setSelectedItem: action,
+        });
     }
 
     setItems(items: Array<Item>) {

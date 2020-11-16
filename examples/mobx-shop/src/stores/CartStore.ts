@@ -19,6 +19,11 @@ export class CartStore {
             clearCart: action,
         });
         this.rootStore = rootStore;
+        makeObservable(this, {
+            total: computed,
+            addOrder: action,
+            clearCart: action,
+        });
     }
 
     get total() {

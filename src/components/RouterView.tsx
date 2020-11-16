@@ -1,6 +1,6 @@
 import Debug from 'debug';
 import { observer } from 'mobx-react-lite';
-import React, { Fragment } from 'react';
+import React from 'react';
 import { useRouterStore } from '../contexts';
 
 const debug = Debug('msr:RouterView');
@@ -24,5 +24,5 @@ export const RouterView: React.FC<RouterViewProps> = observer(({ viewMap }) => {
     debug('render %o', routerState);
 
     const view = viewMap[routerState.routeName];
-    return view ? <Fragment>{view}</Fragment> : null;
+    return view ? <>{view}</> : null;
 });

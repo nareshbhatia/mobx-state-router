@@ -19,6 +19,12 @@ export class PrefStore {
             toggleTheme: action,
         });
         this.rootStore = rootStore;
+        makeObservable(this, {
+            paletteType: observable,
+            theme: computed,
+            loadFromStorage: action,
+            toggleTheme: action,
+        });
     }
 
     // ----- Load from storage -----
