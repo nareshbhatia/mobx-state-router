@@ -1,0 +1,14 @@
+.repo-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.repo-list li {
+    padding: 16px 0;
+    border-bottom: 1px solid #ccc;
+}
+
+.repo-stats {
+    margin-top: 16px;
+}

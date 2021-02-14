@@ -1,0 +1,45 @@
+/* A (ridiculously) simplified version of normalize.css */
+html,
+body,
+div,
+h1,
+p {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+/* Apply a natural box layout model to all elements, but allowing components to change */
+html {
+    box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+#root {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Set up a default font and some padding to provide breathing room */
+body {
+    font-family: Arial, Verdana, Helvetica, sans-serif;
+}
+
+.title {
+    margin-bottom: 8px;
+}
+
+.content {
+    flex: 1;
+    padding: 16px;
+}
