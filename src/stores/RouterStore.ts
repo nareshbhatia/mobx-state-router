@@ -223,8 +223,7 @@ export class RouterStore {
                 this
             );
             if (redirectState) {
-                this.setRouterState(redirectState);
-                return redirectState;
+                return this.transition(fromState, redirectState);
             }
         }
 
@@ -232,8 +231,7 @@ export class RouterStore {
         if (toRoute.beforeEnter) {
             redirectState = await toRoute.beforeEnter(fromState, toState, this);
             if (redirectState) {
-                this.setRouterState(redirectState);
-                return redirectState;
+                return this.transition(fromState, redirectState);
             }
         }
 
@@ -241,8 +239,7 @@ export class RouterStore {
         if (fromRoute.onExit) {
             redirectState = await fromRoute.onExit(fromState, toState, this);
             if (redirectState) {
-                this.setRouterState(redirectState);
-                return redirectState;
+                return this.transition(fromState, redirectState);
             }
         }
 
@@ -250,8 +247,7 @@ export class RouterStore {
         if (toRoute.onEnter) {
             redirectState = await toRoute.onEnter(fromState, toState, this);
             if (redirectState) {
-                this.setRouterState(redirectState);
-                return redirectState;
+                return this.transition(fromState, redirectState);
             }
         }
 
