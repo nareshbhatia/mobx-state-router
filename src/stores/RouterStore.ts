@@ -62,6 +62,7 @@ export class RouterStore {
     notFoundState: RouterState;
     routerState: RouterState;
     options: { [key: string]: any };
+    private transitionState?: RouterState;
 
     /**
      * @param routes: Route[]
@@ -150,12 +151,12 @@ export class RouterStore {
     ): Promise<RouterState> {
         const toState = createRouterState(routeName, options);
         const fromState = this.routerState;
-        return this.transition(fromState, toState);
+        return this.startTransition(fromState, toState);
     }
 
     goToState(toState: RouterState): Promise<RouterState> {
         const fromState = this.routerState;
-        return this.transition(fromState, toState);
+        return this.startTransition(fromState, toState);
     }
 
     goToNotFound(): Promise<RouterState> {
@@ -180,16 +181,29 @@ export class RouterStore {
         return route;
     }
 
+    private startTransition(fromState: RouterState, toState: RouterState): Promise<RouterState> {
+        // Get transition hooks from the two states
+        const fromRoute = Object.assign({}, this.getRoute(fromState.routeName));
+        return this.transition(fromRoute, fromState, toState); 
+    }
+
     /**
      * Requests a transition from fromState to toState. Note that the
      * actual transition may be different from the requested one
      * based on enter and exit hooks.
      */
-    private async transition(
+     private async transition(
+        fromRoute: Route,
         fromState: RouterState,
         toState: RouterState
     ): Promise<RouterState> {
         debug('transition from %o to %o)', fromState, toState);
+        if (valueEqual(this.transitionState, toState)) {
+            throw new Error(`Detected loop involving ${fromState.routeName} -> ${this.transitionState?.routeName} transition.`);
+        }
+        if (!this.transitionState) {
+            this.transitionState = toState;
+        }
 
         // If fromState = toState, do nothing
         // This is important to avoid infinite loops caused by RouterStore.goTo()
@@ -200,8 +214,7 @@ export class RouterStore {
             return toState;
         }
 
-        // Get transition hooks from the two states
-        const fromRoute = this.getRoute(fromState.routeName);
+        // Get transition hooks from the target state
         const toRoute = this.getRoute(toState.routeName);
         if (!fromRoute || !toRoute) {
             this.setRouterState(this.notFoundState);
@@ -222,8 +235,9 @@ export class RouterStore {
                 toState,
                 this
             );
+            fromRoute.beforeExit = undefined;
             if (redirectState) {
-                return this.transition(fromState, redirectState);
+                return this.transition(fromRoute, fromState, redirectState);
             }
         }
 
@@ -231,15 +245,16 @@ export class RouterStore {
         if (toRoute.beforeEnter) {
             redirectState = await toRoute.beforeEnter(fromState, toState, this);
             if (redirectState) {
-                return this.transition(fromState, redirectState);
+                return this.transition(fromRoute, fromState, redirectState);
             }
         }
 
         // ----- onExit -----
         if (fromRoute.onExit) {
             redirectState = await fromRoute.onExit(fromState, toState, this);
+            fromRoute.onExit = undefined;
             if (redirectState) {
-                return this.transition(fromState, redirectState);
+                return this.transition(fromRoute, fromState, redirectState);
             }
         }
 
@@ -247,15 +262,16 @@ export class RouterStore {
         if (toRoute.onEnter) {
             redirectState = await toRoute.onEnter(fromState, toState, this);
             if (redirectState) {
-                return this.transition(fromState, redirectState);
+                return this.transition(fromRoute, fromState, redirectState);
             }
         }
 
+        this.transitionState = undefined;
         // No redirection happened in the redirect chain.
         // So transition to toState.
         this.setRouterState(toState);
         return toState;
-    }
+    }    
 }
 
 
