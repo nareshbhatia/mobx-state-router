@@ -6,8 +6,9 @@ import Debug from 'debug';
 const debug = Debug('msr:RouterStore');
 
 export class TransitionState {
-    private transitionState?: RouterState;
+    private transitions: number = 0;
     private readonly fromRoute: Route;
+    private readonly transitionsThreshold: number = 100;
 
     constructor(
         private routerStore: RouterStore,
@@ -26,14 +27,13 @@ export class TransitionState {
 
     private async transition(toState: RouterState): Promise<RouterState> {
         debug('transition from %o to %o)', this.fromState, toState);
-        if (valueEqual(this.transitionState, toState)) {
+        if (this.transitions >= this.transitionsThreshold) {
             throw new Error(
-                `Detected loop involving ${this.fromState.routeName} -> ${this.transitionState?.routeName} transition.`
+                `Detected loop involving ${this.fromState.routeName} -> ${toState.routeName} transition.`
             );
         }
-        if (!this.transitionState) {
-            this.transitionState = toState;
-        }
+        //increase transitions counter. We will use it to detected infinite loops.
+        this.transitions++;
 
         // If fromState = toState, do nothing
         // This is important to avoid infinite loops caused by RouterStore.goTo()
@@ -66,7 +66,7 @@ export class TransitionState {
                 this.routerStore
             );
             this.fromRoute.beforeExit = undefined;
-            if (redirectState) {
+            if (redirectState && !valueEqual(redirectState, toState)) {
                 return this.transition(redirectState);
             }
         }
@@ -78,7 +78,7 @@ export class TransitionState {
                 toState,
                 this.routerStore
             );
-            if (redirectState) {
+            if (redirectState && !valueEqual(redirectState, toState)) {
                 return this.transition(redirectState);
             }
         }
@@ -91,7 +91,7 @@ export class TransitionState {
                 this.routerStore
             );
             this.fromRoute.onExit = undefined;
-            if (redirectState) {
+            if (redirectState && !valueEqual(redirectState, toState)) {
                 return this.transition(redirectState);
             }
         }
@@ -103,12 +103,11 @@ export class TransitionState {
                 toState,
                 this.routerStore
             );
-            if (redirectState) {
+            if (redirectState && !valueEqual(redirectState, toState)) {
                 return this.transition(redirectState);
             }
         }
 
-        this.transitionState = undefined;
         // No redirection happened in the redirect chain.
         // So transition to toState.
         this.routerStore.setRouterState(toState);
