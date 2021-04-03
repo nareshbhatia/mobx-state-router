@@ -1,7 +1,7 @@
 import Debug from 'debug';
 import { action, makeObservable, observable } from 'mobx';
 import { createRouterState, RouterState } from './RouterState';
-import { TransitionState } from "./TransitionState";
+import { TransitionState } from './TransitionState';
 
 const debugSetState = Debug('msr:setRouterState');
 
@@ -184,11 +184,12 @@ export class RouterStore {
      * actual transition may be different from the requested one
      * based on enter and exit hooks.
      */
-    private transition(fromState: RouterState, toState: RouterState): Promise<RouterState> {
+    private transition(
+        fromState: RouterState,
+        toState: RouterState
+    ): Promise<RouterState> {
         // Get transition hooks from the two states
         const transitionState = new TransitionState(this, fromState);
-        return transitionState.resolve(toState); 
-    }    
+        return transitionState.resolve(toState);
+    }
 }
-
-
