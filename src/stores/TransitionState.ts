@@ -1,9 +1,9 @@
-import { RouterState } from './RouterState';
-import { RouterStore, Route } from './RouterStore';
 import { valueEqual } from '@react-force/utils';
 import Debug from 'debug';
+import { RouterState } from './RouterState';
+import { RouterStore, Route } from './RouterStore';
 
-const debug = Debug('msr:RouterStore');
+const debug = Debug('msr:TransitionState');
 
 export class TransitionState {
     private transitions: number = 0;
@@ -32,7 +32,7 @@ export class TransitionState {
                 `Detected loop involving ${this.fromState.routeName} -> ${toState.routeName} transition.`
             );
         }
-        //increase transitions counter. We will use it to detected infinite loops.
+        // Increment transitions counter. We will use it to detected infinite loops.
         this.transitions++;
 
         // If fromState = toState, do nothing
