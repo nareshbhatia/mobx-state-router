@@ -37,6 +37,37 @@ yarn cz-commit # interactive conventional commit
 git push
 ```
 
+## Testing local builds
+
+To test local builds with examples in the `examples` folder, follow the steps
+listed below:
+
+-   Build the package
+
+```bash
+yarn build:local  # creates a dist folder
+```
+
+-   Create a tarball from the package
+
+```bash
+npm pack  # packages src and dist into a tarball with name [package-name]-[version].tgz
+```
+
+-   Go to an example in the examples directory and add the tarball as a
+    dependency
+
+```bash
+cd examples/mobx-shop
+yarn add ../../[package-name]-[version].tgz
+```
+
+-   Run the example
+
+```bash
+yarn start
+```
+
 ## Release to NPM
 
 -   Change the version number in package.json. Use semver. For pre-release
