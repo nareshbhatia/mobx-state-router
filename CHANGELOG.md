@@ -1,3 +1,13 @@
+## 6.0.0-beta.2 (April 3, 2021)
+
+When a route's transition hook returns a redirect state, we are now calling the
+hooks for the redirected state's route also. See
+[this discussion](https://github.com/nareshbhatia/mobx-state-router/issues/111).
+
+## 6.0.0-beta.1 (October 26, 2020)
+
+Updated dependency from mobx 5.x to mobx 6.0.0.
+
 ## 5.2.0 (July 26, 2020)
 
 Changed build system to [TSDX](https://tsdx.io/).
