@@ -100,7 +100,9 @@ const DepartmentsPage = observer(() => {
 describe('StaticAdapter', () => {
     test('goes correctly to a known location', async () => {
         const staticAdapter = new StaticAdapter(routerStore);
-        await staticAdapter.goToLocation(parsePath('/departments/dept1') as Path);
+        await staticAdapter.goToLocation(
+            parsePath('/departments/dept1') as Path
+        );
         const { getByTestId } = render(
             <RouterContextProvider>
                 <DepartmentsPage />

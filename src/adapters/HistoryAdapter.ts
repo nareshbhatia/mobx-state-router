@@ -62,10 +62,7 @@ export class HistoryAdapter {
                     } else {
                         this.history.push(routerStateUrl);
                     }
-                    debug(
-                        'history.push(%o)',
-                        routerStateUrl
-                    );
+                    debug('history.push(%o)', routerStateUrl);
                 }
             }
         );

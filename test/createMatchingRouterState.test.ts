@@ -55,7 +55,9 @@ describe('createMatchingRouterState', () => {
 
     test('returns RouterState when url matches pattern, params, multiple queryParams', () => {
         const routerState = createMatchingRouterState(
-            parsePath('/departments/electronics/computers?q=apple&r=pear') as Path,
+            parsePath(
+                '/departments/electronics/computers?q=apple&r=pear'
+            ) as Path,
             routes
         );
         expect(routerState).toEqual(
