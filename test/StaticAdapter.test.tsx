@@ -42,7 +42,7 @@ class TeslaStore {
     selectedCar: string = '';
 
     loadSelectedCar() {
-        return new Promise((resolve) => {
+        return new Promise<void>((resolve) => {
             // emulate async load
             setTimeout(() => {
                 runInAction(() => {
