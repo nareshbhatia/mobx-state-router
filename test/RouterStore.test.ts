@@ -212,6 +212,57 @@ describe('RouterStore', () => {
         expect(routerStore.getCurrentRoute()).toEqual(expectedRoute);
     });
 
+    test('runs globalBeforeEnter hook if defined', () => {
+        expect.assertions(1);
+
+        const mockRoutingGuard = jest.fn()
+                .mockImplementation(() => {
+                    return Promise.resolve(null);
+                });
+
+        const routerStore = new RouterStore(routes, notFound, {
+            initialState: notFound,
+            globalBeforeEnter: mockRoutingGuard
+        });
+
+        routerStore.goToState(home);
+
+        expect(mockRoutingGuard).toBeCalledTimes(1);
+    });
+
+    test('calls globalBeforeEnter hook with proper parameters', () => {
+        expect.assertions(1);
+
+        const mockRoutingGuard = jest.fn()
+            .mockImplementation(() => {
+                return Promise.resolve(null);
+            });
+
+        const routerStore = new RouterStore(routes, notFound, {
+            initialState: notFound,
+            globalBeforeEnter: mockRoutingGuard
+        });
+
+        routerStore.goToState(home);
+
+        expect(mockRoutingGuard).toBeCalledWith(notFound, home, routerStore);
+    });
+
+    test('redirects a transition as directed by globalBeforeEnter ', () => {
+        const routerStore = new RouterStore(routes, notFound, {
+            initialState: notFound,
+            globalBeforeEnter: async () => {
+                return gym
+            }
+        });
+
+        routerStore
+            .goToState(home)
+            .then((toState) => {
+                expect(toState).toBe(gym);
+            });
+    });
+
     test('getNotFoundRoute() throws if notFound route does not exist', () => {
         const routes: Route[] = [{ name: 'home', pattern: '/' }];
         const routerStore = new RouterStore(routes, notFound);
