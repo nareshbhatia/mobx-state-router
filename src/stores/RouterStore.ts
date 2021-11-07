@@ -61,7 +61,10 @@ export class RouterStore {
     routes: Route[];
     notFoundState: RouterState;
     routerState: RouterState;
-    options: { [key: string]: any };
+    options: {
+        [key: string]: any,
+        globalBeforeEnter?: TransitionHook,
+    };
 
     /**
      * @param routes: Route[]
@@ -90,11 +93,18 @@ export class RouterStore {
      *     Options for stringifying query params. These are passed directly to
      *     the [query-string](https://github.com/sindresorhus/query-string)
      *     library that is used internally.
+     *
+     *   globalBeforeEnter: function
+     *     A global routing guard applied to each page transition
+     *     //!@# TBD
      */
     constructor(
         routes: Route[],
         notFoundState: RouterState,
-        options: { [key: string]: any } = {}
+        options: {
+            [key: string]: any,
+            globalBeforeEnter?: TransitionHook,
+        } = {}
     ) {
         // Set routes and push an internal route for the default state
         this.routes = routes;
@@ -217,6 +227,15 @@ export class RouterStore {
                 toState,
                 this
             );
+            if (redirectState) {
+                this.setRouterState(redirectState);
+                return redirectState;
+            }
+        }
+
+        // --- globalBeforeEnter ---
+        if (this.options.globalBeforeEnter) {
+            redirectState = await this.options.globalBeforeEnter(fromState, toState, this);
             if (redirectState) {
                 this.setRouterState(redirectState);
                 return redirectState;
