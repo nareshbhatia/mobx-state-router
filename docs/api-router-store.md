@@ -87,6 +87,13 @@ queryStringifyOptions: any
     library that is used internally.
 ```
 
+```jsx
+globalBeforeEnter: TransitionHook
+    A global transition hook executed during every route change. 
+    This hook gets executed after the old `Route`s `beforeExit`
+    and before the new `Route`s `beforeEnter`.
+```
+
 ## goTo()
 
 Transitions to the state specified by the `routeName` and `options`. Calls
