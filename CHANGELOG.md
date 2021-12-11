@@ -1,3 +1,7 @@
+## 6.0.0 (December 11, 2021)
+
+Final release. Updated all dependencies.
+
 ## 6.0.0-beta.2 (April 3, 2021)
 
 When a route's transition hook returns a redirect state, we are now calling the
