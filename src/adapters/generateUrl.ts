@@ -54,15 +54,16 @@ export const routerStateToUrl = (
     routerStore: RouterStore,
     routerState: RouterState
 ): string => {
-    const { routeName, params, queryParams, options } = routerState;
+    const { routeName, params, queryParams } = routerState;
     let route = routerStore.getRoute(routeName);
     if (!route) {
         route = routerStore.getNotFoundRoute();
     }
+
     return generateUrl(
         route.pattern,
         params,
         queryParams,
-        options.queryStringifyOptions
+        routerStore.options.queryStringifyOptions
     );
 };
