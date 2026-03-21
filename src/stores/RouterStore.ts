@@ -61,6 +61,7 @@ export class RouterStore {
     notFoundState: RouterState;
     routerState: RouterState;
     options: { [key: string]: any };
+    private _transitionId: number = 0;
 
     /**
      * @param routes: Route[]
@@ -113,6 +114,10 @@ export class RouterStore {
         // Set states
         this.notFoundState = notFoundState;
         this.routerState = this.options.initialState;
+    }
+
+    get transitionId(): number {
+        return this._transitionId;
     }
 
     setRouterState(routerState: RouterState) {
@@ -188,6 +193,7 @@ export class RouterStore {
         fromState: RouterState,
         toState: RouterState
     ): Promise<RouterState> {
+        ++this._transitionId;
         // Get transition hooks from the two states
         const transitionState = new TransitionState(this, fromState);
         return transitionState.resolve(toState);

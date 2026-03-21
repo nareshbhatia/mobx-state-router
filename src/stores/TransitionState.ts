@@ -9,6 +9,7 @@ export class TransitionState {
     private transitions: number = 0;
     private readonly fromRoute: Route;
     private readonly transitionsThreshold: number = 100;
+    private readonly capturedTransitionId: number;
 
     constructor(
         private routerStore: RouterStore,
@@ -19,10 +20,15 @@ export class TransitionState {
             {},
             this.routerStore.getRoute(this.fromState.routeName)
         );
+        this.capturedTransitionId = this.routerStore.transitionId;
     }
 
     resolve(toState: RouterState): Promise<RouterState> {
         return this.transition(toState);
+    }
+
+    private isSuperseded(): boolean {
+        return this.capturedTransitionId !== this.routerStore.transitionId;
     }
 
     private async transition(toState: RouterState): Promise<RouterState> {
@@ -66,6 +72,7 @@ export class TransitionState {
                 this.routerStore
             );
             this.fromRoute.beforeExit = undefined;
+            if (this.isSuperseded()) return toState;
             if (redirectState && !valueEqual(redirectState, toState)) {
                 return this.transition(redirectState);
             }
@@ -78,6 +85,7 @@ export class TransitionState {
                 toState,
                 this.routerStore
             );
+            if (this.isSuperseded()) return toState;
             if (redirectState && !valueEqual(redirectState, toState)) {
                 return this.transition(redirectState);
             }
@@ -91,6 +99,7 @@ export class TransitionState {
                 this.routerStore
             );
             this.fromRoute.onExit = undefined;
+            if (this.isSuperseded()) return toState;
             if (redirectState && !valueEqual(redirectState, toState)) {
                 return this.transition(redirectState);
             }
@@ -103,6 +112,7 @@ export class TransitionState {
                 toState,
                 this.routerStore
             );
+            if (this.isSuperseded()) return toState;
             if (redirectState && !valueEqual(redirectState, toState)) {
                 return this.transition(redirectState);
             }
