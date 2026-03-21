@@ -257,4 +257,35 @@ describe('RouterStore', () => {
                 expect(routerStore.goToState(startLoop)).rejects.toThrow()
             );
     });
+
+    test('a newer transition supersedes a slow in-flight transition', async () => {
+        let unblockSlowHook!: () => void;
+        const localRoutes: Route[] = [
+            ...routes,
+            {
+                name: 'slowRoute',
+                pattern: '/slow',
+                beforeEnter: () =>
+                    new Promise((resolve) => {
+                        unblockSlowHook = resolve;
+                    }),
+            },
+            { name: 'fastRoute', pattern: '/fast' },
+        ];
+
+        const routerStore = new RouterStore(localRoutes, notFound, {
+            initialState: home,
+        });
+
+        const slowPromise = routerStore.goTo('slowRoute');
+
+        await routerStore.goTo('fastRoute');
+        expect(routerStore.routerState.routeName).toBe('fastRoute');
+
+        unblockSlowHook();
+        await slowPromise;
+
+        // The stale slow transition should NOT have overwritten fastRoute
+        expect(routerStore.routerState.routeName).toBe('fastRoute');
+    });
 });
